@@ -1,0 +1,29 @@
+.top-header-bar {
+  background-color: #000;
+}
+
+.header-btn-group .btn-icon {
+  border-bottom: 0;
+}
+
+.logo-wrapper {
+  background-color: #111111;
+  padding: 25px 0px;
+}
+
+.nav-search-form .form-control {
+    background-color: #b80000;
+    border: 0 none;
+    padding: 11px 25px;
+    border-radius: 0;
+    color: #fff;
+}
+
+.nav-search-form .form-control::placeholder{
+    color: #fff;
+}
+.nav-search-form .form-control:focus{
+    outline: 0 none;
+    border: 0 none;
+    box-shadow: none;
+}

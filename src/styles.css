@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.btn-hover-light:hover {
+  background-color: #e6e6e6;
+  color: #000000;
+  background: linear-gradient(to left bottom, #FFFFFF 50%, #e6e6e6 50%);
+}
+
+.btn-hover-dark:hover {
+  background-color: black;
+  color: #fff;
+  background: linear-gradient(to left bottom, #1F1F1F 50%, black 50%);
+}
+
+.theme-bg {
+  background-color: #CC0000;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background-color: #b80000;
+  color: #fff;
+}
+
+.nav-item:hover>.dropdown-menu {
+  display: block;
+}
+
+li.nav-item.dropdown>.dropdown-menu {
+  background-color: transparent;
+  border-radius: 0;
+  margin-top: 0;
+  border: 0;
+  padding: 0;
+}
+
+li.nav-item.dropdown>.dropdown-menu>.dropdown-item {
+  padding: 10px 20px;
+  border-top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
+li.nav-item.dropdown>.dropdown-menu>.dropdown-item:hover {
+  background-color: #b80000;
+}
+.contact-text{
+    margin-top: 6px;
+    display: inline-block;
+}
