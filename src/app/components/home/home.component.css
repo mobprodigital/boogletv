@@ -1,0 +1,51 @@
+.h-media-inner {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4)
+}
+.h-media-img{
+    
+    background-size: cover;
+    background-position: center;
+}
+.h-media-title {
+  text-align: center;
+  font-size: 65px;
+  color: #fff;
+}
+
+.h-media-meta-data {
+  text-align: center;
+}
+
+.h-media-meta-data ul {
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  display: inline-block;
+}
+
+.h-media-meta-data ul li {
+  float: left;
+  color: #fff;
+  margin: 0 28px 0 0;
+}
+
+.h-play-btn {
+  text-align: center;
+}
+
+.h-play-btn>i {
+  background-color: #c00;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 25px;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  padding-top: 17px;
+}

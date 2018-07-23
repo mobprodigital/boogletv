@@ -57,6 +57,6 @@ li.nav-item.dropdown>.dropdown-menu>.dropdown-item:hover {
     display: inline-block;
 }
 
-main.main-content {
+.main-content {
     padding-top: 80px;
 }
