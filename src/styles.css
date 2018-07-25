@@ -66,8 +66,157 @@ li.nav-item.dropdown>.dropdown-menu>.dropdown-item:hover {
   padding-top: 80px;
 }
 
-
 header.page-header {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+/* section */
+
+.section-title {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.section-title.section-title-center {
+  text-align: center;
+}
+
+.section-header {
+  padding: 20px 20px;
+}
+
+.section-body {
+  padding: 0 20px 20px 20px;
+}
+
+/* slider */
+
+.imgs-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.imgs-single {
+  flex-basis: 25%;
+  padding: 7px;
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.imgs-image {
+  background-size: cover;
+  height: 160px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 25px;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  padding-top: 17px;
+  padding-left: 6px;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  animation-name: play-btn-animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.imgs-image:hover .play-btn {
+  background-color: #cc0000;
+}
+
+.imgs-meta-data>ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.imgs-meta-data>ul>li {
+  margin-right: 15px;
+  color: gray;
+  font-size: 12px;
+}
+
+.imgs-title {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 0 5px 0;
+}
+
+.imgs-container {
   position: relative;
 }
 
+span.imgs-control-left,
+span.imgs-control-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+span.imgs-control-left {
+  left: -40px;
+}
+
+span.imgs-control-right {
+  right: -40px;
+}
+
+span.imgs-control-left>i,
+span.imgs-control-right>i {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: gray;
+  border-radius: 50%;
+  padding-top: 13px;
+  color: #fff;
+  align-self: center;
+  cursor: pointer;
+}
+
+.imgs-container:hover span.imgs-control-left>i,
+.imgs-container:hover span.imgs-control-right>i {
+  background-color: #cc0000;
+}
+
+@keyframes play-btn-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1)
+  }
+}
+
+/* slider ends */

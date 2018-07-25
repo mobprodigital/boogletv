@@ -78,7 +78,7 @@
 }
 
 .banner-btn {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.88);
   color: #fff;
   padding: 30px 20px;
   font-size: 17px;
@@ -87,7 +87,11 @@
   border-right: 1px gray solid;
   border-bottom: solid 6px transparent;
   cursor: pointer;
-  flex: 0 0 258px;
+  flex: 0 0 300px;
+}
+
+.banner-btn:hover{
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .banner-btn:first-of-type {
@@ -97,6 +101,7 @@
 .banner-btn.banner-btn-active {
   border-bottom-color: #c00;
 }
+
 
 @media screen and (max-width: 992px) {
   .h-media-inner{
