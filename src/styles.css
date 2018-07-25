@@ -65,3 +65,9 @@ li.nav-item.dropdown>.dropdown-menu>.dropdown-item:hover {
 .main-content {
   padding-top: 80px;
 }
+
+
+header.page-header {
+  position: relative;
+}
+

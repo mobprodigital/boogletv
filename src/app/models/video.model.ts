@@ -1,16 +1,24 @@
-import { MovieCategory } from "./movie-category.modal";
+import { VideoCategory } from "./video-category.modal";
+import { ThumbnailSize } from "../interfaces/thumbnail.interface";
 
 export class Video {
     public Id: string;
     public Title: string;
     public Description: string;
-    public Categories: MovieCategory[];
+    public Categories: VideoCategory[];
     public LikesCount: number;
     public DislikesCount: number;
     public ViewsCount: number;
     public ReleaseDate: Date;
     public CreateDate: Date;
-    constructor(){
-        
+    public Thumbnails: ThumbnailSize = {
+        Orignal: '',
+        Large: '',
+        Medium: '',
+        small: '',
+    };
+    public Src: string;
+    constructor() {
+
     }
 }
