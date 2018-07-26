@@ -9,6 +9,7 @@
 .h-media-img {
   background-size: cover;
   background-position: center;
+  cursor: w-resize;
 }
 
 .h-media-title {
@@ -60,7 +61,7 @@
 }
 
 .banner-btn-wrap {
-  overflow: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -88,6 +89,9 @@
   border-bottom: solid 6px transparent;
   cursor: pointer;
   flex: 0 0 300px;
+}
+.nav-banner img {
+  width: 100%;
 }
 
 .banner-btn:hover{

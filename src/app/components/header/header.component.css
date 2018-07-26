@@ -11,19 +11,106 @@
   padding: 25px 0px;
 }
 
-.nav-search-form .form-control {
-    background-color: #b80000;
-    border: 0 none;
-    padding: 11px 25px;
-    border-radius: 0;
-    color: #fff;
+.nav-banner img {
+  width: 100%;
+  overflow: auto;
 }
 
-.nav-search-form .form-control::placeholder{
-    color: #fff;
+.nav-banner img {
+  width: 100%;
+  float: right;
 }
-.nav-search-form .form-control:focus{
-    outline: 0 none;
-    border: 0 none;
-    box-shadow: none;
+
+/* nav menu css */
+
+ul.main-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
 }
+
+ul.main-nav>li.main-nav-item {
+  position: relative;
+}
+
+ul.main-nav>li.main-nav-item:hover>ul.sub-menu {
+  display: block;
+}
+
+a.main-nav-link {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0);
+  min-height: 50px;
+  text-align: center;
+  line-height: 50px;
+  display: block;
+  padding: 0 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+a.main-nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.21);
+}
+
+a.main-nav-link.sub-menu-link {
+  background-color: rgba(0, 0, 0, 0.51);
+}
+
+a.main-nav-link.sub-menu-link:hover {
+  background-color: rgb(204, 0, 0);
+}
+
+li.main-nav-item>ul.sub-menu {
+  position: absolute;
+  top: 50px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  display: none;
+}
+
+nav.app-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+input.nav-search-box::placeholder {
+  color: #fff;
+}
+
+input.nav-search-box {
+  border: 0;
+  background-color: #b80000;
+  color: #FFFFFF;
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+}
+input.nav-search-box:hover, input.nav-search-box:focus {
+  outline: 0 none;
+}
+
+/* nav menu end */
+
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+  .contact-text {
+    padding: 3px 0 12px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 576px) {}

@@ -1,7 +1,9 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
     <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!( lVdo.Id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.Thumbnails.Orignal + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
+      [ngStyle]="{'background-image' : 'url(' + lVdo.Thumbnails.Orignal + ')'}" 
+      (swipeleft)="bannerSwipeLeft(_index)" 
+      (swiperight)="bannerSwipeRight(_index)">
 
       <div class="h-media-inner">
         <div class="h-play-btn">
@@ -33,8 +35,9 @@
 
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
-      <article class="banner-btn-wrap">
-        <div *ngFor="let lVdoBtn of LatestVideos" class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id" (click)="showSlide(lVdoBtn.Id)">
+      <article class="banner-btn-wrap" #bannerBtnWrap>
+        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id" 
+        (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.Title}}
           </span>
@@ -52,7 +55,7 @@
       </header>
       <div class="section-body">
         <div class="imgs-container">
-          <div class="imgs-wrap" #imgSlider>
+          <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
             <article *ngFor="let ML_Vid of MostLikedVideos" class="imgs-single">
               <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.Thumbnails.Orignal + ')'}">
                 <i class="fas fa-play play-btn"></i>
