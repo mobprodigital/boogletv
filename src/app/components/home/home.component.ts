@@ -88,13 +88,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   imgSlide(slideTo: string) {
     let slider: HTMLDivElement = this.imgSlider.nativeElement;
+    let scrollLength: number = 0;
     if (slideTo == 'left') {
-      slider.scroll({ left: (slider.scrollLeft + slider.clientWidth), behavior: 'smooth' });
+      scrollLength = slider.scrollLeft + slider.clientWidth;
+      // slider.scroll({ left: (slider.scrollLeft + slider.clientWidth), behavior: 'smooth' });
     }
     else {
-      slider.scroll({ left: (slider.scrollLeft - slider.clientWidth), behavior: 'smooth' });
+      scrollLength = slider.scrollLeft - slider.clientWidth
     }
 
+    /* let scrollTimer = setTimeout(() => {
+
+    }) */
+
+    // slider.scrollLeft = scrollLength;
+
+
+    slider.scroll({ left: scrollLength, behavior: 'smooth' });
   }
 
 }

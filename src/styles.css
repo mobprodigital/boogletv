@@ -99,6 +99,7 @@ header.page-header {
 .imgs-wrap {
   display: flex;
   flex-wrap: nowrap;
+  cursor: w-resize;
   overflow: hidden;
 }
 
