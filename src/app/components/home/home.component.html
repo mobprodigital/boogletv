@@ -35,8 +35,9 @@
 
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
-      <article class="banner-btn-wrap">
-        <div *ngFor="let lVdoBtn of LatestVideos" class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id" (click)="showSlide(lVdoBtn.Id)">
+      <article class="banner-btn-wrap" #bannerBtnWrap>
+        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id" 
+        (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.Title}}
           </span>
