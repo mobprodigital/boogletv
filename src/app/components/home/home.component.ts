@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private async scrollBannerBtnBar(targetSlideIndex: number) {
     let bannerBtnWrapDiv: HTMLDivElement = this.bannerBtnWrap.nativeElement;
     let bannerBtnDiv = <HTMLDivElement>bannerBtnWrapDiv.firstElementChild;
-    let sliderBtnWidth: number = bannerBtnDiv && bannerBtnDiv.clientWidth || 300;
+    let sliderBtnWidth: number = bannerBtnDiv && bannerBtnDiv.offsetWidth || 300;
     let scrollLength: number = sliderBtnWidth * targetSlideIndex;
     bannerBtnWrapDiv.scroll({ left: scrollLength, behavior: 'smooth' });
   }

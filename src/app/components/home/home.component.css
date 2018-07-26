@@ -90,6 +90,9 @@
   cursor: pointer;
   flex: 0 0 300px;
 }
+.nav-banner img {
+  width: 100%;
+}
 
 .banner-btn:hover{
   background-color: rgba(0, 0, 0, 1);
