@@ -1,2 +1,2 @@
 deploy on local server iis
-ng build --base-href "/toh/" --prod
+ng build --base-href "/gyan/media-tube/" --prod

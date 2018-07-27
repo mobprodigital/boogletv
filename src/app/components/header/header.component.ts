@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavMenu } from '../../interfaces/nav-item.interface';
+import { NavMenu, NavMenuItem } from '../../interfaces/nav-menu.interface';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +10,29 @@ export class HeaderComponent implements OnInit {
 
 
   public mainNavMenu: NavMenu;
+  public showMobMenu: boolean = false;
 
   constructor() {
     this.feedMenu();
-   }
+  }
 
   ngOnInit() {
+  }
+
+
+  public toggleMenu(ev: MouseEvent, navItem: NavMenuItem) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (navItem.ChildMenu && navItem.ChildMenu.length > 0) {
+      navItem.ChildMenu.forEach((menu: NavMenu) => {
+        menu.Hidden = !menu.Hidden;
+      });
+      console.log(navItem.ChildMenu);
+    }
+  }
+
+  public toggleMobileMenu(show: boolean) {
+    this.showMobMenu = show;
   }
 
   private feedMenu() {
@@ -29,23 +46,24 @@ export class HeaderComponent implements OnInit {
           Text: 'Home'
         },
         {
-          NavItemId : 12,
-          Href : '#',
-          Text : 'Video',
-          ChildMenu : [
+          NavItemId: 12,
+          Href: '#',
+          Text: 'Video',
+          ChildMenu: [
             {
-              NavId : 121,
-              NavName : 'Movies',
-              NavItems : [
+              Hidden: true,
+              NavId: 121,
+              NavName: 'Movies',
+              NavItems: [
                 {
-                  Text : 'Bollywood',
-                  Href : '#',
-                  NavItemId : 1211
+                  Text: 'Bollywood',
+                  Href: '#',
+                  NavItemId: 1211
                 },
                 {
-                  Text : 'Hollywood',
-                  Href : '#',
-                  NavItemId : 1212
+                  Text: 'Hollywood',
+                  Href: '#',
+                  NavItemId: 1212
                 },
               ]
             }

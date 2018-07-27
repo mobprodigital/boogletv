@@ -3,6 +3,7 @@ export interface NavMenu {
     NavName: string;
     NavId: number;
     NavItems?: NavMenuItem[];
+    Hidden?: boolean;
 }
 
 export interface NavMenuItem {
