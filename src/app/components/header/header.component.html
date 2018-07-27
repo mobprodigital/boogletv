@@ -4,7 +4,8 @@
       <div class="row">
         <div class="col-lg-8">
           <span class="text-light contact-text">
-            <b>Contact us -: </b> <a href="sales@mail.com">sales@jmm.com</a>
+            <b>Contact us -: </b>
+            <a href="sales@mail.com">sales@jmm.com</a>
           </span>
         </div>
         <div class="col-lg-4 d-none d-lg-block d-xl-block">
@@ -48,20 +49,59 @@
 
   <section class="main-nav theme-bg shadow-lg">
     <div class="container">
-      <nav class="app-nav">
-        <ul class="main-nav">
-          <li class="main-nav-item"><a class="main-nav-link main-nav-link-active">nav 1</a></li>
-          <li class="main-nav-item"><a class="main-nav-link">nav 2 <i class="fas fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="sub-menu animated fadeIn">
-              <li class="sub-menu-item">
-                <a class="main-nav-link sub-menu-link">Sub menu link</a>
+      <section class="app-nav mobile-menu-wrap">
+
+      </section>
+      <nav class="app-nav app-nav-desktop">
+        <div class="btn-wrap">
+          <button type="button" class="mob-nav-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="logo-wrap">
+          <img src="assets/images/logo/logo-default.png" alt="">
+        </div>
+
+        <div class="main-menu-wrapper">
+          <div class="mob-menu-sec mob-close-btn-wrap">
+            <button type="button">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+          <div class="mob-menu-sec mob-social-menu-wrap">
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fab fa-google-plus"></i>
+            </button>
+            <button type="button" class="btn-icon btn btn-dark">
+              <i class="fas fa-user-tie"></i>
+            </button>
+          </div>
+          <ul class="mob-menu-sec main-nav">
+            <ng-container *ngIf="mainNavMenu.NavItems && mainNavMenu.NavItems.length > 0">
+              <li class="main-nav-item" *ngFor="let _navItem of mainNavMenu.NavItems">
+                <a href="{{_navItem.Href}}" class="main-nav-link">{{_navItem.Text}}
+                  <i *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0" class="fas fa-angle-down" aria-hidden="true"></i>
+                </a>
+                <ng-container *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0">
+                  <ul *ngFor="let _childMenu of _navItem.ChildMenu" class="sub-menu animated fadeIn">
+                    <li *ngFor="let _subNavItem of _childMenu.NavItems" class="sub-menu-item">
+                      <a href="{{_subNavItem.Href}}" class="main-nav-link sub-menu-link">{{_subNavItem.Text}}</a>
+                    </li>
+                  </ul>
+                </ng-container>
               </li>
-              <li class="sub-menu-item">
-                <a class="main-nav-link sub-menu-link">Sub menu link</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+            </ng-container>
+          </ul>
+
+        </div>
         <div class="search-div">
           <form action="" method="post">
             <div>
@@ -70,36 +110,7 @@
           </form>
         </div>
       </nav>
-      <!-- <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0 nav-search-form">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </nav> -->
+     
     </div>
   </section>
 </header>
