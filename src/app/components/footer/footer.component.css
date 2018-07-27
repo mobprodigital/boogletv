@@ -1,10 +1,82 @@
 .footer{
-    background-color: #c4c4c4;
+    background-color: #111111;
+    color: #aeaeae;
+    font-display: "Poppins",sans-serif
+    
+}
+
+.app-footer{
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 .app-copyright{
     text-align: center;
 }
-
 .textwidget{
-    font-display: "Poppins",sans-serif
+    margin: 0px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: #C4C4C4;
+}
+.post-content>a {
+    font-weight: 600;
+
+    color: white;
+    
+    line-height: 0;
+    
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.post-content>a:hover {
+    font-weight: 600;
+    color: #cc0000;
+}
+.post-image {
+    width: 100px;
+    height: 100px;
+}
+.widget-title{
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.post-meta-wrap{
+    font-size: 12px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+                    .post-meta-wrap .author a{
+                        color: gray;
+                        text-decoration: none;
+
+                    }
+.post-meta-wrap>div{
+    flex: 0 0 50%;
+}
+.break-point-line{
+    border: .5px solid rgba(255, 255, 255, 0.1);
+    margin-top: 15px;
+    margin-bottom: 15px; 
+}
+.footer-copyright{
+    background-color: #000000;
+}
+.app-copyright-footer{
+    background-color: #000000;
+    font-size: 14px;
+    padding-top: 21px;
+    padding-bottom: 6px;
+    font-weight: 600;
+}
+
+.post-content {
+
+    margin-bottom: 10px;
+
 }
