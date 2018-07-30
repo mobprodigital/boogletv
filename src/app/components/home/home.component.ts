@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Video } from "../../models/video.model";
+import { VideoCategory } from '../../models/video-category.modal';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   MostLikedVideos: Video[] = [];
   MostViewedVideos: Video[] = [];
   MostPopulerVideos: Video[] = [];
-
+  videoCategoryList: VideoCategory[];
+  activeCategoryTab: string = 'all';
   constructor() {
     this.feedVideos();
   }
@@ -91,6 +93,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return vdo;
     });
 
+
+    this.videoCategoryList = Array.from({ length: 3 }, (_, i: number) => {
+      let cat = new VideoCategory();
+      cat.Id = 'catId' + i.toString();
+      cat.Name = 'cat ' + i;
+      return cat;
+    })
+
     this.MostLikedVideos = Array.from({ length: 12 }, (_, i: number) => {
       if (i === 0) {
         this.selectedSlide = 'vid' + i;
@@ -98,12 +108,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       let vdo = new Video();
       vdo.Id = 'vid' + i;
       vdo.Title = 'Video Title ' + i;
-      vdo.ViewsCount = 10;
-      vdo.LikesCount = 20;
+      vdo.ViewsCount = i * 10;
+      vdo.LikesCount = i * 20;
       vdo.CreateDate = new Date();
+      vdo.Categories = [this.videoCategoryList[i]];
       vdo.Thumbnails.Orignal = `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`;
       return vdo;
     })
+
+
   }
 
 
@@ -118,8 +131,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     else {
       scrollLength = slider.scrollLeft - slider.clientWidth
     }
-
     slider.scroll({ left: scrollLength, behavior: 'smooth' });
+  }
+
+  public showCat(ev: MouseEvent, catId: string) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    alert(catId);
   }
 
 }

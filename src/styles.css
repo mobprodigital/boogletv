@@ -73,7 +73,8 @@ header.page-header {
 
 /* section */
 
-.section-title {
+.section-title,
+.sidebar-title {
   font-size: 16px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -94,6 +95,19 @@ header.page-header {
   padding: 0 0px 0px 0px;
 }
 
+/* sidebar */
+
+.sidebar-wrap {
+  border: solid 2px lightgray;
+  padding: 20px;
+}
+
+.sidebar-title {
+  border-bottom: solid 2px lightgray;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
 /* slider */
 
 .imgs-wrap {
@@ -104,20 +118,27 @@ header.page-header {
 }
 
 .imgs-single {
-  flex-basis: 25%;
   padding: 7px;
   box-sizing: border-box;
   flex-grow: 0;
   flex-shrink: 0;
 }
 
+.imgs-wrap .imgs-single {
+  flex-basis: 25%;
+}
+
 .imgs-image {
   background-size: cover;
-  height: 160px;
+  height: 180px;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cat-wrapper>.imgs-image {
+  height: 200px;
 }
 
 .play-btn {
@@ -208,6 +229,41 @@ span.imgs-control-right>i {
   background-color: #cc0000;
 }
 
+.section-header-action {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.category-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-list>li>a {
+  color: gray;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+  margin: 0 0 0 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  transition: color 0.25s;
+  border-bottom: solid 1px transparent;
+}
+
+.category-list>li>a.active-tab {
+  color: #000000;
+  border-bottom: solid 1px #000000;
+}
+
+.category-list>li>a:hover {
+  color: #000000
+}
+
 @keyframes play-btn-animation {
   0% {
     transform: scale(1);
@@ -227,7 +283,7 @@ span.imgs-control-right>i {
 /* large device */
 
 @media screen and (max-width: 1200px) {
-  .imgs-single {
+  .imgs-wrap .imgs-single {
     flex-basis: 33.333%;
   }
 }
@@ -235,7 +291,7 @@ span.imgs-control-right>i {
 /* medium device */
 
 @media screen and (max-width: 992px) {
-  .imgs-single {
+  .imgs-wrap .imgs-single {
     flex-basis: 50%;
   }
 }
@@ -254,7 +310,7 @@ span.imgs-control-right>i {
 /* small device */
 
 @media screen and (max-width: 576px) {
-  .imgs-single {
+  .imgs-wrap .imgs-single {
     flex-basis: 100%;
   }
 }

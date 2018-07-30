@@ -8,6 +8,11 @@ import { HomeComponent } from "./components/home/home.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { RoutingRoutingModule } from "./routing/routing-routing.module";
+import { ImageSliderDirective } from './directives/image-slider/image-slider.directive';
+import { VideoModule } from './modules/video/video.module';
+
+
+// custom modules
 
 @NgModule({
   declarations: [
@@ -15,10 +20,12 @@ import { RoutingRoutingModule } from "./routing/routing-routing.module";
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ImageSliderDirective
   ],
   imports: [
     BrowserModule,
+    VideoModule,
     RoutingRoutingModule
   ],
   providers: [],

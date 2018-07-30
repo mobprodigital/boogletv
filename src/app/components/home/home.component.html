@@ -1,9 +1,7 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
     <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!( lVdo.Id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.Thumbnails.Orignal + ')'}" 
-      (swipeleft)="bannerSwipeLeft(_index)" 
-      (swiperight)="bannerSwipeRight(_index)">
+      [ngStyle]="{'background-image' : 'url(' + lVdo.Thumbnails.Orignal + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
 
       <div class="h-media-inner">
         <div class="h-play-btn">
@@ -36,8 +34,8 @@
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
       <article class="banner-btn-wrap" #bannerBtnWrap>
-        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id" 
-        (click)="showSlide(lVdoBtnIndex)">
+        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id"
+          (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.Title}}
           </span>
@@ -84,5 +82,71 @@
         </div>
       </div>
     </section>
+
+    <div class="row">
+      <section class="col-md-8">
+
+        <section class="section">
+          <header class="section-header section-header-action">
+            <h2 class="section-title">Videos</h2>
+            <div>
+              <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
+                <li>
+                  <a class="active-tab">All</a>
+                </li>
+                <li *ngFor="let cat of videoCategoryList">
+                  <a (click)="showCat($event, cat.Id)">{{cat.Name}}</a>
+                </li>
+              </ul>
+            </div>
+          </header>
+          <div class="section-body">
+            <ng-container *ngIf="MostLikedVideos && MostLikedVideos.length > 0">
+              <div class="row cat-wrapper">
+                <article *ngFor="let ML_Vid of MostLikedVideos" class="imgs-single col-6">
+                  <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.Thumbnails.Orignal + ')'}">
+                    <i class="fas fa-play play-btn"></i>
+                  </div>
+                  <div class="imgs-captions">
+                    <div class="imgs-title">{{ML_Vid.Title}}</div>
+                    <div class="imgs-meta-data">
+                      <ul>
+                        <li>
+                          <i class="fas fa-eye" aria-hidden="true"></i> 12k</li>
+                        <li>
+                          <i class="fas fa-thumbs-up" aria-hidden="true"></i> 5k</li>
+                        <li>
+                          <i class="fas fa-thumbs-down" aria-hidden="true"></i> 154</li>
+                      </ul>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </ng-container>
+          </div>
+        </section>
+      </section>
+
+      <!-- sidebar -->
+      <section class="col-md-4">
+        <aside class="sidebar-wrap">
+          <div class="sidebar-header">
+            <h6 class="sidebar-title">Newsletter</h6>
+          </div>
+          <div class="sidebar-body">
+            <p>
+              Subscribe to our newsletter and join our 1 subscribers
+            </p>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your email address">
+            </div>
+            <div class="">
+              <button type="button" class="btn btn-danger btn-hover-dark">Subscribe</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </div>
+
   </div>
 </main>
