@@ -26,7 +26,8 @@ import { VideoModule } from './modules/video/video.module';
   imports: [
     BrowserModule,
     VideoModule,
-    RoutingRoutingModule
+    RoutingRoutingModule,
+    VideoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
