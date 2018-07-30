@@ -4,9 +4,20 @@
   font-family: 'Poppins', sans-serif;
 }
 
+a.post-link {
+  color: #1f1f1f;
+  transition: color 0.25s;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+a.post-link:hover {
+  color: #CC0000;
+}
+
 .btn-icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   text-align: center;
   font-size: 14px;
 }
@@ -73,6 +84,10 @@ header.page-header {
 
 /* section */
 
+.section{
+  margin-bottom: 40px;
+}
+
 .section-title,
 .sidebar-title {
   font-size: 16px;
@@ -97,15 +112,30 @@ header.page-header {
 
 /* sidebar */
 
-.sidebar-wrap {
+.sidebar-item {
   border: solid 2px lightgray;
   padding: 20px;
+  margin-bottom: 40px;
+}
+
+.ads{
+  margin-bottom: 40px;
 }
 
 .sidebar-title {
-  border-bottom: solid 2px lightgray;
+  border-bottom: solid 1px lightgray;
   padding-bottom: 15px;
   margin-bottom: 15px;
+  position: relative;
+}
+
+.sidebar-title:before {
+  content: '';
+  position: absolute;
+  height: 3px;
+  background: red;
+  width: 10%;
+  bottom: -2px;
 }
 
 /* slider */
@@ -137,7 +167,11 @@ header.page-header {
   align-items: center;
 }
 
-.cat-wrapper>.imgs-image {
+.cat-wrapper .imgs-single{
+  padding: 0;
+  margin-bottom: 30px;
+}
+.cat-wrapper .imgs-image {
   height: 200px;
 }
 

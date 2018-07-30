@@ -1,5 +1,6 @@
 export class VideoCategory {
     public Name: string = '';
     public Id: string = '';
-    public ChildCategories: VideoCategory[] = [];
+    public parentCategoryId : string = '';
+    public ChildCategories: Array<VideoCategory> = [];
 }

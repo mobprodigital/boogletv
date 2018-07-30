@@ -6,6 +6,12 @@
   border-bottom: 0;
 }
 
+.btn-group.header-btn-group>.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo-wrapper {
   background-color: #111111;
   padding: 25px 0px;
