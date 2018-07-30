@@ -1,8 +1,8 @@
+/* Footer CSS */
 .footer{
     background-color: #111111;
     color: #aeaeae;
     font-display: "Poppins",sans-serif
-    
 }
 
 .app-footer{
@@ -18,16 +18,13 @@
     padding-bottom: 7px;
     font-size: 14px;
     line-height: 1.8;
-    font-weight: 400;
+    font-weight: 600;
     color: #C4C4C4;
 }
 .post-content>a {
     font-weight: 600;
-
     color: white;
-    
-    line-height: 0;
-    
+    line-height: 0;    
     text-decoration: none;
     transition: color 0.2s;
 }
@@ -51,11 +48,23 @@
     display: flex;
     justify-content: space-between;
 }
-                    .post-meta-wrap .author a{
-                        color: gray;
-                        text-decoration: none;
-
-                    }
+/* Author and Date Start */
+.app-author{
+    text-decoration: none;
+    text-decoration: none;
+    font-weight: 600;
+    color: #AEAEAE;
+}
+.app-author:hover{
+    font-weight: 600;
+    color: #fff;
+}
+.app-date{
+    color: #AEAEAE;
+    font-size: 12px;
+}
+ /* Author and Date End */
+ 
 .post-meta-wrap>div{
     flex: 0 0 50%;
 }
@@ -64,8 +73,17 @@
     margin-top: 15px;
     margin-bottom: 15px; 
 }
+.media-content{
+    text-align: center;
+}
+.post-content {
+    margin-bottom: 0px;
+    margin-left: 5px;
+ }
 .footer-copyright{
     background-color: #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .app-copyright-footer{
     background-color: #000000;
@@ -74,9 +92,9 @@
     padding-bottom: 6px;
     font-weight: 600;
 }
-
-.post-content {
-
-    margin-bottom: 10px;
-
+.app-copyright {
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
 }
+/* Footer CSS End */
