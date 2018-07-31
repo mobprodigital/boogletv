@@ -42,12 +42,12 @@ export class HeaderComponent implements OnInit {
       NavItems: [
         {
           NavItemId: 11,
-          Href: '#',
+          Href: 'home',
           Text: 'Home'
         },
         {
           NavItemId: 12,
-          Href: '#',
+          Href: 'video',
           Text: 'Video',
           ChildMenu: [
             {

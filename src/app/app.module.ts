@@ -5,11 +5,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from "./components/home/home.component";
-import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { RoutingRoutingModule } from "./routing/routing-routing.module";
 import { ImageSliderDirective } from './directives/image-slider/image-slider.directive';
-import { VideoModule } from './modules/video/video.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 
 // custom modules
@@ -20,14 +19,12 @@ import { VideoModule } from './modules/video/video.module';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent,
     ImageSliderDirective
   ],
   imports: [
     BrowserModule,
-    VideoModule,
     RoutingRoutingModule,
-    VideoModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -87,7 +87,7 @@
           <ul  class="mob-menu-sec main-nav">
             <ng-container *ngIf="mainNavMenu.NavItems && mainNavMenu.NavItems.length > 0">
               <li class="main-nav-item" *ngFor="let _navItem of mainNavMenu.NavItems">
-                <a href="{{_navItem.Href}}" class="main-nav-link">{{_navItem.Text}}
+                <a routerLinkActive="active" routerLink="/{{_navItem.Href}}" class="main-nav-link">{{_navItem.Text}}
                   <i *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0" 
                     (click)="toggleMenu($event, _navItem)" 
                     class="fas fa-angle-down" 

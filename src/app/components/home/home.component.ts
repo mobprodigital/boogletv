@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Video } from "../../models/video.model";
-import { VideoCategory } from '../../models/video-category.modal';
+import { VideoCategory } from '../../models/video-category.model';
 
 @Component({
   selector: 'app-home',

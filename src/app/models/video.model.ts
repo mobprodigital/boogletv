@@ -1,4 +1,4 @@
-import { VideoCategory } from "./video-category.modal";
+import { VideoCategory } from "./video-category.model";
 import { ThumbnailSize } from "../interfaces/thumbnail.interface";
 
 export class Video {
