@@ -18,7 +18,6 @@
 
 /* Single Player Control-Icon Start*/
 .btn-group.video-player-button>button {
-    font-size: 18px;
     font-weight: 600;
 }
 .player-button{
@@ -43,32 +42,7 @@ article>h1{
     font-weight: 700;
 }
 
-/* single post author and date CSS */
-.app-author{
-    text-decoration: none;
-    text-decoration: none;
-    color: #AEAEAE;
-    font-size: 12px;
-    text-transform: uppercase;
-    
-}
-.app-author:hover{
-   
-    color: #000;
-}
-.meta-data-list{
-    margin-top: 0;
-    overflow: hidden;
-}
-.meta-data-item{
-    color: #888888;
-    font-size: 12px;
-    margin-right: 20px;
-    list-style-type: none;
-    float: left; 
-    margin-top: 0;
-}
-/* single post author and date End */
+
 
 .break-point-line{
     border: .8px solid #efefef;
@@ -83,5 +57,13 @@ article>h1{
     width: 100%;
     height: auto;
     display: block;
+}
+.blockquote{
+    padding: 13px 20px 13px 75px;
+    font-size: 18px;
+    border-left: 10px solid #CC0000;
+    border-right: 2px solid #CC0000;
+    background: #000000;
+    color: #999999;
 }
 /* main section end */
