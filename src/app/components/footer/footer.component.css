@@ -42,13 +42,13 @@
     text-transform: uppercase;
     margin-bottom: 8px;
 }
+/* Author and Date Start */
 .post-meta-wrap{
     font-size: 12px;
     text-transform: uppercase;
     display: flex;
     justify-content: space-between;
 }
-/* Author and Date Start */
 .app-author{
     text-decoration: none;
     text-decoration: none;

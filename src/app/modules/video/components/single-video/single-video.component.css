@@ -42,33 +42,7 @@ article>h1{
     font-weight: 700;
 }
 
-/* single post author and date CSS */
-.app-author{
-    text-decoration: none;
-    text-decoration: none;
-    color: #AEAEAE;
-    font-size: 12px;
-    text-transform: uppercase;
-    
-}
-.app-author:hover{
-   
-    color: #000;
-}
-.meta-data-list{
-    margin-top: 0;    
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-    display: flex;
-    justify-content: flex-start;
-}
-.meta-data-item{
-    color: #888888;
-    font-size: 12px;
-    margin-right: 20px;
-}
-/* single post author and date End */
+
 
 .break-point-line{
     border: .8px solid #efefef;
