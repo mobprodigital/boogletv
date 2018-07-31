@@ -9,6 +9,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { RoutingRoutingModule } from "./routing/routing-routing.module";
 import { ImageSliderDirective } from './directives/image-slider/image-slider.directive';
 import { SharedModule } from './modules/shared/shared.module';
+import { AjaxService } from './services/ajax/ajax.service';
 
 
 // custom modules
@@ -26,7 +27,7 @@ import { SharedModule } from './modules/shared/shared.module';
     RoutingRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [AjaxService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

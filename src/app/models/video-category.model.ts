@@ -10,7 +10,7 @@ export class VideoCategory {
     /**
      * Parent category id if parent exists, otherwise null
      */
-    public parentCategoryId: string | null = '';
+    public parentCategoryId: string | null = null;
     /**
      * Child categoty array
      */
