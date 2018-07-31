@@ -4,6 +4,7 @@ import { SingleVideoComponent } from './components/single-video/single-video.com
 import { AllVideoComponent } from './components/all-video/all-video.component';
 import { VideoRoutingModule } from './video-routing/video-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { SharedModule } from '../shared/shared.module';
     VideoRoutingModule,
     SharedModule
   ],
-  declarations: [SingleVideoComponent, AllVideoComponent],
+  declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent],
   exports: [VideoRoutingModule, SharedModule]
 })
 export class VideoModule { }
