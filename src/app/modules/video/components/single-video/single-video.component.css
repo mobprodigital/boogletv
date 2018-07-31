@@ -5,12 +5,14 @@
 }
 .single-video{
     margin-top: 0px;
+    width: 100%;
+    height: auto;
 }
 .single-post-video-palyer{
-    width: 1140px;
-    height: 641px;
+    width: 100%;
+    height: auto;
     left: 0px;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 /* Single Video Player Class End */
 
@@ -75,7 +77,11 @@ article>h1{
 }
 
 .meta-content {
-    margin-top: 40px;
+    margin-top: 30px;
 }
-
+.video-article-image{
+    width: 100%;
+    height: auto;
+    display: block;
+}
 /* main section end */
