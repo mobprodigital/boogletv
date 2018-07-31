@@ -1,0 +1,81 @@
+/* Single Video Player */
+.app-video-single{
+    background-color: black;
+    margin-top: 0px;
+}
+.single-video{
+    margin-top: 0px;
+}
+.single-post-video-palyer{
+    width: 1140px;
+    height: 641px;
+    left: 0px;
+    margin-top: 60px;
+}
+/* Single Video Player Class End */
+
+/* Single Player Control-Icon Start*/
+.btn-group.video-player-button>button {
+    font-size: 18px;
+    font-weight: 600;
+}
+.player-button{
+    width: 100px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}   
+/* Single Player Control-Icon End*/
+
+/* main section start */
+
+.main{
+    background-color: #fff;
+    font-family: "Poppins", sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+article>h1{
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+}
+
+/* single post author and date CSS */
+.app-author{
+    text-decoration: none;
+    text-decoration: none;
+    color: #AEAEAE;
+    font-size: 12px;
+    text-transform: uppercase;
+    
+}
+.app-author:hover{
+   
+    color: #000;
+}
+.meta-data-list{
+    margin-top: 0;
+    overflow: hidden;
+}
+.meta-data-item{
+    color: #888888;
+    font-size: 12px;
+    margin-right: 20px;
+    list-style-type: none;
+    float: left; 
+    margin-top: 0;
+}
+/* single post author and date End */
+
+.break-point-line{
+    border: .8px solid #efefef;
+    margin-top: 0px;
+    margin-bottom: 0px; 
+}
+
+.meta-content {
+    margin-top: 40px;
+}
+
+/* main section end */
