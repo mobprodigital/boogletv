@@ -391,6 +391,143 @@ span.imgs-control-right>i {
 
 /* badge categories style */
 
+/* Single Video Player */
+
+.app-video-single {
+  background-color: black;
+  margin-top: 0px;
+}
+
+.single-video {
+  margin-top: 0px;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.single-video .video-player-frame {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.single-video ul.video-controls {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 15px;
+}
+
+.single-video ul.video-controls>li:first-of-type {
+  position: absolute;
+  left: 0;
+}
+
+.single-video ul.video-controls>li>span {
+  padding: 5px 10px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.single-post-video-palyer {
+  width: 100%;
+  height: auto;
+  left: 0px;
+  margin-top: 40px;
+}
+.single-video .video-player-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.single-video:hover .video-player-btn{
+  background-color: #b80000;
+}
+.single-video i.video-player-btn.video-play {
+  background-image: url('/assets/images/icons/play.png');
+}
+.single-video i.video-player-btn.video-pause {
+  background-image: url('/assets/images/icons/pause.png');
+}
+.single-video .video-seekbar {
+  height: 3px;
+  cursor: pointer;
+  margin-bottom: 17px;
+  margin-left: 13px;
+  margin-right: 13px;
+}
+
+/* Single Video Player Class End */
+
+/* Single Player Control-Icon Start*/
+
+.btn-group.video-player-button>button {
+  font-weight: 600;
+}
+
+.player-button {
+  width: 100px;
+  height: 50px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* Single Player Control-Icon End*/
+
+/* main section start */
+
+.main {
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+article>h1 {
+  font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.break-point-line {
+  border: .8px solid #efefef;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.meta-content {
+  margin-top: 30px;
+}
+
+.video-article-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blockquote {
+  padding: 13px 20px 13px 75px;
+  font-size: 18px;
+  border-left: 10px solid #CC0000;
+  border-right: 2px solid #CC0000;
+  background: #000000;
+  color: #999999;
+}
+
+/* main section end */
+
 /* responsive css */
 
 /* large device */

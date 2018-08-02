@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Video } from '../../../../models/video.model';
 import { VideoCategory } from '../../../../models/video-category.model';
 import { VideoService } from '../../services/video.service';
-import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-all-video',
@@ -51,6 +50,14 @@ export class AllVideoComponent implements OnInit {
 
   public showVideoByCategory(categoryId: string) {
     this._router.navigate(['/video/category', categoryId]);
+  }
+
+  /**
+   * Navigate to play video page and play a video 
+   * @param videoId video id
+   */
+  public viewVideo(videoId: string) {
+    this._router.navigate(['video/play', videoId]);
   }
 
 }

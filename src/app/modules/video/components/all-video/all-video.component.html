@@ -13,7 +13,7 @@
                 <article *ngFor="let ML_Vid of MostLikedVideos" class="col-6">
                   <div class="imgs-single">
                     <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.Thumbnails.Orignal + ')'}">
-                      <i class="fas fa-play play-btn"></i>
+                      <i (click)="viewVideo(ML_Vid.Id)" class="fas fa-play play-btn"></i>
                       <span class="badge badge-dark duration-text">11:55</span>
                     </div>
                     <div>

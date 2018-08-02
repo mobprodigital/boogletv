@@ -1,9 +1,34 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video class="single-post-video-palyer" controls>
-        <source src="movie.mp4" type="video/mp4">
+      <video class="single-post-video-palyer" #videoPlayer>
       </video>
+      <div class="video-player-frame">
+
+        <span class="video-btn-span">
+          <i (click)="videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
+            class="video-player-btn"></i>
+        </span>
+
+        <ul class="video-controls">
+          <li>
+            <span class="video-time">{{videoPlayer.currentTime}}/{{videoPlayer.duration}}</span>
+          </li>
+          <li>
+            <span>
+              <i class="fas fa-expand"></i>
+            </span>
+          </li>
+          <li>
+            <span>
+              <i (click)="videoPlayer.muted = !videoPlayer.muted" [ngClass]="videoPlayer.muted ? 'fa-volume-off' : 'fa-volume-up'" class="fas"></i>
+            </span>
+          </li>
+        </ul>
+        <div (click)="seekVideo($event)" #seekBar class="progress video-seekbar">
+          <div [ngStyle]="{width : seekBarpercent + '%'}" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
     </div>
     <!-- video-player-control Start -->
     <div class="row">
@@ -71,7 +96,7 @@
               <p class="break-point-line"> </p>
             </div>
             <!-- End Break Point Line Latest Post Bottom -->
-            
+
           </article>
         </section>
 
@@ -83,7 +108,7 @@
             <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
           </div>
         </section>
-        
+
         <section class="section">
           <header class="section-header">
             <h6 class="section-title">Most liked videos of this category</h6>
