@@ -15,7 +15,7 @@ export class Video {
         Orignal: '',
         Large: '',
         Medium: '',
-        small: '',
+        Small: '',
     };
     public Src: string;
     constructor() {

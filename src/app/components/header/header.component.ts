@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavMenu, NavMenuItem } from '../../interfaces/nav-menu.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   public mainNavMenu: NavMenu;
   public showMobMenu: boolean = false;
 
-  constructor() {
+  constructor(private router: Router) {
     this.feedMenu();
   }
 
@@ -27,7 +28,9 @@ export class HeaderComponent implements OnInit {
       navItem.ChildMenu.forEach((menu: NavMenu) => {
         menu.Hidden = !menu.Hidden;
       });
-      console.log(navItem.ChildMenu);
+    }
+    else {
+      this.router.navigateByUrl('/' + navItem.Href);
     }
   }
 
@@ -56,13 +59,18 @@ export class HeaderComponent implements OnInit {
               NavName: 'Movies',
               NavItems: [
                 {
+                  Text : 'All',
+                  Href : 'video',
+                  NavItemId : 1210
+                },
+                {
                   Text: 'Bollywood',
-                  Href: '#',
+                  Href: 'video/category',
                   NavItemId: 1211
                 },
                 {
                   Text: 'Hollywood',
-                  Href: '#',
+                  Href: 'video/category',
                   NavItemId: 1212
                 },
               ]

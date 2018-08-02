@@ -52,6 +52,7 @@
         <h2 class="section-title section-title-center">Most liked videos</h2>
       </header>
       <div class="section-body">
+          <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
         <div class="imgs-container">
           <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
             <article *ngFor="let ML_Vid of MostLikedVideos" class="imgs-single">

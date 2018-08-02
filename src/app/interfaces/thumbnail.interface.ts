@@ -15,5 +15,5 @@ export interface ThumbnailSize {
     /**
      * 300 x 150 width and height respectivly in pixels
      */
-    small: string;
+    Small: string;
 }

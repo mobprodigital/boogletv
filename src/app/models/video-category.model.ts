@@ -12,7 +12,7 @@ export class VideoCategory {
      */
     public parentCategoryId: string | null = null;
     /**
-     * Child categoty array
+     * Child category array
      */
     public Categories: Array<VideoCategory> = [];
 }

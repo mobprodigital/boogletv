@@ -87,9 +87,8 @@
           <ul  class="mob-menu-sec main-nav">
             <ng-container *ngIf="mainNavMenu.NavItems && mainNavMenu.NavItems.length > 0">
               <li class="main-nav-item" *ngFor="let _navItem of mainNavMenu.NavItems">
-                <a routerLinkActive="active" routerLink="/{{_navItem.Href}}" class="main-nav-link">{{_navItem.Text}}
+                <a (click)="toggleMenu($event, _navItem)" class="main-nav-link">{{_navItem.Text}}
                   <i *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0" 
-                    (click)="toggleMenu($event, _navItem)" 
                     class="fas fa-angle-down" 
                     aria-hidden="true"></i>
                 </a>
@@ -99,7 +98,7 @@
                     [hidden]="_childMenu.Hidden" 
                     class="sub-menu animated fadeIn">
                     <li *ngFor="let _subNavItem of _childMenu.NavItems" class="sub-menu-item">
-                      <a href="{{_subNavItem.Href}}" class="main-nav-link sub-menu-link">{{_subNavItem.Text}}</a>
+                      <a [routerLink]="[_subNavItem.Href, _subNavItem.Text.toLowerCase()]" class="main-nav-link sub-menu-link">{{_subNavItem.Text}}</a>
                     </li>
                   </ul>
                 </ng-container>

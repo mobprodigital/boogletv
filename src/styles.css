@@ -8,6 +8,7 @@ a.post-link {
   color: #1f1f1f;
   transition: color 0.25s;
   cursor: pointer;
+  text-decoration: none;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -84,7 +85,7 @@ header.page-header {
 
 /* section */
 
-.section{
+.section {
   margin-bottom: 40px;
 }
 
@@ -118,7 +119,7 @@ header.page-header {
   margin-bottom: 40px;
 }
 
-.ads{
+.ads {
   margin-bottom: 40px;
 }
 
@@ -154,6 +155,19 @@ header.page-header {
   flex-shrink: 0;
 }
 
+.imgs-single.post-full-width {
+  display: flex;
+  justify-content: space-between;
+}
+
+.imgs-single.post-full-width>div {
+  flex-basis: 50%;
+}
+
+.imgs-single.post-full-width>div:last-of-type {
+  padding-left: 20px;
+}
+
 .imgs-wrap .imgs-single {
   flex-basis: 25%;
 }
@@ -165,17 +179,18 @@ header.page-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
-.cat-wrapper .imgs-single{
+.cat-wrapper .imgs-single {
   padding: 0;
   margin-bottom: 30px;
 }
+
 .cat-wrapper .imgs-image {
   height: 200px;
   position: relative;
 }
+
 .play-btn {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -200,7 +215,8 @@ header.page-header {
 .imgs-image:hover .play-btn {
   background-color: #cc0000;
 }
-.duration-text{
+
+.duration-text {
   padding: 3px 10px 3px 10px;
   display: block;
   background-color: rgba(0, 0, 0, 0.8);
@@ -210,6 +226,7 @@ header.page-header {
   bottom: 3px;
   font-size: 12px;
 }
+
 .imgs-meta-data>ul {
   margin: 0;
   padding: 0;
@@ -322,21 +339,22 @@ span.imgs-control-right>i {
 
 /* slider ends */
 
-
 /* single post author and date CSS */
-.app-author{
+
+.app-author {
   text-decoration: none;
   text-decoration: none;
   color: #AEAEAE;
   font-size: 12px;
   text-transform: uppercase;
-  
 }
-.app-author:hover{   
+
+.app-author:hover {
   color: #000;
 }
-.meta-data-list{
-  margin-top: 0;    
+
+.meta-data-list {
+  margin-top: 0;
   list-style: none;
   margin-left: 0;
   padding-left: 0;
@@ -344,25 +362,35 @@ span.imgs-control-right>i {
   justify-content: flex-start;
   text-transform: uppercase;
 }
-.meta-data-item{
+
+.meta-data-item {
   color: #888888;
   font-size: 12px;
   margin-right: 20px;
 }
+
 /* single post author and date End */
 
 /* badge categories style */
-.badge{ 
-    font-size: 11px;
-    font-weight: normal;
-    border-radius: 0;
-    text-transform: uppercase;
+
+.badge {
+  font-size: 11px;
+  font-weight: normal;
+  border-radius: 0;
+  text-transform: uppercase;
 }
+
 .badge-categories {
   margin-right: 5px;
+  cursor: pointer;
+}
+
+.badge.badge-warning.badge-categories:hover {
+  background-color: #d29d00;
 }
 
 /* badge categories style */
+
 /* responsive css */
 
 /* large device */

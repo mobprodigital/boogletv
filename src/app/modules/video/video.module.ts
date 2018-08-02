@@ -5,14 +5,20 @@ import { AllVideoComponent } from './components/all-video/all-video.component';
 import { VideoRoutingModule } from './video-routing/video-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.component';
+import { HttpModule } from '@angular/http';
+import { AjaxService } from '../../services/ajax/ajax.service';
+import { ImageSliderDirective } from '../../directives/image-slider/image-slider.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     VideoRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpModule,
+    
   ],
-  declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent],
-  exports: [VideoRoutingModule, SharedModule]
+  declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent, ImageSliderDirective],
+  exports: [VideoRoutingModule, SharedModule, HttpModule, ImageSliderDirective],
+  providers : [AjaxService]
 })
 export class VideoModule { }

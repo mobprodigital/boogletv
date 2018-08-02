@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Video } from "../../models/video.model";
 import { VideoCategory } from '../../models/video-category.model';
+import { ImageSlider, ImageSliderImage } from '../../directives/image-slider/interface/image-slider.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChild('imgSlider', { read: ElementRef }) imgSlider: ElementRef;
   @ViewChild('bannerBtnWrap', { read: ElementRef }) bannerBtnWrap: ElementRef;
+
 
   selectedSlide: string = '';
 
@@ -116,6 +118,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return vdo;
     })
 
+    /*  this.relatedVideoSliderImages.ImageSlideList = Array.from({ length: 12 }, (_, i: number) => {
+       let singleImage: ImageSliderImage = {
+         href: 'video/play/videoid',
+         imagePath: `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`,
+         metaData: [
+           { 'faClassName': 'fa-eye', text: '20k' },
+           { 'faClassName': 'fa-thumbs-up', text: '200' },
+           { 'faClassName': 'fa-thumbs-down', text: '20' },
+         ],
+         title: 'Title ' + i
+       }
+ 
+       return singleImage
+     }); */
 
   }
 
@@ -127,9 +143,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     let scrollLength: number = 0;
     if (slideTo == 'left') {
       scrollLength = slider.scrollLeft + slider.clientWidth;
+      if (scrollLength >= slider.scrollWidth) {
+        scrollLength = 0;
+      }
     }
     else {
-      scrollLength = slider.scrollLeft - slider.clientWidth
+      scrollLength = slider.scrollLeft - slider.clientWidth;
+      if (slider.scrollLeft <= 0) {
+        scrollLength = slider.scrollWidth;
+      }
     }
     slider.scroll({ left: scrollLength, behavior: 'smooth' });
   }

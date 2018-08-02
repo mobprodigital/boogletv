@@ -67,6 +67,9 @@ a.main-nav-link {
 a.main-nav-link:hover {
   background-color: rgba(0, 0, 0, 0.21);
 }
+a.main-nav-link:hover + ul {
+  display: block;
+}
 
 a.main-nav-link.sub-menu-link {
   background-color: rgba(0, 0, 0, 0.51);

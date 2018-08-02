@@ -1,101 +1,104 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video class= "single-post-video-palyer" controls>
+      <video class="single-post-video-palyer" controls>
         <source src="movie.mp4" type="video/mp4">
-        <source src="movie.ogg" type="video/ogg">
       </video>
     </div>
     <!-- video-player-control Start -->
-    <div class="row">    
-          <div class="col-lg-4 d-none d-lg-block d-xl-block btn-group video-player-button" role="group" aria-label="Video Player">
-              <button type="button" class="btn-icon btn btn-dark player-button">
-                Like: 
-                <i class="fas fa-thumbs-up"></i>
-              </button>
-              <button type="button" class="btn-icon btn btn-dark player-button">
-                Dislike: 
-                <i class="fas fa-thumbs-down"></i>
-              </button>
-              <button type="button" class="btn-icon btn btn-dark player-button">
-                Share: 
-                <i class="fas fa-share-alt-square"></i>
-              </button>
-          </div>        
-        <div class="col">
+    <div class="row">
+      <div class="col-lg-4 d-none d-lg-block d-xl-block btn-group video-player-button" role="group" aria-label="Video Player">
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Like:
+          <i class="fas fa-thumbs-up"></i>
+        </button>
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Dislike:
+          <i class="fas fa-thumbs-down"></i>
+        </button>
+        <button type="button" class="btn-icon btn btn-dark player-button">
+          Share:
+          <i class="fas fa-share-alt-square"></i>
+        </button>
+      </div>
+      <div class="col">
 
-        </div>
-      </div> <!-- Row End -->
-         <!-- video-player-control End -->
+      </div>
+    </div>
+    <!-- Row End -->
+    <!-- video-player-control End -->
+  </div>
+</div>
+
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <section class="">
+          <article>
+            <h1>How Long – Charlie Puth – IAGO & KHS Cover</h1>
+            <ul class="meta-data-list">
+              <li class="meta-data-item">
+                <i class="fa fa-user-circle nav-font-size"> &nbsp;</i>
+                <a class="app-author nav-font-size" href="#">Girish</a>
+              </li>
+              <li class="meta-data-item">
+                <i class="fas fa-calendar-alt nav-font-size">&nbsp;</i>
+                <span>
+                  <time class="entry-date nav-font-size" datetime="2018-07-29">July 30, 2018</time>
+                </span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-comment nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size"> 10 </span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-eye nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">718.3K</span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-thumbs-up nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">2.3K</span>
+              </li>
+              <li class="meta-data-item">
+                <i class="fa fa-thumbs-down nav-font-size" aria-hidden="true">&nbsp;</i>
+                <span class="nav-font-size nav-font-size">144</span>
+              </li>
+            </ul>
+
+            <div>
+              <!-- Start Break Point Line Latest Post Bottom -->
+              <p class="break-point-line"> </p>
+            </div>
+            <!-- End Break Point Line Latest Post Bottom -->
+            
+          </article>
+        </section>
+
+        <section class="section">
+          <header class="section-header">
+            <h6 class="section-title">Related videos</h6>
+          </header>
+          <div class="section-body">
+            <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
+          </div>
+        </section>
+        
+        <section class="section">
+          <header class="section-header">
+            <h6 class="section-title">Most liked videos of this category</h6>
+          </header>
+          <div class="section-body">
+            <div [appImageSlider]="relatedVideoSliderImages"></div>
+          </div>
+        </section>
+      </div>
+      <!-- col-md-8 End-->
+      <!-- <div class="col-md-4">
+          <app-video-sidebar></app-video-sidebar>
+        </div> -->
+      <!-- col-md-4 End-->
     </div>
   </div>
-
-  <div class="main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <section class="">
-            <article>
-              <h1>How Long – Charlie Puth – IAGO & KHS Cover</h1>
-              <ul class="meta-data-list">
-                <li class="meta-data-item">
-                    <i class="fa fa-user-circle nav-font-size"> &nbsp;</i>
-                    <a class="app-author nav-font-size" href="#">Girish</a> 
-                </li>
-                <li class="meta-data-item">
-                    <i class="fas fa-calendar-alt nav-font-size">&nbsp;</i>
-                    <span>
-                      <time class="entry-date nav-font-size" datetime="2018-07-29">July 30, 2018</time>
-                    </span>
-                </li>
-                <li class="meta-data-item">
-                    <i class="fa fa-comment nav-font-size" aria-hidden="true">&nbsp;</i>
-                    <span class="nav-font-size"> 10 </span>
-                </li>
-                <li class="meta-data-item">
-                    <i class="fa fa-eye nav-font-size" aria-hidden="true">&nbsp;</i>
-                    <span class="nav-font-size nav-font-size">718.3K</span>
-                </li>
-                <li class="meta-data-item">
-                    <i class="fa fa-thumbs-up nav-font-size" aria-hidden="true">&nbsp;</i>
-                    <span class="nav-font-size nav-font-size">2.3K</span>
-                </li>
-                <li class="meta-data-item">
-                    <i class="fa fa-thumbs-down nav-font-size" aria-hidden="true">&nbsp;</i>
-                    <span class="nav-font-size nav-font-size">144</span>
-                </li>
-              </ul>
-              
-              <div> <!-- Start Break Point Line Latest Post Bottom -->
-                  <p class="break-point-line"> </p>
-              </div>
-                <!-- End Break Point Line Latest Post Bottom -->
-                <p class="meta-content">Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor expression unpleasing she led met. Estate was tended ten boy nearer seemed. As so seeing latter he should thirty whence. Steepest speaking up attended it as. Made neat an on be gave show snug tore.</p>
-                <p>Did shy say mention enabled through elderly improve. As at so believe account evening behaved hearted is. House is tiled we aware. It ye greatest removing concerns an <a href="#none">overcame appetite</a>. Manner result square father boy behind its his. Their above spoke match ye mr right oh as first. Be my depending to believing perfectly concealed household. Point could to built no hours smile sense.</p>
-                <figure class="figure">
-                    <img class="video-article-image" src="assets/images/home/vanessa.jpg" alt="">
-                    <figcaption class="figure-caption">
-                      Yourself required no at thoughts delicate landlord it be.
-                    </figcaption>
-                </figure>
-                <p>
-                    On insensible possession oh particular attachment at excellence in. The books arose but miles happy she. It building contempt or interest children mistress of unlocked no. Offending she contained mrs led listening resembled. Delicate marianne absolute men dashwood landlord and offended. Suppose cottage between and way. Minuter him own clothes but observe country. Agreement far boy otherwise rapturous incommode favourite.
-                </p>
-                <blockquote class="blockquote">
-                    Branched dashwood do is whatever it. Farther be chapter at visited married in it pressed. By distrusts procuring be oh frankness existence believing instantly if. Doubtful on an juvenile as of servants insisted.
-                </blockquote>
-                <p>
-                    Your it to gave life whom as. Favourable dissimilar resolution led for and had. At play much to time four many. Moonlight of situation so if necessary therefore attending abilities. Calling looking enquire up me to in removal. Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can. Unreserved had she nay dissimilar admiration interested. Departure performed exquisite rapturous so ye me resources.
-                </p>
-                <p>
-                    Old education him departure any arranging one prevailed. Their end whole might began her. Behaved the comfort another fifteen eat. Partiality had his themselves ask pianoforte increasing discovered. So mr delay at since place whole above miles. He to observe conduct at detract because. Way ham unwilling not breakfast furniture explained perpetual. Or mr surrounded conviction so astonished literature. Songs to an blush woman be sorry young. We certain as removal attempt.
-                </p>
-              </article>
-          </section>
-        </div> <!-- col-md-8 End-->
-        <div class="col-md-4">
-          <app-video-sidebar></app-video-sidebar>
-        </div> <!-- col-md-4 End-->
-      </div>
-    </div> <!--main Section End -->
-  </div>
+  <!--main Section End -->
+</div>
