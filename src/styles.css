@@ -422,7 +422,7 @@ span.imgs-control-right>i {
   list-style-type: none;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 
 .single-video ul.video-controls>li:first-of-type {
@@ -434,6 +434,15 @@ span.imgs-control-right>i {
   padding: 5px 10px;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.single-video ul.video-controls>li:not(:first-of-type)>span {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .single-post-video-palyer {
@@ -475,6 +484,17 @@ span.imgs-control-right>i {
   margin-right: 13px;
   border-radius: 0;
 }
+
+.single-video .video-player-frame.hide-controls>* {
+  visibility: hidden;
+  transition: visibility 1s ease-in; 
+}
+
+.single-video .video-player-frame.hide-controls:hover>* {
+  visibility: visible;
+}
+
+
 
 /* Single Video Player Class End */
 

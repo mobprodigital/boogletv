@@ -3,7 +3,7 @@
     <div class="single-video">
       <video class="single-post-video-palyer" #videoPlayer>
       </video>
-      <div class="video-player-frame">
+      <div class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
         <span class="video-btn-span">
           <i (click)="videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
@@ -41,7 +41,7 @@
           Dislike:
           <i class="fas fa-thumbs-down"></i>
         </button>
-        <button type="button" class="btn-icon btn btn-dark player-button">
+        <button (click)="shareVideo()" type="button" class="btn-icon btn btn-dark player-button">
           Share:
           <i class="fas fa-share-alt-square"></i>
         </button>

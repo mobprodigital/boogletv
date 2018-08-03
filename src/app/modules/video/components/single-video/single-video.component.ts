@@ -103,4 +103,15 @@ export class SingleVideoComponent implements OnInit {
     screenfull.toggle(this.videoPlayer);
   }
 
+  shareVideo() {
+
+    if (navigator['share']) {
+      navigator['share']({
+        title: 'Thor',
+        text: 'Thor moview',
+        url: location.href,
+      });
+    }
+  }
+
 }
