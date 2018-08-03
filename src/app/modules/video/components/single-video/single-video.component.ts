@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../services/video.service';
-import { interval } from 'rxjs';
-import { map } from 'rxjs/operators'
+import * as screenfull from 'screenfull'
 
 @Component({
   selector: 'app-single-video',
@@ -15,9 +14,13 @@ export class SingleVideoComponent implements OnInit {
 
   @ViewChild('videoPlayer', { read: ElementRef }) videoPlayerControlRef: ElementRef;
   videoPlayer: HTMLMediaElement;
-
+  videoTimer: any;
   @ViewChild('seekBar', { read: ElementRef }) seekBarControlRef: ElementRef;
   seekBar: HTMLDivElement;
+
+
+  videoCurrentTime: string | number = '00:00:00';
+  videoTotalTime: string | number = '00:00:00';
 
   seekBarPercent: number = 0;
 
@@ -49,15 +52,23 @@ export class SingleVideoComponent implements OnInit {
 
   ngOnInit() {
     this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
-    this.videoPlayer.src = 'https://www.w3schools.com/tags/mov_bbb.mp4';
-
+    this.videoPlayer.src = '/assets/videodata/Movie/Thor Ragnarok/video/Thor Ragnarok.mp4';
+    this.videoTotalTime = this.videoPlayer.duration ? this.secToTime(this.videoPlayer.duration) : '00:00:00';
     this.seekBar = <HTMLDivElement>this.seekBarControlRef.nativeElement;
 
     this._activatedRoute.params.forEach(p => {
-      console.log(p);
+
     });
 
     this.videoPlayer.addEventListener('contextmenu', (ev: MouseEvent) => ev.preventDefault());
+
+    this.videoPlayer.ontimeupdate = () => {
+      this.seekBarPercent = (this.videoPlayer.currentTime / this.videoPlayer.duration) * 100;
+      this.videoCurrentTime = this.secToTime(this.videoPlayer.currentTime);
+      this.videoTotalTime = this.secToTime(this.videoPlayer.duration);
+    }
+
+
   }
 
   public seekVideo(ev: MouseEvent) {
@@ -65,6 +76,31 @@ export class SingleVideoComponent implements OnInit {
     this.videoPlayer.currentTime = (this.videoPlayer.duration / 100) * this.seekBarPercent;
   }
 
+  /**
+   * Convert seconds to hh/mm/ss format
+   * @param duration seconds
+   */
+  public secToTime(duration: number): string | number {
+    if (duration == NaN) {
+      return '00:00:00';
+    }
+    let sec_num = parseInt(duration.toString(), 10);
+    let hours: string | number = Math.floor(sec_num / 3600);
+    let minutes: string | number = Math.floor((sec_num - (hours * 3600)) / 60);
+    let seconds: string | number = sec_num - (hours * 3600) - (minutes * 60);
 
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+
+    return hours + ":" + minutes + ":" + seconds;
+
+  }
+
+  fullScreen: boolean = false
+
+  toggleFullScreen() {
+    screenfull.toggle(this.videoPlayer);
+  }
 
 }

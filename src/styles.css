@@ -442,6 +442,7 @@ span.imgs-control-right>i {
   left: 0px;
   margin-top: 40px;
 }
+
 .single-video .video-player-btn {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
@@ -452,21 +453,27 @@ span.imgs-control-right>i {
   background-position: center center;
   background-repeat: no-repeat;
 }
-.single-video:hover .video-player-btn{
+
+.single-video:hover .video-player-btn {
   background-color: #b80000;
 }
+
 .single-video i.video-player-btn.video-play {
   background-image: url('/assets/images/icons/play.png');
 }
+
 .single-video i.video-player-btn.video-pause {
   background-image: url('/assets/images/icons/pause.png');
 }
+
 .single-video .video-seekbar {
-  height: 3px;
+  height: 4px;
   cursor: pointer;
   margin-bottom: 17px;
   margin-left: 13px;
+  padding: 0px 0;
   margin-right: 13px;
+  border-radius: 0;
 }
 
 /* Single Video Player Class End */

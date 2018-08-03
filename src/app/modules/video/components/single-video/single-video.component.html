@@ -12,11 +12,11 @@
 
         <ul class="video-controls">
           <li>
-            <span class="video-time">{{videoPlayer.currentTime}}/{{videoPlayer.duration}}</span>
+            <span class="video-time">{{videoCurrentTime}} / {{videoTotalTime}}</span>
           </li>
           <li>
             <span>
-              <i class="fas fa-expand"></i>
+              <i (click)="toggleFullScreen()" class="fas fa-expand"></i>
             </span>
           </li>
           <li>
@@ -26,7 +26,7 @@
           </li>
         </ul>
         <div (click)="seekVideo($event)" #seekBar class="progress video-seekbar">
-          <div [ngStyle]="{width : seekBarpercent + '%'}" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [ngStyle]="{width : seekBarPercent + '%'}" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>
