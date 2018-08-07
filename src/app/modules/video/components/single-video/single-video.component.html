@@ -1,9 +1,14 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video class="single-post-video-palyer" #videoPlayer>
+      <video [hidden]="currentVideo.videoSource == 1" class="single-post-video-palyer" #videoPlayer>
       </video>
-      <div class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
+      <ng-container *ngIf="currentVideo.videoSource == 1">
+        <div class="youtube-player-wrap">
+          <youtube-player [videoId]="currentVideo.src"></youtube-player>
+        </div>
+      </ng-container>
+      <div [hidden]="currentVideo.videoSource == 1"  class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
         <span class="video-btn-span">
           <i (click)="videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
@@ -61,12 +66,9 @@
       <div class="col-md-12">
         <section class="">
           <article>
-            <h1>How Long – Charlie Puth – IAGO & KHS Cover</h1>
+            <h1>{{currentVideo.title}}</h1>
             <ul class="meta-data-list">
-              <li class="meta-data-item">
-                <i class="fa fa-user-circle nav-font-size"> &nbsp;</i>
-                <a class="app-author nav-font-size" href="#">Girish</a>
-              </li>
+
               <li class="meta-data-item">
                 <i class="fas fa-calendar-alt nav-font-size">&nbsp;</i>
                 <span>
@@ -79,15 +81,15 @@
               </li>
               <li class="meta-data-item">
                 <i class="fa fa-eye nav-font-size" aria-hidden="true">&nbsp;</i>
-                <span class="nav-font-size nav-font-size">718.3K</span>
+                <span class="nav-font-size nav-font-size">{{currentVideo.viewsCount}}</span>
               </li>
               <li class="meta-data-item">
                 <i class="fa fa-thumbs-up nav-font-size" aria-hidden="true">&nbsp;</i>
-                <span class="nav-font-size nav-font-size">2.3K</span>
+                <span class="nav-font-size nav-font-size">{{currentVideo.likesCount}}</span>
               </li>
               <li class="meta-data-item">
                 <i class="fa fa-thumbs-down nav-font-size" aria-hidden="true">&nbsp;</i>
-                <span class="nav-font-size nav-font-size">144</span>
+                <span class="nav-font-size nav-font-size">{{currentVideo.dislikesCount}}</span>
               </li>
             </ul>
 
@@ -105,18 +107,11 @@
             <h6 class="section-title">Related videos</h6>
           </header>
           <div class="section-body">
-            <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
-          </div>
-        </section>
-
-        <section class="section">
-          <header class="section-header">
-            <h6 class="section-title">Most liked videos of this category</h6>
-          </header>
-          <div class="section-body">
             <div [appImageSlider]="relatedVideoSliderImages"></div>
           </div>
         </section>
+
+
       </div>
       <!-- col-md-8 End-->
       <!-- <div class="col-md-4">

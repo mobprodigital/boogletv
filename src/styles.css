@@ -341,6 +341,13 @@ span.imgs-control-right>i {
 
 /* single post author and date CSS */
 
+.video-description {
+  height: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: justify;
+}
+
 .app-author {
   text-decoration: none;
   text-decoration: none;
@@ -396,6 +403,11 @@ span.imgs-control-right>i {
 .app-video-single {
   background-color: black;
   margin-top: 0px;
+}
+
+.youtube-player-wrap iframe {
+  width: 100%;
+  height: 500px;
 }
 
 .single-video {
@@ -487,14 +499,12 @@ span.imgs-control-right>i {
 
 .single-video .video-player-frame.hide-controls>* {
   visibility: hidden;
-  transition: visibility 1s ease-in; 
+  transition: visibility 1s ease-in;
 }
 
 .single-video .video-player-frame.hide-controls:hover>* {
   visibility: visible;
 }
-
-
 
 /* Single Video Player Class End */
 

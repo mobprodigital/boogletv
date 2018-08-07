@@ -4,6 +4,7 @@ import { VideoCategory } from '../../../../models/video-category.model';
 import { VideoService } from '../../services/video.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+
 @Component({
   selector: 'app-all-video',
   templateUrl: './all-video.component.html',
@@ -13,34 +14,30 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class AllVideoComponent implements OnInit {
   MostLikedVideos: Video[] = [];
 
-  videoCategrioes: VideoCategory;
+  videoCategrioes: VideoCategory[];
 
   constructor(
     private _videoService: VideoService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-
+    
   ) {
-    this.feedVideos();
+    this.getAllVideos();
     this.getCategories();
+    
   }
   ngOnInit() {
     this._activatedRoute.params.forEach((p: Params) => {
       console.log(p)
     });
   }
-  private feedVideos() {
-    this.MostLikedVideos = Array.from({ length: 12 }, (_, i: number) => {
+  private getAllVideos() {
+    this._videoService.getAllVideos().then(vid => {
+      this.MostLikedVideos = vid;
+      console.log(this.MostLikedVideos);
+    });
 
-      let vdo = new Video();
-      vdo.Id = 'vid' + i;
-      vdo.Title = 'Video Title ' + i;
-      vdo.ViewsCount = i * 10;
-      vdo.LikesCount = i * 20;
-      vdo.CreateDate = new Date();
-      vdo.Thumbnails.Orignal = `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`;
-      return vdo;
-    })
+
   }
 
   private async getCategories() {

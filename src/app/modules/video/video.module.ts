@@ -8,6 +8,7 @@ import { VideoSidebarComponent } from './components/video-sidebar/video-sidebar.
 import { HttpModule } from '@angular/http';
 import { AjaxService } from '../../services/ajax/ajax.service';
 import { ImageSliderDirective } from '../../directives/image-slider/image-slider.directive';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { ImageSliderDirective } from '../../directives/image-slider/image-slider
     VideoRoutingModule,
     SharedModule,
     HttpModule,
-    
+    YoutubePlayerModule    
   ],
   declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent, ImageSliderDirective],
   exports: [VideoRoutingModule, SharedModule, HttpModule, ImageSliderDirective],

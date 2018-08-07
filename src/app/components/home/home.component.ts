@@ -86,21 +86,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
       let vdo = new Video();
-      vdo.Id = 'vid' + i;
-      vdo.Title = 'Video Title ' + i;
-      vdo.ViewsCount = 10;
-      vdo.LikesCount = 20;
-      vdo.CreateDate = new Date();
-      vdo.Thumbnails.Orignal = 'assets/images/home/movie' + ((Math.floor(Math.random() * (1 - 3)) + 3)) + '.jpg';
+      vdo.id = 'vid' + i;
+      vdo.title = 'Video Title ' + i;
+      vdo.viewsCount = 10;
+      vdo.likesCount = 20;
+      vdo.createDate = new Date();
+      vdo.thumbnails.orignal = 'assets/images/home/movie' + ((Math.floor(Math.random() * (1 - 3)) + 3)) + '.jpg';
       return vdo;
     });
 
 
     this.videoCategoryList = Array.from({ length: 3 }, (_, i: number) => {
-      let cat = new VideoCategory();
-      cat.Id = 'catId' + i.toString();
-      cat.Name = 'cat ' + i;
-      return cat;
+      return new VideoCategory('cat ' + i, 'catId' + i.toString());
     })
 
     this.MostLikedVideos = Array.from({ length: 12 }, (_, i: number) => {
@@ -108,13 +105,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.selectedSlide = 'vid' + i;
       }
       let vdo = new Video();
-      vdo.Id = 'vid' + i;
-      vdo.Title = 'Video Title ' + i;
-      vdo.ViewsCount = i * 10;
-      vdo.LikesCount = i * 20;
-      vdo.CreateDate = new Date();
-      vdo.Categories = [this.videoCategoryList[i]];
-      vdo.Thumbnails.Orignal = `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`;
+      vdo.id = 'vid' + i;
+      vdo.title = 'Video Title ' + i;
+      vdo.viewsCount = i * 10;
+      vdo.likesCount = i * 20;
+      vdo.createDate = new Date();
+      vdo.categories = [this.videoCategoryList[i]];
+      vdo.thumbnails.large = `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`;
       return vdo;
     })
 

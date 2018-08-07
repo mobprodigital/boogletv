@@ -3,6 +3,7 @@ import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slid
 import { Router, ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../services/video.service';
 import * as screenfull from 'screenfull'
+import { Video } from '../../../../models/video.model';
 
 @Component({
   selector: 'app-single-video',
@@ -17,12 +18,13 @@ export class SingleVideoComponent implements OnInit {
   videoTimer: any;
   @ViewChild('seekBar', { read: ElementRef }) seekBarControlRef: ElementRef;
   seekBar: HTMLDivElement;
-
-
   videoCurrentTime: string | number = '00:00:00';
   videoTotalTime: string | number = '00:00:00';
 
   seekBarPercent: number = 0;
+
+  currentVideo: Video = new Video();
+
 
   relatedVideoSliderImages: ImageSlider = {
     ImageSlideList: []
@@ -33,15 +35,16 @@ export class SingleVideoComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
   ) {
-    window.scroll({ top: 0, behavior: 'smooth' })
+    // window.scroll({ top: 0, behavior: 'smooth' });
+
     this.relatedVideoSliderImages.ImageSlideList = Array.from({ length: 12 }, (_, i: number) => {
       let singleImage: ImageSliderImage = {
         href: 'video/play/videoid',
         imagePath: `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`,
         metaData: [
-          { 'faClassName': 'fa-eye', text: '20k' },
-          { 'faClassName': 'fa-thumbs-up', text: '200' },
-          { 'faClassName': 'fa-thumbs-down', text: '20' },
+          { faClassName: 'fa-eye', text: '20k' },
+          { faClassName: 'fa-thumbs-up', text: '200' },
+          { faClassName: 'fa-thumbs-down', text: '20' },
         ],
         title: 'Title ' + i
       }
@@ -51,14 +54,15 @@ export class SingleVideoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
-    this.videoPlayer.src = '/assets/videodata/Movie/Thor Ragnarok/video/Thor Ragnarok.mp4';
-    this.videoTotalTime = this.videoPlayer.duration ? this.secToTime(this.videoPlayer.duration) : '00:00:00';
+
     this.seekBar = <HTMLDivElement>this.seekBarControlRef.nativeElement;
+    this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
 
-    this._activatedRoute.params.forEach(p => {
+    let vidId = this._activatedRoute.snapshot.paramMap.get('id');
 
-    });
+
+
+    this._videoService.getVideoById(vidId).then(vid => { this.currentVideo = vid; this.setVideoData(); });
 
     this.videoPlayer.addEventListener('contextmenu', (ev: MouseEvent) => ev.preventDefault());
 
@@ -69,6 +73,11 @@ export class SingleVideoComponent implements OnInit {
     }
 
 
+  }
+
+  private setVideoData() {
+    this.videoPlayer.src = this.currentVideo.src;
+    this.videoTotalTime = this.currentVideo.duration;
   }
 
   public seekVideo(ev: MouseEvent) {
@@ -99,11 +108,11 @@ export class SingleVideoComponent implements OnInit {
 
   fullScreen: boolean = false
 
-  toggleFullScreen() {
+  public toggleFullScreen() {
     screenfull.toggle(this.videoPlayer);
   }
 
-  shareVideo() {
+  public shareVideo() {
 
     if (navigator['share']) {
       navigator['share']({

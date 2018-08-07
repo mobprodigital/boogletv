@@ -1,24 +1,34 @@
 import { VideoCategory } from "./video-category.model";
 import { ThumbnailSize } from "../interfaces/thumbnail.interface";
+import { VideoSource } from "../enums/videosource.enum";
 
 export class Video {
-    public Id: string;
-    public Title: string;
-    public Description: string;
-    public Categories: VideoCategory[];
-    public LikesCount: number;
-    public DislikesCount: number;
-    public ViewsCount: number;
-    public ReleaseDate: Date;
-    public CreateDate: Date;
-    public Thumbnails: ThumbnailSize = {
-        Orignal: '',
-        Large: '',
-        Medium: '',
-        Small: '',
+    public id: string;
+    public title: string;
+    public description: string;
+    public categories: VideoCategory[] = [];
+    public likesCount: number;
+    public dislikesCount: number;
+    public viewsCount: number;
+    public duration: string;
+    public releaseDate: Date;
+    public createDate: Date;
+    public videoSource: VideoSource;
+    public thumbnails: ThumbnailSize = {
+        orignal: '',
+        large: '',
+        medium: '',
+        small: '',
     };
-    public Src: string;
+    public src: string;
     constructor() {
-
+        this.id = '';
+        this.title = '';
+        this.description = '';
+        this.likesCount = 0;
+        this.dislikesCount = 0;
+        this.viewsCount = 0;
+        this.duration = '00:00:00';
+        this.videoSource = VideoSource.File;
     }
 }

@@ -1,14 +1,14 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
-    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!( lVdo.Id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.Thumbnails.Orignal + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
+    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!( lVdo.id == selectedSlide)"
+      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.orignal + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
 
       <div class="h-media-inner">
         <div class="h-play-btn">
           <i class="fas fa-play"></i>
         </div>
         <div class="h-media-title">
-          {{lVdo.Title}}
+          {{lVdo.title}}
         </div>
         <div class="h-media-meta-data">
           <ul>
@@ -34,10 +34,10 @@
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
       <article class="banner-btn-wrap" #bannerBtnWrap>
-        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.Id"
+        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id"
           (click)="showSlide(lVdoBtnIndex)">
           <span>
-            {{lVdoBtn.Title}}
+            {{lVdoBtn.title}}
           </span>
         </div>
       </article>
@@ -56,12 +56,12 @@
         <div class="imgs-container">
           <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
             <article *ngFor="let ML_Vid of MostLikedVideos" class="imgs-single">
-              <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.Thumbnails.Orignal + ')'}">
+              <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
                 <i class="fas fa-play play-btn"></i>
               </div>
               <div class="imgs-captions">
                 <div class="imgs-title">
-                  <a class="post-link">{{ML_Vid.Title}}</a>
+                  <a class="post-link">{{ML_Vid.title}}</a>
                 </div>
                 <div class="imgs-meta-data">
                   <ul>
@@ -98,7 +98,7 @@
                   <a class="active-tab">All</a>
                 </li>
                 <li *ngFor="let cat of videoCategoryList">
-                  <a (click)="showCat($event, cat.Id)">{{cat.Name}}</a>
+                  <a (click)="showCat($event, cat.id)">{{cat.Name}}</a>
                 </li>
               </ul>
             </div>
@@ -108,12 +108,12 @@
               <div class="row cat-wrapper">
                 <article *ngFor="let ML_Vid of MostLikedVideos" class="col-6">
                   <div class="imgs-single">
-                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.Thumbnails.Orignal + ')'}">
+                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
                       <i class="fas fa-play play-btn"></i>
                     </div>
                     <div class="imgs-captions">
                       <div class="imgs-title">
-                        <a class="post-link">{{ML_Vid.Title}}</a>
+                        <a class="post-link">{{ML_Vid.title}}</a>
                       </div>
                       <div class="imgs-meta-data">
                         <ul>
