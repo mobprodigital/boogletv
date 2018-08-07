@@ -37,20 +37,25 @@ export class SingleVideoComponent implements OnInit {
   ) {
     // window.scroll({ top: 0, behavior: 'smooth' });
 
-    this.relatedVideoSliderImages.ImageSlideList = Array.from({ length: 12 }, (_, i: number) => {
-      let singleImage: ImageSliderImage = {
-        href: 'video/play/videoid',
-        imagePath: `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`,
-        metaData: [
-          { faClassName: 'fa-eye', text: '20k' },
-          { faClassName: 'fa-thumbs-up', text: '200' },
-          { faClassName: 'fa-thumbs-down', text: '20' },
-        ],
-        title: 'Title ' + i
-      }
+    this._videoService.getAllVideos().then(allVideos => {
+      
+      this.relatedVideoSliderImages.ImageSlideList = allVideos.map(singleVideo => {
+        let singleImage: ImageSliderImage = {
+          href: 'video/play/' + singleVideo.id,
+          imagePath: singleVideo.thumbnails.medium,
+          metaData: [
+            { faClassName: 'fa-eye', text: singleVideo.viewsCount.toString() },
+            { faClassName: 'fa-thumbs-up', text: singleVideo.likesCount.toString() },
+            { faClassName: 'fa-thumbs-down', text: singleVideo.dislikesCount.toString() },
+          ],
+          title: singleVideo.title
+        };
+        return singleImage;
+      });
 
-      return singleImage
-    });
+  
+    })
+
   }
 
   ngOnInit() {

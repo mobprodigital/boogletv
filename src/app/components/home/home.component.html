@@ -1,11 +1,12 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
-    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!( lVdo.id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.orignal + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
+    <article *ngFor="let lVdo of LatestVideos;let _index = index" 
+          class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!(lVdo.id == selectedSlide)"
+      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}" (swipeleft)="bannerSwipeLeft(_index)" (swiperight)="bannerSwipeRight(_index)">
 
       <div class="h-media-inner">
         <div class="h-play-btn">
-          <i class="fas fa-play"></i>
+          <i (click)="playVideo(lVdo.id)" class="fas fa-play"></i>
         </div>
         <div class="h-media-title">
           {{lVdo.title}}
@@ -16,13 +17,13 @@
               <i class="fas fa-calendar"></i> oct 19, 2018
             </li>
             <li>
-              <i class="fas fa-eye"></i> 4.5M
+              <i class="fas fa-eye"></i> {{lVdo.viewsCount}}
             </li>
             <li>
-              <i class="fas fa-thumbs-up"></i> 58.4K
+              <i class="fas fa-thumbs-up"></i> {{lVdo.likesCount}}
             </li>
             <li>
-              <i class="fas fa-thumbs-down"></i> 122.K
+              <i class="fas fa-thumbs-down"></i> {{lVdo.dislikesCount}}
             </li>
           </ul>
         </div>
@@ -55,9 +56,9 @@
           <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
         <div class="imgs-container">
           <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
-            <article *ngFor="let ML_Vid of MostLikedVideos" class="imgs-single">
-              <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
-                <i class="fas fa-play play-btn"></i>
+            <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
+              <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
+                <i class="fas fa-play play-btn" (click)="playVideo(ML_Vid.id)"></i>
               </div>
               <div class="imgs-captions">
                 <div class="imgs-title">
@@ -66,11 +67,11 @@
                 <div class="imgs-meta-data">
                   <ul>
                     <li>
-                      <i class="fas fa-eye" aria-hidden="true"></i> 12k</li>
+                      <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
                     <li>
-                      <i class="fas fa-thumbs-up" aria-hidden="true"></i> 5k</li>
+                      <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
                     <li>
-                      <i class="fas fa-thumbs-down" aria-hidden="true"></i> 154</li>
+                      <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
                   </ul>
                 </div>
               </div>
@@ -95,34 +96,34 @@
             <div>
               <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
                 <li>
-                  <a class="active-tab">All</a>
+                  <a [ngClass]="{'active-tab' : selectedCatTab == 'all'}" (click)="showCat($event, 'all')">All</a>
                 </li>
                 <li *ngFor="let cat of videoCategoryList">
-                  <a (click)="showCat($event, cat.id)">{{cat.Name}}</a>
+                  <a (click)="showCat($event, cat.id)" [ngClass]="{'active-tab' : selectedCatTab == cat.id}">{{cat.name}}</a>
                 </li>
               </ul>
             </div>
           </header>
           <div class="section-body">
-            <ng-container *ngIf="MostLikedVideos && MostLikedVideos.length > 0">
+            <ng-container *ngIf="LatestVideos && LatestVideos.length > 0">
               <div class="row cat-wrapper">
-                <article *ngFor="let ML_Vid of MostLikedVideos" class="col-6">
+                <article *ngFor="let LT_Vid of LatestVideos" class="col-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                   <div class="imgs-single">
-                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
-                      <i class="fas fa-play play-btn"></i>
+                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
+                      <i class="fas fa-play play-btn" (click)="playVideo(LT_Vid.id)"></i>
                     </div>
                     <div class="imgs-captions">
                       <div class="imgs-title">
-                        <a class="post-link">{{ML_Vid.title}}</a>
+                        <a class="post-link">{{LT_Vid.title}}</a>
                       </div>
                       <div class="imgs-meta-data">
                         <ul>
                           <li>
-                            <i class="fas fa-eye" aria-hidden="true"></i> 12k</li>
+                            <i class="fas fa-eye" aria-hidden="true"></i> {{LT_Vid.viewsCount}}</li>
                           <li>
-                            <i class="fas fa-thumbs-up" aria-hidden="true"></i> 5k</li>
+                            <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{LT_Vid.likesCount}}</li>
                           <li>
-                            <i class="fas fa-thumbs-down" aria-hidden="true"></i> 154</li>
+                            <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{LT_Vid.dislikesCount}}</li>
                         </ul>
                       </div>
                     </div>
@@ -155,13 +156,10 @@
         </aside>
 
         <aside class="ads">
-          <img src="assets/images/ads/banner-ads.jpg" alt="">
+          <img src="assets/images/banner/Ad/ad2.jpg" alt="">
         </aside>
         <aside class="ads">
-          <img src="assets/images/ads/banner-ads.jpg" alt="">
-        </aside>
-        <aside class="ads">
-          <img src="assets/images/ads/banner-ads.jpg" alt="">
+          <img src="assets/images/banner/Ad/ad4.png" alt="">
         </aside>
       </section> <!-- sidebar -->
     </div>

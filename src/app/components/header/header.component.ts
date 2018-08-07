@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
               NavName: 'Movies',
               NavItems: [
                 {
-                  Text : 'All',
+                  Text : 'all',
                   Href : 'video',
                   NavItemId : 1210
                 },
@@ -76,7 +76,32 @@ export class HeaderComponent implements OnInit {
               ]
             }
           ]
-        }
+        },
+        {
+          NavItemId : 13,
+          Href: '',
+          Text: 'Audio'
+        },
+        {
+          NavItemId : 14,
+          Href: '',
+          Text: 'Text'
+        },
+        {
+          NavItemId : 15,
+          Href: '',
+          Text: 'Images'
+        },
+        {
+          NavItemId : 16,
+          Href: '',
+          Text: 'About Us'
+        },
+        {
+          NavItemId : 17,
+          Href: '',
+          Text: 'Contact Us'
+        },
       ]
     }
   }

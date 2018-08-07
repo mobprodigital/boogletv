@@ -15,6 +15,11 @@ let videoRoutes: Routes = [
     component: AllVideoComponent
   },
   {
+    path: 'all',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
+  {
     path: '',
     component: AllVideoComponent,
     pathMatch: 'full'

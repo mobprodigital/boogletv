@@ -1,12 +1,15 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Video } from "../../models/video.model";
 import { VideoCategory } from '../../models/video-category.model';
-import { ImageSlider, ImageSliderImage } from '../../directives/image-slider/interface/image-slider.interface';
+import { VideoService } from "../../modules/video/services/video.service";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [VideoService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
@@ -17,13 +20,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectedSlide: string = '';
 
   LatestVideos: Video[] = [];
-  MostLikedVideos: Video[] = [];
-  MostViewedVideos: Video[] = [];
-  MostPopulerVideos: Video[] = [];
+ 
   videoCategoryList: VideoCategory[];
-  activeCategoryTab: string = 'all';
-  constructor() {
+  selectedCatTab: string = 'all';
+  constructor(private _videoService: VideoService, private _router: Router, ) {
     this.feedVideos();
+
   }
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   public showSlide(targetSlideIndex: string) {
-    this.selectedSlide = 'vid' + targetSlideIndex;
+    this.selectedSlide = this.LatestVideos[targetSlideIndex].id;
     this.scrollBannerBtnBar(parseInt(targetSlideIndex))
   }
   bannerSwipeLeft(slideindex: number): void {
@@ -50,6 +52,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.showSlide(targetSlideIndex.toString());
     // this.scrollBannerBtnBar(targetSlideIndex);
 
+  }
+
+  /**
+    * Navigate to play video page and play a video 
+    * @param videoId video id
+    */
+  public playVideo(videoId: string) {
+    this._router.navigate(['video/play', videoId]);
   }
 
   bannerSwipeRight(slideindex: number): void {
@@ -79,57 +89,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
    */
   private feedVideos() {
 
-    this.LatestVideos = Array.from({ length: 12 }, (_, i: number) => {
-
-      if (i === 0) {
-        this.selectedSlide = 'vid' + i;
-      }
-
-      let vdo = new Video();
-      vdo.id = 'vid' + i;
-      vdo.title = 'Video Title ' + i;
-      vdo.viewsCount = 10;
-      vdo.likesCount = 20;
-      vdo.createDate = new Date();
-      vdo.thumbnails.orignal = 'assets/images/home/movie' + ((Math.floor(Math.random() * (1 - 3)) + 3)) + '.jpg';
-      return vdo;
+    this._videoService.getAllVideos().then(vidList => {
+      this.LatestVideos = vidList;
+      this.selectedSlide = vidList[0].id;
     });
 
-
-    this.videoCategoryList = Array.from({ length: 3 }, (_, i: number) => {
-      return new VideoCategory('cat ' + i, 'catId' + i.toString());
-    })
-
-    this.MostLikedVideos = Array.from({ length: 12 }, (_, i: number) => {
-      if (i === 0) {
-        this.selectedSlide = 'vid' + i;
-      }
-      let vdo = new Video();
-      vdo.id = 'vid' + i;
-      vdo.title = 'Video Title ' + i;
-      vdo.viewsCount = i * 10;
-      vdo.likesCount = i * 20;
-      vdo.createDate = new Date();
-      vdo.categories = [this.videoCategoryList[i]];
-      vdo.thumbnails.large = `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`;
-      return vdo;
-    })
-
-    /*  this.relatedVideoSliderImages.ImageSlideList = Array.from({ length: 12 }, (_, i: number) => {
-       let singleImage: ImageSliderImage = {
-         href: 'video/play/videoid',
-         imagePath: `assets/images/home/movie${(Math.floor(Math.random() * (1 - 3)) + 3)}.jpg`,
-         metaData: [
-           { 'faClassName': 'fa-eye', text: '20k' },
-           { 'faClassName': 'fa-thumbs-up', text: '200' },
-           { 'faClassName': 'fa-thumbs-down', text: '20' },
-         ],
-         title: 'Title ' + i
-       }
- 
-       return singleImage
-     }); */
-
+    this._videoService.getAllCategories().then(catList => { 
+      this.videoCategoryList = catList; 
+      console.log(catList);
+    });
   }
 
 
@@ -156,7 +124,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   public showCat(ev: MouseEvent, catId: string) {
     ev.preventDefault();
     ev.stopPropagation();
-    alert(catId);
+    this.selectedCatTab = catId;
+    if(catId == 'all'){
+      this.LatestVideos.forEach(lv => lv.hidden = false);
+    }
+    else{
+      this.LatestVideos.forEach(lv => lv.hidden = lv.categories.find(lvc => lvc.id == catId) ? false : true);
+    }
   }
 
 }

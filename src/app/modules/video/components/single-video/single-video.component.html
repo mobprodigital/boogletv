@@ -1,14 +1,15 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video [hidden]="currentVideo.videoSource == 1" class="single-post-video-palyer" #videoPlayer>
+      <video [hidden]="currentVideo.videoSource == 1 " class="single-post-video-palyer" #videoPlayer>
       </video>
+
       <ng-container *ngIf="currentVideo.videoSource == 1">
         <div class="youtube-player-wrap">
           <youtube-player [videoId]="currentVideo.src"></youtube-player>
         </div>
       </ng-container>
-      <div [hidden]="currentVideo.videoSource == 1"  class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
+      <div [hidden]="currentVideo.videoSource == 1" class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
         <span class="video-btn-span">
           <i (click)="videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
@@ -119,6 +120,11 @@
         </div> -->
       <!-- col-md-4 End-->
     </div>
+
+    <aside class="ads">
+      <img src="assets/images/banner/Ad/ad1.png" alt="">
+    </aside>
+
   </div>
   <!--main Section End -->
 </div>
