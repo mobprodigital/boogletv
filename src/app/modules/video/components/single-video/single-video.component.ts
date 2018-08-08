@@ -82,6 +82,7 @@ export class SingleVideoComponent implements OnInit {
 
   private setVideoData() {
     this.videoPlayer.src = this.currentVideo.src;
+    this.videoPlayer.play();
     this.videoTotalTime = this.currentVideo.duration;
   }
 

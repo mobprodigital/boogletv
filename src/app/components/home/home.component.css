@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.banner-btn-wrap .banner-btn >span {
+.banner-btn-wrap .banner-btn>span {
   height: 24px;
   display: block;
   overflow: hidden;
@@ -98,11 +98,12 @@
   cursor: pointer;
   flex: 0 0 300px;
 }
+
 .nav-banner img {
   width: 100%;
 }
 
-.banner-btn:hover{
+.banner-btn:hover {
   background-color: rgba(0, 0, 0, 1);
 }
 
@@ -114,12 +115,50 @@
   border-bottom-color: #c00;
 }
 
+header.page-header>.banner-nav-btns {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+header.page-header>.banner-nav-btns>i {
+  width: 70px;
+  height: 70px;
+  padding-top: 7px;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  align-self: center;
+  opacity: 0.35;
+  font-size: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color, opacity 0.25s ease-in;
+}
+header.page-header>.banner-nav-btns>i:hover{
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 1;
+}
+header.page-header>.banner-nav-btns.banner-nav-btns-left {
+  left: 0;
+}
+
+header.page-header>.banner-nav-btns.banner-nav-btns-right {
+  right: 0;
+}
 
 @media screen and (max-width: 992px) {
-  .h-media-inner{
+  .h-media-inner {
     height: 450px;
   }
 }
+
 @media screen and (max-width: 768px) {
   .h-media-title {
     font-size: 25px;

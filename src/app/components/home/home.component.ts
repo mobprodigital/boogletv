@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectedSlide: string = '';
 
   LatestVideos: Video[] = [];
- 
+
   videoCategoryList: VideoCategory[];
   selectedCatTab: string = 'all';
   constructor(private _videoService: VideoService, private _router: Router, ) {
@@ -34,46 +34,50 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
-  public showSlide(targetSlideIndex: string) {
+  private showSlide(targetSlideIndex: string) {
     this.selectedSlide = this.LatestVideos[targetSlideIndex].id;
     this.scrollBannerBtnBar(parseInt(targetSlideIndex))
   }
-  bannerSwipeLeft(slideindex: number): void {
+
+  private bannerSwipeLeft(slideindex: number): void {
     let targetSlideIndex: number = 0;
     if (slideindex >= (this.LatestVideos.length - 1)) {
-      // this.showSlide('vid0');
       targetSlideIndex = 0;
     }
     else {
-      // this.showSlide('vid' + (slideindex + 1));
       targetSlideIndex = slideindex + 1;
     }
-
     this.showSlide(targetSlideIndex.toString());
-    // this.scrollBannerBtnBar(targetSlideIndex);
-
   }
 
-  /**
-    * Navigate to play video page and play a video 
-    * @param videoId video id
-    */
-  public playVideo(videoId: string) {
-    this._router.navigate(['video/play', videoId]);
-  }
-
-  bannerSwipeRight(slideindex: number): void {
+  private bannerSwipeRight(slideindex: number): void {
     let targetSlideIndex: number = 0;
     if (slideindex <= 0) {
-      // this.showSlide('vid' + (this.LatestVideos.length - 1));
       targetSlideIndex = this.LatestVideos.length - 1;
     }
     else {
-      // this.showSlide('vid' + (slideindex - 1));
       targetSlideIndex = slideindex - 1;
     }
     this.showSlide(targetSlideIndex.toString());
-    // this.scrollBannerBtnBar(targetSlideIndex);
+  }
+
+  public bannerNextPrev(nextOrPrev: string) {
+    let vdoLength = this.LatestVideos.length
+    for (let i = 0; i < vdoLength; i++) {
+      if (this.LatestVideos[i].id == this.selectedSlide) {
+        if (nextOrPrev == 'next') {
+          this.bannerSwipeLeft(i);
+        }
+        else {
+          this.bannerSwipeRight(i);
+        }
+        break;
+      }
+    }
+  }
+
+  public playVideo(videoId: string) {
+    this._router.navigate(['video/play', videoId]);
   }
 
   private async scrollBannerBtnBar(targetSlideIndex: number) {
@@ -84,9 +88,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     bannerBtnWrapDiv.scroll({ left: scrollLength, behavior: 'smooth' });
   }
 
-  /**
-   * Temp function
-   */
   private feedVideos() {
 
     this._videoService.getAllVideos().then(vidList => {
@@ -94,16 +95,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.selectedSlide = vidList[0].id;
     });
 
-    this._videoService.getAllCategories().then(catList => { 
-      this.videoCategoryList = catList; 
+    this._videoService.getAllCategories().then(catList => {
+      this.videoCategoryList = catList;
       console.log(catList);
     });
   }
 
-
-
-
-  imgSlide(slideTo: string) {
+  public imgSlide(slideTo: string) {
     let slider: HTMLDivElement = this.imgSlider.nativeElement;
     let scrollLength: number = 0;
     if (slideTo == 'left') {
@@ -125,10 +123,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ev.preventDefault();
     ev.stopPropagation();
     this.selectedCatTab = catId;
-    if(catId == 'all'){
+    if (catId == 'all') {
       this.LatestVideos.forEach(lv => lv.hidden = false);
     }
-    else{
+    else {
       this.LatestVideos.forEach(lv => lv.hidden = lv.categories.find(lvc => lvc.id == catId) ? false : true);
     }
   }
