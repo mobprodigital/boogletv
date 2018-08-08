@@ -179,6 +179,7 @@ header.page-header {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .cat-wrapper .imgs-single {

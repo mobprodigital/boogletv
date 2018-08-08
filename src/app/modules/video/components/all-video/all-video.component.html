@@ -12,9 +12,9 @@
               <div class="row cat-wrapper">
                 <article *ngFor="let ML_Vid of MostLikedVideos" class="col-6">
                   <div class="imgs-single">
-                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
+                    <div (click)="viewVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
 
-                      <i (click)="viewVideo(ML_Vid.id)" class="fas fa-play play-btn"></i>
+                      <i class="fas fa-play play-btn"></i>
                       <span class="badge badge-dark duration-text">{{ML_Vid.duration}}</span>
                     </div>
                     <div>
@@ -23,7 +23,7 @@
                       </div>
                       <div class="imgs-captions">
                         <div class="imgs-title">
-                          <a class="post-link">{{ML_Vid.title}}</a>
+                          <a (click)="viewVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
                         </div>
 
                         <p class="video-description">{{ML_Vid.description}}</p>

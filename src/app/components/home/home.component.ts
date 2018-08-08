@@ -76,7 +76,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public playVideo(videoId: string) {
+  public playVideo(ev: MouseEvent, videoId: string) {
+    ev.preventDefault();
+    ev.stopPropagation();
     this._router.navigate(['video/play', videoId]);
   }
 

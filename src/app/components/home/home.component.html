@@ -72,12 +72,12 @@
         <div class="imgs-container">
           <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
             <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
-              <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
-                <i class="fas fa-play play-btn" (click)="playVideo(ML_Vid.id)"></i>
+              <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
+                <i class="fas fa-play play-btn" ></i>
               </div>
               <div class="imgs-captions">
                 <div class="imgs-title">
-                  <a class="post-link">{{ML_Vid.title}}</a>
+                  <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
                 </div>
                 <div class="imgs-meta-data">
                   <ul>
@@ -124,12 +124,12 @@
               <div class="row cat-wrapper">
                 <article *ngFor="let LT_Vid of LatestVideos" class="col-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                   <div class="imgs-single">
-                    <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
-                      <i class="fas fa-play play-btn" (click)="playVideo(LT_Vid.id)"></i>
+                    <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
+                      <i class="fas fa-play play-btn"></i>
                     </div>
                     <div class="imgs-captions">
                       <div class="imgs-title">
-                        <a class="post-link">{{LT_Vid.title}}</a>
+                        <a (click)="playVideo($event, LT_Vid.id)" class="post-link">{{LT_Vid.title}}</a>
                       </div>
                       <div class="imgs-meta-data">
                         <ul>
@@ -153,7 +153,7 @@
 
       <!-- sidebar -->
       <section class="col-md-4">
-        <aside class="sidebar-item">
+        <!-- <aside class="sidebar-item">
           <div class="sidebar-header">
             <h6 class="sidebar-title">Newsletter</h6>
           </div>
@@ -168,7 +168,7 @@
               <button type="button" class="btn btn-danger btn-hover-dark">Subscribe</button>
             </div>
           </div>
-        </aside>
+        </aside> -->
 
         <aside class="ads">
           <img src="assets/images/banner/Ad/ad2.jpg" alt="">

@@ -53,7 +53,9 @@ export class AllVideoComponent implements OnInit {
    * Navigate to play video page and play a video 
    * @param videoId video id
    */
-  public viewVideo(videoId: string) {
+  public viewVideo(ev: MouseEvent, videoId: string) {
+    ev.preventDefault();
+    ev.stopPropagation();
     this._router.navigate(['video/play', videoId]);
   }
 

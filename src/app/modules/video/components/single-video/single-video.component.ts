@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../services/video.service';
 import * as screenfull from 'screenfull'
 import { Video } from '../../../../models/video.model';
+import { VideoSource } from '../../../../enums/videosource.enum';
 
 @Component({
   selector: 'app-single-video',
@@ -35,7 +36,7 @@ export class SingleVideoComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
   ) {
-    // window.scroll({ top: 0, behavior: 'smooth' });
+   
 
     this._videoService.getAllVideos().then(allVideos => {
       
@@ -77,13 +78,15 @@ export class SingleVideoComponent implements OnInit {
       this.videoTotalTime = this.secToTime(this.videoPlayer.duration);
     }
 
-
+    window.scroll({ top: 180, behavior: 'smooth' });
   }
 
   private setVideoData() {
-    this.videoPlayer.src = this.currentVideo.src;
-    this.videoPlayer.play();
-    this.videoTotalTime = this.currentVideo.duration;
+    if(this.currentVideo.videoSource == VideoSource.File){
+      this.videoPlayer.src = this.currentVideo.src;
+      this.videoPlayer.play();
+      this.videoTotalTime = this.currentVideo.duration;
+    }
   }
 
   public seekVideo(ev: MouseEvent) {
