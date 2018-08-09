@@ -1,109 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { NavMenu, NavMenuItem } from '../../interfaces/nav-menu.interface';
 import { Router } from '@angular/router';
+import { VideoService } from '../../modules/video/services/video.service';
+import { VideoCategory } from '../../models/video-category.model';
+import { Video } from '../../models/video.model';
+
+
+
+export type VideoByCategory = {
+  name: string;
+  id: string;
+  videos: Video[]
+}
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers: [VideoService]
 })
 export class HeaderComponent implements OnInit {
 
 
-  public mainNavMenu: NavMenu;
-  public showMobMenu: boolean = false;
+  mainNavMenu: NavMenu;
+  videoCategories: VideoCategory[] = [];
+  videoList: Video[] = [];
+  videoListByCategory: VideoByCategory[] = [];
 
-  constructor(private router: Router) {
-    this.feedMenu();
+
+  constructor(private router: Router, private _videoService: VideoService) {
+    this.getVideoData();
   }
 
   ngOnInit() {
+
   }
 
+  public getVideoData() {
+    Promise.all([this._videoService.getAllVideos(), this._videoService.getAllCategories()]).then(
+      ([videos, categories]) => {
+        this.videoCategories = categories;
+        this.videoListByCategory = categories.map(cat => {
+          let _cat: VideoByCategory = {
+            id: cat.id,
+            name: cat.name,
+            videos: videos.filter(vid => vid.categories.find(c => c.id == cat.id))
+          };
+          return _cat;
+        });
 
-  public toggleMenu(ev: MouseEvent, navItem: NavMenuItem) {
-    ev.preventDefault();
-    ev.stopPropagation();
-    if (navItem.ChildMenu && navItem.ChildMenu.length > 0) {
-      navItem.ChildMenu.forEach((menu: NavMenu) => {
-        menu.Hidden = !menu.Hidden;
-      });
-    }
-    else {
-      this.router.navigateByUrl('/' + navItem.Href);
-    }
-  }
+        console.log(this.videoListByCategory);
 
-  public toggleMobileMenu(show: boolean) {
-    this.showMobMenu = show;
-  }
-
-  private feedMenu() {
-    this.mainNavMenu = {
-      NavId: 1,
-      NavName: 'Main nenu',
-      NavItems: [
-        {
-          NavItemId: 11,
-          Href: 'home',
-          Text: 'Home'
-        },
-        {
-          NavItemId: 12,
-          Href: 'video',
-          Text: 'Video',
-          ChildMenu: [
-            {
-              Hidden: true,
-              NavId: 121,
-              NavName: 'Movies',
-              NavItems: [
-                {
-                  Text : 'all',
-                  Href : 'video',
-                  NavItemId : 1210
-                },
-                {
-                  Text: 'Bollywood',
-                  Href: 'video/category',
-                  NavItemId: 1211
-                },
-                {
-                  Text: 'Hollywood',
-                  Href: 'video/category',
-                  NavItemId: 1212
-                },
-              ]
-            }
-          ]
-        },
-        {
-          NavItemId : 13,
-          Href: '',
-          Text: 'Audio'
-        },
-        {
-          NavItemId : 14,
-          Href: '',
-          Text: 'Text'
-        },
-        {
-          NavItemId : 15,
-          Href: '',
-          Text: 'Images'
-        },
-        {
-          NavItemId : 16,
-          Href: '',
-          Text: 'About Us'
-        },
-        {
-          NavItemId : 17,
-          Href: '',
-          Text: 'Contact Us'
-        },
-      ]
-    }
+      }
+    );
   }
 
 }

@@ -99,7 +99,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this._videoService.getAllCategories().then(catList => {
       this.videoCategoryList = catList;
-      console.log(catList);
     });
   }
 

@@ -51,67 +51,81 @@
 
   <section class="main-nav theme-bg shadow-lg">
     <div class="container">
-      <section class="app-nav mobile-menu-wrap">
-
-      </section>
-      <nav class="app-nav app-nav-desktop">
-        <div class="btn-wrap">
-          <button (click)="toggleMobileMenu(true)" type="button" class="mob-nav-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-        <div class="logo-wrap">
-          <img src="assets/images/logo/logo.png" alt="">
-        </div>
-
-        <div [ngClass]="{'hide-main-menu' : !showMobMenu}" class="main-menu-wrapper">
-          <div class="mob-menu-sec mob-close-btn-wrap">
-            <button (click)="toggleMobileMenu(false)" type="button">
-              <i class="far fa-times-circle"></i>
-            </button>
-          </div>
-          <div class="mob-menu-sec mob-social-menu-wrap">
-            <button type="button" class="btn-icon btn btn-dark">
-              <i class="fab fa-facebook-f"></i>
-            </button>
-            <button type="button" class="btn-icon btn btn-dark">
-              <i class="fab fa-twitter"></i>
-            </button>
-            <button type="button" class="btn-icon btn btn-dark">
-              <i class="fab fa-google-plus"></i>
-            </button>
-            <button type="button" class="btn-icon btn btn-dark">
-              <i class="fas fa-user-tie"></i>
-            </button>
-          </div>
-          <ul class="mob-menu-sec main-nav">
-            <ng-container *ngIf="mainNavMenu.NavItems && mainNavMenu.NavItems.length > 0">
-              <li class="main-nav-item" *ngFor="let _navItem of mainNavMenu.NavItems">
-                <a (click)="toggleMenu($event, _navItem)" [routerLinkActive]="'active-menu'" class="main-nav-link">{{_navItem.Text}}
-                  <i *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0" class="fas fa-angle-down" aria-hidden="true"></i>
-                </a>
-                <ng-container *ngIf="_navItem.ChildMenu && _navItem.ChildMenu.length > 0">
-                  <ul *ngFor="let _childMenu of _navItem.ChildMenu" [hidden]="_childMenu.Hidden" class="sub-menu animated fadeIn">
-                    <li *ngFor="let _subNavItem of _childMenu.NavItems" class="sub-menu-item">
-                      <a [routerLinkActive]="'active-menu'" [routerLink]="[_subNavItem.Href, _subNavItem.Text.toLowerCase()]" class="main-nav-link sub-menu-link">{{_subNavItem.Text}}</a>
+      <div class="row justify-content-between">
+        <nav class="col-auto">
+          <ul class="main-menu">
+            <li>
+              <a>Home</a>
+            </li>
+            <li>
+              <a>Video
+                <i class="fas fa-angle-down"></i>
+              </a>
+              <ul *ngIf="videoListByCategory.length > 0" class="mega-menu">
+                <li *ngFor="let mgMenu of videoListByCategory">
+                  <a>{{mgMenu.name}}</a>
+                  <ul >
+                    <li *ngFor="let mmgVideo of mgMenu.videos">
+                      <article class="imgs-single">
+                        <div class="imgs-image" 
+                        [ngStyle]="{'background-image' : 'url(' + mmgVideo.thumbnails.large + ')'}" 
+                        >
+                          <i class="fas fa-play play-btn"></i>
+                        </div>
+                        <div class="imgs-captions">
+                          <div class="imgs-title">
+                            <a class="post-link">{{mmgVideo.title}}</a>
+                          </div>
+                        </div>
+                      </article>
                     </li>
                   </ul>
-                </ng-container>
-              </li>
-            </ng-container>
-          </ul>
+                </li>
 
+              </ul>
+            </li>
+            <li>
+              <a>Images
+                <i class="fas fa-angle-down"></i>
+              </a>
+              <ul>
+                <li>
+                  <a>Desktop Wallpapers </a>
+                </li>
+                <li>
+                  <a>3d</a>
+                </li>
+                <li>
+                  <a>Nature</a>
+                </li>
+                <li>
+                  <a>Celebrity</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a>Text</a>
+            </li>
+            <li>
+              <a>About Us</a>
+            </li>
+            <li>
+              <a>Contact Us</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="col-auto">
+          <div class="search-div">
+            <form action="" method="post">
+              <div class="search-wrap">
+                <input placeholder="Search..." type="search" class="nav-search-box">
+                <i class="fas fa-search"></i>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="search-div">
-          <form action="" method="post">
-            <div>
-              <input placeholder="Search..." type="search" class="nav-search-box">
-            </div>
-          </form>
-        </div>
-      </nav>
+      </div>
+
 
     </div>
   </section>

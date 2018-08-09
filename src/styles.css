@@ -39,36 +39,6 @@ a.post-link:hover {
   background-color: #CC0000;
 }
 
-.nav-link.active,
-.nav-link:hover {
-  background-color: #b80000;
-  color: #fff;
-}
-
-.nav-item:hover>.dropdown-menu {
-  display: block;
-}
-
-li.nav-item.dropdown>.dropdown-menu {
-  background-color: transparent;
-  border-radius: 0;
-  margin-top: 0;
-  border: 0;
-  padding: 0;
-}
-
-li.nav-item.dropdown>.dropdown-menu>.dropdown-item {
-  padding: 10px 20px;
-  border-top: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-}
-
-li.nav-item.dropdown>.dropdown-menu>.dropdown-item:hover {
-  background-color: #b80000;
-}
-
 .contact-text {
   margin-top: 6px;
   display: inline-block;
@@ -208,7 +178,7 @@ header.page-header {
 
 .play-btn:hover {
   animation-name: play-btn-animation;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
@@ -329,12 +299,15 @@ span.imgs-control-right>i {
 @keyframes play-btn-animation {
   0% {
     transform: scale(1);
+    background-color: rgb(204, 0, 0, 1);
   }
   50% {
     transform: scale(1.25);
+    background-color: rgb(204, 0, 0, 0.5);
   }
   100% {
-    transform: scale(1)
+    transform: scale(1);
+    background-color: rgb(204, 0, 0, 1);
   }
 }
 

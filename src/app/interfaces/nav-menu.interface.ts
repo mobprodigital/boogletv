@@ -1,16 +1,17 @@
 
 export interface NavMenu {
-    NavName: string;
-    NavId: number;
-    NavItems?: NavMenuItem[];
-    Hidden?: boolean;
+    navName: string;
+    navId: number;
+    navItems?: NavMenuItem[];
+    hidden?: boolean;
+    isMegaMenu?:boolean;
 }
 
 export interface NavMenuItem {
-    Href: string;
-    Text: string;
-    NavItemId: number;
-    NavParams?: any;
-    ChildMenu?: NavMenu[];
-    Hidden?: boolean;
+    href: string;
+    text: string;
+    navItemId: number;
+    navParams?: any;
+    childMenu?: NavMenu[];
+    hidden?: boolean;
 }
