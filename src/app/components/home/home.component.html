@@ -122,7 +122,7 @@
           <div class="section-body">
             <ng-container *ngIf="LatestVideos && LatestVideos.length > 0">
               <div class="row cat-wrapper">
-                <article *ngFor="let LT_Vid of LatestVideos" class="col-6 animated zoomIn" [hidden]="LT_Vid.hidden">
+                <article *ngFor="let LT_Vid of LatestVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                   <div class="imgs-single">
                     <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
                       <i class="fas fa-play play-btn"></i>

@@ -50,26 +50,39 @@
   </section>
 
   <section class="main-nav theme-bg shadow-lg">
-    <div class="container">
+    <div class="mobile-menu-trigger">
+      <button (click)="viewMenu = true" class="h-menu-btn" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="text-center">
+        <img class="mob-logo" src="assets/images/logo/logo-default-mob.png" alt="">
+      </div>
+    </div>
+    <div [ngClass]="!viewMenu ? 'mob-menu-hidden' : ''" class="main-nav-wrapper container">
+      <div class="text-center menu-close-btn-wrap">
+        <button (click)="viewMenu = false" class="menu-close-btn">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
       <div class="row justify-content-between">
-        <nav class="col-auto">
+        <nav class="col-lg-auto">
           <ul class="main-menu">
             <li>
               <a>Home</a>
             </li>
             <li>
               <a>Video
-                <i class="fas fa-angle-down"></i>
+                <i (click)="toggleMobileSubMenu($event)" class="fas fa-angle-down"></i>
               </a>
-              <ul *ngIf="videoListByCategory.length > 0" class="mega-menu">
+              <ul *ngIf="videoListByCategory.length > 0" class="mega-menu mob-menu-hidden">
                 <li *ngFor="let mgMenu of videoListByCategory">
                   <a>{{mgMenu.name}}</a>
-                  <ul >
+                  <ul>
                     <li *ngFor="let mmgVideo of mgMenu.videos">
                       <article class="imgs-single">
-                        <div class="imgs-image" 
-                        [ngStyle]="{'background-image' : 'url(' + mmgVideo.thumbnails.large + ')'}" 
-                        >
+                        <div class="imgs-image" [ngStyle]="{'background-image' : 'url(' + mmgVideo.thumbnails.large + ')'}">
                           <i class="fas fa-play play-btn"></i>
                         </div>
                         <div class="imgs-captions">
@@ -114,7 +127,7 @@
             </li>
           </ul>
         </nav>
-        <div class="col-auto">
+        <div class="col-lg-auto">
           <div class="search-div">
             <form action="" method="post">
               <div class="search-wrap">
@@ -125,8 +138,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </section>
 </header>

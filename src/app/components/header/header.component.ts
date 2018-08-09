@@ -28,32 +28,35 @@ export class HeaderComponent implements OnInit {
   videoList: Video[] = [];
   videoListByCategory: VideoByCategory[] = [];
 
+  viewMenu: boolean = false;
 
   constructor(private router: Router, private _videoService: VideoService) {
     this.getVideoData();
   }
 
   ngOnInit() {
-
+    this.viewMenu = window.outerWidth > 992;
   }
 
   public getVideoData() {
     Promise.all([this._videoService.getAllVideos(), this._videoService.getAllCategories()]).then(
       ([videos, categories]) => {
         this.videoCategories = categories;
-        this.videoListByCategory = categories.map(cat => {
-          let _cat: VideoByCategory = {
-            id: cat.id,
-            name: cat.name,
-            videos: videos.filter(vid => vid.categories.find(c => c.id == cat.id))
-          };
-          return _cat;
-        });
-
-        console.log(this.videoListByCategory);
-
+        this.videoListByCategory = categories.map(cat => ({
+          id: cat.id,
+          name: cat.name,
+          videos: videos.filter(vid => vid.categories.find(c => c.id == cat.id))
+        })
+        );
       }
     );
   }
 
+  public toggleMobileSubMenu(ev: MouseEvent) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    let targetElement = <HTMLElement>ev.target;
+    targetElement.parentElement.nextElementSibling.classList.toggle('mob-menu-hidden');
+  }
 }
