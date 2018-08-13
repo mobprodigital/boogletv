@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NavMenu, NavMenuItem } from '../../interfaces/nav-menu.interface';
 import { Router } from '@angular/router';
 import { VideoService } from '../../modules/video/services/video.service';
-import { VideoCategory } from '../../models/video-category.model';
-import { Video } from '../../models/video.model';
+import { VideoCategoryModel } from '../../models/video-category.model';
+import { VideoModel } from '../../models/video.model';
 
 
 
 export type VideoByCategory = {
   name: string;
   id: string;
-  videos: Video[]
+  videos: VideoModel[]
 }
 
 
@@ -23,9 +23,8 @@ export type VideoByCategory = {
 export class HeaderComponent implements OnInit {
 
 
-  mainNavMenu: NavMenu;
-  videoCategories: VideoCategory[] = [];
-  videoList: Video[] = [];
+  videoCategories: VideoCategoryModel[] = [];
+  videoList: VideoModel[] = [];
   videoListByCategory: VideoByCategory[] = [];
 
   viewMenu: boolean = false;
@@ -52,11 +51,13 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  public toggleMobileSubMenu(ev: MouseEvent) {
+  /**
+   * Navigate to play video page and play a video 
+   * @param videoId video id
+   */
+  public viewVideo(ev: MouseEvent, videoId: string) {
     ev.preventDefault();
     ev.stopPropagation();
-
-    let targetElement = <HTMLElement>ev.target;
-    targetElement.parentElement.nextElementSibling.classList.toggle('mob-menu-hidden');
+    this.router.navigate(['video/play', videoId]);
   }
 }

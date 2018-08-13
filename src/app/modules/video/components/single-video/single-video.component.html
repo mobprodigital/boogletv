@@ -1,7 +1,14 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video [hidden]="currentVideo.videoSource == 1 " class="single-post-video-palyer" #videoPlayer>
+      <video 
+        (waiting)="onVideoWaiting($event)"
+        (timeupdate)="onTimeUpdate()" 
+        (contextmenu)="contextMenu($event)" 
+        (ended)="videoEnded()" 
+        [hidden]="currentVideo.videoSource == 1 " 
+        class="single-post-video-palyer" 
+        #videoPlayer>
       </video>
 
       <ng-container *ngIf="currentVideo.videoSource == 1">
@@ -11,8 +18,8 @@
       </ng-container>
       <div [hidden]="currentVideo.videoSource == 1" class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
-        <span class="video-btn-span">
-          <i (click)="videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
+        <span [hidden]="isAdvideoPlaying" class="video-btn-span">
+          <i (click)="videoPlayer.paused ? play() : pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
             class="video-player-btn"></i>
         </span>
 
@@ -32,7 +39,8 @@
           </li>
         </ul>
         <div (click)="seekVideo($event)" #seekBar class="progress video-seekbar">
-          <div [ngStyle]="{width : seekBarPercent + '%'}" class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [ngStyle]="{width : seekBarPercent + '%', transition: 'none'}" [ngClass]="isAdvideoPlaying ? 'bg-warning': 'bg-danger'" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <!-- <div class="progress-bar bg-secondary buffer-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div> -->
         </div>
       </div>
     </div>
@@ -52,9 +60,7 @@
           <i class="fas fa-share-alt-square"></i>
         </button>
       </div>
-      <div class="col">
-
-      </div>
+     
     </div>
     <!-- Row End -->
     <!-- video-player-control End -->

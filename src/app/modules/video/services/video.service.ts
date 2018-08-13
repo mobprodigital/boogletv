@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AjaxService } from '../../../services/ajax/ajax.service';
-import { VideoCategory } from '../../../models/video-category.model';
-import { Video } from '../../../models/video.model';
+import { VideoCategoryModel } from '../../../models/video-category.model';
+import { VideoModel } from '../../../models/video.model';
 import { VideoSource } from '../../../enums/videosource.enum';
 
 
@@ -13,25 +13,25 @@ export class VideoService {
   }
 
 
-  private videoList: Video[] = [];
+  private videoList: VideoModel[] = [];
 
   /**
    * Get all video categories
    */
-  public getAllCategories(): Promise<VideoCategory[]> {
-    let videoCategoryList: VideoCategory[] = [
-      new VideoCategory('Movie', 'vidcat1', [
-        new VideoCategory('Action', 'vidcat13'),
-        new VideoCategory('Comedy', 'vidcat14'),
-        new VideoCategory('Hollywood', 'vidcat12'),
+  public getAllCategories(): Promise<VideoCategoryModel[]> {
+    let videoCategoryList: VideoCategoryModel[] = [
+      new VideoCategoryModel('Movie', 'vidcat1', [
+        new VideoCategoryModel('Action', 'vidcat13'),
+        new VideoCategoryModel('Comedy', 'vidcat14'),
+        new VideoCategoryModel('Hollywood', 'vidcat12'),
       ]),
-      new VideoCategory('Kids', 'vidcat2', [
-        new VideoCategory('Poem', 'vidcat21'),
-        new VideoCategory('Toons', 'vidcat22'),
+      new VideoCategoryModel('Kids', 'vidcat2', [
+        new VideoCategoryModel('Poem', 'vidcat21'),
+        new VideoCategoryModel('Toons', 'vidcat22'),
       ]),
-      new VideoCategory('Travel', 'vidcat3', [
-        new VideoCategory('Islands', 'vidcat31'),
-        new VideoCategory('Mountains', 'vidcat32'),
+      new VideoCategoryModel('Travel', 'vidcat3', [
+        new VideoCategoryModel('Islands', 'vidcat31'),
+        new VideoCategoryModel('Mountains', 'vidcat32'),
       ]),
     ];
 
@@ -42,11 +42,11 @@ export class VideoService {
 
   }
 
-  public getAllVideos(): Promise<Video[]> {
+  public getAllVideos(): Promise<VideoModel[]> {
     return Promise.resolve(this.videoList);
   }
 
-  public getVideoById(videoId: string): Promise<Video> {
+  public getVideoById(videoId: string): Promise<VideoModel> {
     return new Promise((resolve, reject) => {
       let videoFound = this.videoList.find(vid => vid.id == videoId);
       if (videoFound) {
@@ -62,7 +62,7 @@ export class VideoService {
   private feedTempVideo() {
     //#region movies
 
-    let _movie1 = new Video();
+    let _movie1 = new VideoModel();
     _movie1.id = 'vid1';
     _movie1.title = 'Johnny English Strikes Again';
     _movie1.likesCount = 120;
@@ -76,12 +76,12 @@ export class VideoService {
     _movie1.thumbnails.small = '/assets/videodata/Movie/Johnny_English_Strikes_Again/images/small.jpg';
     _movie1.src = '/assets/videodata/Movie/Johnny_English_Strikes_Again/video/Johnny English Strikes Again.mp4';
     _movie1.categories = [
-      new VideoCategory('Movie', 'vidcat1'),
-      new VideoCategory('Hollywood', 'vidcat12'),
-      new VideoCategory('Comedy', 'vidcat14'),
+      new VideoCategoryModel('Movie', 'vidcat1'),
+      new VideoCategoryModel('Hollywood', 'vidcat12'),
+      new VideoCategoryModel('Comedy', 'vidcat14'),
     ]
 
-    let _movie2 = new Video();
+    let _movie2 = new VideoModel();
     _movie2.id = 'vid2';
     _movie2.title = 'The Condemned 2007';
     _movie2.description = `A convict on death row is bought by a rich TV producer and is transported to a secluded island to fight against nine other condemned murderers. Liberty is for the only survivor of this contest.`;
@@ -95,15 +95,15 @@ export class VideoService {
     _movie2.videoSource = VideoSource.File;
     _movie2.src = '/assets/videodata/Movie/The_Condemned_2007/video/The Condemned (2007) Official Trailer 1 - Steve Austin Movie.mp4';
     _movie2.categories = [
-      new VideoCategory('Movie', 'vidcat1', [
+      new VideoCategoryModel('Movie', 'vidcat1', [
       ]),
-      new VideoCategory('Hollywood', 'vidcat12'),
-      new VideoCategory('Action', 'vidcat13'),
+      new VideoCategoryModel('Hollywood', 'vidcat12'),
+      new VideoCategoryModel('Action', 'vidcat13'),
 
     ];
 
 
-    let _movie3 = new Video();
+    let _movie3 = new VideoModel();
     _movie3.id = 'vid7';
     _movie3.title = 'The Dark Knight (2008) Official Trailer #1';
     _movie3.description = `After Gordon, Dent and Batman begin an assault on Gotham's organised crime, the mobs hire the Joker, a psychopathic criminal mastermind, who wants to bring all the heroes down to his level.`;
@@ -117,10 +117,10 @@ export class VideoService {
     _movie3.videoSource = VideoSource.Youtube;
     _movie3.src = 'EXeTwQWrcwY';
     _movie3.categories = [
-      new VideoCategory('Movie', 'vidcat1'),
-      new VideoCategory('Hollywood', 'vidcat12'),
-      new VideoCategory('Action', 'vidcat13'),
-      new VideoCategory('Drama', 'vidcat14'),
+      new VideoCategoryModel('Movie', 'vidcat1'),
+      new VideoCategoryModel('Hollywood', 'vidcat12'),
+      new VideoCategoryModel('Action', 'vidcat13'),
+      new VideoCategoryModel('Drama', 'vidcat14'),
 
     ]
 
@@ -130,7 +130,7 @@ export class VideoService {
 
     //#region kids
 
-    let _kids1 = new Video();
+    let _kids1 = new VideoModel();
     _kids1.id = 'vid3';
     _kids1.title = 'Chhota Bheem';
     _kids1.description = `Bheem is an extremely brave, strong and intelligent young boy. All the children in the town are very fond of him, as he always manages to solve everyone's problems.`;
@@ -144,13 +144,13 @@ export class VideoService {
     _kids1.thumbnails.medium = '/assets/videodata/Kids/Chhota_Bheem/images/medium.jpg';
     _kids1.thumbnails.small = '/assets/videodata/Kids/Chhota_Bheem/images/small.jpg';
     _kids1.categories = [
-      new VideoCategory('Kids', 'vidcat2', [
+      new VideoCategoryModel('Kids', 'vidcat2', [
       ]),
-      new VideoCategory('Toons', 'vidcat22'),
+      new VideoCategoryModel('Toons', 'vidcat22'),
 
     ]
 
-    let _kids2 = new Video();
+    let _kids2 = new VideoModel();
     _kids2.id = 'vid4';
     _kids2.title = 'Baa Baa Black Sheep - The Joy of Sharing!';
     _kids2.likesCount = 114;
@@ -164,9 +164,9 @@ export class VideoService {
     _kids2.thumbnails.small = '/assets/videodata/Kids/Baa_Baa_Black_Sheep/images/small.jpg';
     _kids2.src = '/assets/videodata/Kids/Baa_Baa_Black_Sheep/video/Baa Baa Black Sheep - The Joy of Sharing!.mp4';
     _kids2.categories = [
-      new VideoCategory('Kids', 'vidcat2', [
+      new VideoCategoryModel('Kids', 'vidcat2', [
       ]),
-      new VideoCategory('Poem', 'vidcat21'),
+      new VideoCategoryModel('Poem', 'vidcat21'),
 
     ];
 
@@ -174,7 +174,7 @@ export class VideoService {
 
     //#region travel
 
-    let _travel1 = new Video();
+    let _travel1 = new VideoModel();
     _travel1.id = 'vid5';
     _travel1.title = 'Andaman';
     _travel1.likesCount = 125;
@@ -188,12 +188,12 @@ export class VideoService {
     _travel1.thumbnails.medium = '/assets/videodata/Travel/Andaman/images/medium.jpg';
     _travel1.thumbnails.small = '/assets/videodata/Travel/Andaman/images/small.jpg';
     _travel1.categories = [
-      new VideoCategory('Travel', 'vidcat3', [
+      new VideoCategoryModel('Travel', 'vidcat3', [
       ]),
-      new VideoCategory('Islands', 'vidcat31'),
+      new VideoCategoryModel('Islands', 'vidcat31'),
     ]
 
-    let _travel2 = new Video();
+    let _travel2 = new VideoModel();
     _travel2.id = 'vid6';
     _travel2.title = 'This is Switzerland';
     _travel2.description = `Switzerland is a mountainous Central European country, home to numerous lakes, villages and the high peaks of the Alps. Its cities contain medieval quarters, with landmarks like capital Bern’s Zytglogge clock tower and Lucerne’s wooden chapel bridge. The country is also known for its ski resorts and hiking trails. Banking and finance are key industries, and Swiss watches and chocolate are world renowned.`;
@@ -208,15 +208,20 @@ export class VideoService {
     _travel2.thumbnails.medium = '/assets/videodata/Travel/This_is_Switzerland_4k/images/medium.jpg';
     _travel2.thumbnails.small = '/assets/videodata/Travel/This_is_Switzerland_4k/images/small.jpg';
     _travel2.categories = [
-      new VideoCategory('Travel', 'vidcat3', [
+      new VideoCategoryModel('Travel', 'vidcat3', [
       ]),
-      new VideoCategory('Mountains', 'vidcat32'),
+      new VideoCategoryModel('Mountains', 'vidcat32'),
 
     ];
 
     //#endregion
 
     this.videoList = [_movie1, _movie2, _movie3, _kids1, _kids2, _travel1, _travel2];
+  }
+
+
+  public getAdVideos(){
+    
   }
 
 }

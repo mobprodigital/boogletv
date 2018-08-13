@@ -81,6 +81,15 @@ header.page-header {
   padding: 0 0px 0px 0px;
 }
 
+h1.page-title {
+  text-transform: uppercase;
+  border-bottom: solid 2px gainsboro;
+  padding-bottom: 19px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+}
+
 /* sidebar */
 
 .sidebar-item {

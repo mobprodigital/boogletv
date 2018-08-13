@@ -1,5 +1,5 @@
 
-export interface ThumbnailSize {
+export interface IthumbnailSize {
     /**
      * Orignal size of the thumbnail image
      */

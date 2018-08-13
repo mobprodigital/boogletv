@@ -1,4 +1,4 @@
-export class VideoCategoryModel {
+export class ImageCategoryModel {
     /**
      * Name of the Category
      */
@@ -11,9 +11,9 @@ export class VideoCategoryModel {
     /**
      * Child category array
      */
-    public categories: Array<VideoCategoryModel> = [];
+    public categories: Array<ImageCategoryModel> = [];
 
-    constructor(Name: string, Id: string, Categories?: Array<VideoCategoryModel>) {
+    constructor(Name: string, Id: string, Categories?: Array<ImageCategoryModel>) {
         this.id = Id;
         this.name = Name;
         if (Categories && Categories.length > 0) {

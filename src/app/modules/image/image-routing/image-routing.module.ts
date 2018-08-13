@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { AllVideoComponent } from '../components/all-video/all-video.component';
-import { SingleVideoComponent } from '../components/single-video/single-video.component';
+import { SingleImageComponent } from '../components/single-image/single-image.component';
+import { AllImagesComponent } from '../components/all-images/all-images.component';
 import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 
-let videoRoutes: Routes = [
+let imageRoutes: Routes = [
   {
-    path: "play/:id",
-    component: SingleVideoComponent
+    path: "view/:id",
+    component: SingleImageComponent
   },
   {
     path: "category/:id",
-    component: AllVideoComponent
+    component: AllImagesComponent
   },
   {
     path: '',
-    component: AllVideoComponent,
+    component: AllImagesComponent,
     pathMatch: 'full'
   },
   {
@@ -29,9 +29,9 @@ let videoRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(videoRoutes)
+    RouterModule.forChild(imageRoutes)
   ],
   declarations: [],
   exports: [RouterModule]
 })
-export class VideoRoutingModule { }
+export class ImageRoutingModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Video } from "../../models/video.model";
-import { VideoCategory } from '../../models/video-category.model';
+import { VideoModel } from "../../models/video.model";
+import { VideoCategoryModel } from '../../models/video-category.model';
 import { VideoService } from "../../modules/video/services/video.service";
 import { Router } from '@angular/router';
 
@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   selectedSlide: string = '';
 
-  LatestVideos: Video[] = [];
+  LatestVideos: VideoModel[] = [];
 
-  videoCategoryList: VideoCategory[];
+  videoCategoryList: VideoCategoryModel[];
   selectedCatTab: string = 'all';
   constructor(private _videoService: VideoService, private _router: Router, ) {
     this.feedVideos();

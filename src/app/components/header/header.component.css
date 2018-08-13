@@ -78,7 +78,7 @@
     background-color: #000;
     display: none;
     justify-content: center;
-    min-height: 215px;
+    min-height: 235px;
   }
   ul.main-menu>li:hover>ul.mega-menu {
     display: flex;
@@ -86,8 +86,8 @@
   ul.main-menu>li>ul.mega-menu>li>a {
     line-height: 2;
     min-height: auto;
-    padding: 0 8px;
-    font-size: 12px;
+    padding: 4px 37px;
+    font-size: 15px;
     margin: 9px 8px;
   }
   ul.main-menu>li>ul.mega-menu>li>ul {
@@ -151,6 +151,11 @@
     width: 250px;
     height: 100%;
     padding-left: 22px;
+    transition: width 0.25s linear;
+  }
+  .search-wrap>input:focus{
+    width: 300px;
+    outline: none;
   }
   .search-wrap>i {
     position: absolute;

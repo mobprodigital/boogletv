@@ -4,23 +4,23 @@ import { HomeComponent } from '../components/home/home.component';
 import { NotFoundComponent } from '../modules/shared/components/not-found/not-found.component';
 
 const routes: Routes = [
+
   {
-    path : 'home',
-    component : HomeComponent
+    path: 'video',
+    loadChildren: '../modules/video/video.module#VideoModule'
   },
   {
-    path : 'video',
-    loadChildren : '../modules/video/video.module#VideoModule'
+    path: 'image',
+    loadChildren: '../modules/image/image.module#ImageModule'
   },
   {
-    path : '',
-    component : HomeComponent,
-    pathMatch : 'full'
+    path: '',
+    component: HomeComponent,
   },
   {
-    path : '**',
-    component : NotFoundComponent,
-    pathMatch : 'full'
+    path: '**',
+    component: NotFoundComponent,
+    pathMatch: 'full'
   },
 ];
 
