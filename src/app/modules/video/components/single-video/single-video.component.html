@@ -2,7 +2,8 @@
   <div class="container">
     <div class="single-video">
       <video 
-        (waiting)="onVideoWaiting($event)"
+        (waiting)="onWaiting($event)"
+        (progress)="onProgress()"
         (timeupdate)="onTimeUpdate()" 
         (contextmenu)="contextMenu($event)" 
         (ended)="videoEnded()" 
@@ -39,8 +40,8 @@
           </li>
         </ul>
         <div (click)="seekVideo($event)" #seekBar class="progress video-seekbar">
-          <div [ngStyle]="{width : seekBarPercent + '%', transition: 'none'}" [ngClass]="isAdvideoPlaying ? 'bg-warning': 'bg-danger'" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-          <!-- <div class="progress-bar bg-secondary buffer-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div> -->
+          <div [ngStyle]="{width : seekBarPercent + '%'}" [ngClass]="isAdvideoPlaying ? 'bg-warning': 'bg-danger'" class="progress-bar current-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [ngStyle]="{width : videoBuffered + '%'}" class="progress-bar bg-secondary buffer-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export class SingleVideoComponent implements OnInit {
   seekBar: HTMLDivElement;
   videoCurrentTime: string | number = '00:00:00';
   videoTotalTime: string | number = '00:00:00';
-
+  videoBuffered: number;
   seekBarPercent: number = 0;
 
   currentVideo: VideoModel = new VideoModel();
@@ -70,6 +70,7 @@ export class SingleVideoComponent implements OnInit {
 
     this._activatedRoute.params.subscribe((params) => {
       let videoId = params['id'];
+
       this._videoService.getVideoById(videoId).then(vid => {
 
         this.currentVideo = vid;
@@ -109,15 +110,13 @@ export class SingleVideoComponent implements OnInit {
     this.videoTotalTime = this.secToTime(this.videoPlayer.duration);
   }
 
-  private setVideoData() {
+  private async setVideoData() {
     if (this.currentVideo.videoSource == VideoSource.File) {
       this.videoPlayer.src = this.isAdPlayed ? this.currentVideo.src : this.adVideos[(Math.floor(Math.random() * 3) + 0)];
       if (!this.isAdPlayed) {
         this.isAdvideoPlaying = true;
       }
-      this.videoPlayer.play().catch(err => {
-
-      });
+      await this.play();
       this.videoTotalTime = this.currentVideo.duration;
 
     }
@@ -125,7 +124,7 @@ export class SingleVideoComponent implements OnInit {
 
   public seekVideo(ev: MouseEvent) {
     ev.preventDefault();
-    if(!this.isAdvideoPlaying){
+    if (!this.isAdvideoPlaying) {
       this.seekBarPercent = (ev.offsetX / this.seekBar.offsetWidth) * 100;
       this.videoPlayer.currentTime = (this.videoPlayer.duration / 100) * this.seekBarPercent;
     }
@@ -140,7 +139,6 @@ export class SingleVideoComponent implements OnInit {
     let hours: string | number = Math.floor(sec_num / 3600);
     let minutes: string | number = Math.floor((sec_num - (hours * 3600)) / 60);
     let seconds: string | number = sec_num - (hours * 3600) - (minutes * 60);
-    console.log('nan duration', duration);
 
 
     if (hours < 10) { hours = "0" + hours; }
@@ -158,26 +156,37 @@ export class SingleVideoComponent implements OnInit {
   }
 
   public shareVideo() {
-
     if (navigator['share']) {
       navigator['share']({
-        title: 'Thor',
-        text: 'Thor moview',
+        title: this.currentVideo.title,
+        text: this.currentVideo.description,
         url: location.href,
       });
     }
   }
 
   public play() {
-    this.videoPlayer.play();
+    return this.videoPlayer.play();
   }
 
   public pause() {
     this.videoPlayer.pause();
   }
 
-  public onVideoWaiting(ev){
-    
+  public onProgress() {
+    var duration = this.videoPlayer.duration;
+    if (duration > 0) {
+      for (var i = 0; i < this.videoPlayer.buffered.length; i++) {
+        if (this.videoPlayer.buffered.start(this.videoPlayer.buffered.length - 1 - i) < this.videoPlayer.currentTime) {
+          this.videoBuffered = (this.videoPlayer.buffered.end(this.videoPlayer.buffered.length - 1 - i) / duration) * 100;
+          break;
+        }
+      }
+    }
+  }
+
+  public onWaiting(ev) {
+    console.log('waiting : ', ev);
   }
 
 }

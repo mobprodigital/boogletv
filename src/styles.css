@@ -478,6 +478,22 @@ span.imgs-control-right>i {
   padding: 0px 0;
   margin-right: 13px;
   border-radius: 0;
+  position: relative;
+}
+
+.progress.video-seekbar>div {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  left: 0;
+  transition: none;
+}
+
+.progress.video-seekbar>div.current-progress {
+  z-index: 1;
+}
+.progress.video-seekbar>div.buffer-progress {
+  z-index: 0;
 }
 
 .single-video .video-player-frame.hide-controls>* {
