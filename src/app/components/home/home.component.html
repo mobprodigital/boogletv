@@ -1,11 +1,7 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
-    <article *ngFor="let lVdo of LatestVideos;let _index = index" 
-          class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!(lVdo.id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}" 
-      (swipeleft)="bannerNextPrev('next')" 
-      (swiperight)="bannerNextPrev('prev')"
-      >
+    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!(lVdo.id == selectedSlide)"
+      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}" (swipeleft)="bannerNextPrev('next')" (swiperight)="bannerNextPrev('prev')">
 
       <div class="h-media-inner">
         <div class="h-play-btn">
@@ -37,10 +33,7 @@
 
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
-      <article 
-      (swipeleft)="bannerNextPrev('next')" 
-      (swiperight)="bannerNextPrev('prev')"
-      class="banner-btn-wrap" #bannerBtnWrap>
+      <article (swipeleft)="bannerNextPrev('next')" (swiperight)="bannerNextPrev('prev')" class="banner-btn-wrap" #bannerBtnWrap>
         <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id"
           (click)="showSlide(lVdoBtnIndex)">
           <span>
@@ -62,122 +55,145 @@
 </header>
 
 <main class="page-main-content">
-  <div class="container">
-    <section class="section">
-      <header class="section-header">
-        <h2 class="section-title section-title-center">Most liked videos</h2>
-      </header>
-      <div class="section-body">
-          <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
-        <div class="imgs-container">
-          <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
-            <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
-              <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
-                <i class="fas fa-play play-btn" ></i>
-              </div>
-              <div class="imgs-captions">
-                <div class="imgs-title">
-                  <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
-                </div>
-                <div class="imgs-meta-data">
-                  <ul>
-                    <li>
-                      <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
-                    <li>
-                      <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
-                    <li>
-                      <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </div>
-          <span class="imgs-control-left">
-            <i (click)="imgSlide('right')" class="fas fa-arrow-left" aria-hidden="true"></i>
-          </span>
-          <span class="imgs-control-right">
-            <i (click)="imgSlide('left')" class="fas fa-arrow-right" aria-hidden="true"></i>
-          </span>
-        </div>
-      </div>
-    </section>
-
+  <div class="container-fluid">
     <div class="row">
-      <section class="col-md-8">
-
+      <aside class="col-md-1 ad-sidebar ad-sidebar-left">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v1.jpg" alt="">
+        </div>
+      </aside>
+      <div class="col-md-10">
         <section class="section">
-          <header class="section-header section-header-action">
-            <h2 class="section-title">Videos</h2>
-            <div>
-              <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
-                <li>
-                  <a [ngClass]="{'active-tab' : selectedCatTab == 'all'}" (click)="showCat($event, 'all')">All</a>
-                </li>
-                <li *ngFor="let cat of videoCategoryList">
-                  <a (click)="showCat($event, cat.id)" [ngClass]="{'active-tab' : selectedCatTab == cat.id}">{{cat.name}}</a>
-                </li>
-              </ul>
-            </div>
+          <header class="section-header">
+            <h2 class="section-title section-title-center">Most liked videos</h2>
           </header>
           <div class="section-body">
-            <ng-container *ngIf="LatestVideos && LatestVideos.length > 0">
-              <div class="row cat-wrapper">
-                <article *ngFor="let LT_Vid of LatestVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
-                  <div class="imgs-single">
-                    <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
-                      <i class="fas fa-play play-btn"></i>
+            <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
+            <div class="imgs-container">
+              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
+                <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
+                  <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
+                    <i class="fas fa-play play-btn"></i>
+                  </div>
+                  <div class="imgs-captions">
+                    <div class="imgs-title">
+                      <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
                     </div>
-                    <div class="imgs-captions">
-                      <div class="imgs-title">
-                        <a (click)="playVideo($event, LT_Vid.id)" class="post-link">{{LT_Vid.title}}</a>
-                      </div>
-                      <div class="imgs-meta-data">
-                        <ul>
-                          <li>
-                            <i class="fas fa-eye" aria-hidden="true"></i> {{LT_Vid.viewsCount}}</li>
-                          <li>
-                            <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{LT_Vid.likesCount}}</li>
-                          <li>
-                            <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{LT_Vid.dislikesCount}}</li>
-                        </ul>
-                      </div>
+                    <div class="imgs-meta-data">
+                      <ul>
+                        <li>
+                          <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
+                        <li>
+                          <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
+                        <li>
+                          <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
+                      </ul>
                     </div>
                   </div>
                 </article>
-
               </div>
-            </ng-container>
+              <span class="imgs-control-left">
+                <i (click)="imgSlide('right')" class="fas fa-arrow-left" aria-hidden="true"></i>
+              </span>
+              <span class="imgs-control-right">
+                <i (click)="imgSlide('left')" class="fas fa-arrow-right" aria-hidden="true"></i>
+              </span>
+            </div>
           </div>
         </section>
-      </section>
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_h2.jpg" alt="">
+        </div>
+        <div class="row">
+          <section class="col-md-8">
 
-      <!-- sidebar -->
-      <section class="col-md-4">
-        <!-- <aside class="sidebar-item">
-          <div class="sidebar-header">
-            <h6 class="sidebar-title">Newsletter</h6>
-          </div>
-          <div class="sidebar-body">
-            <p>
-              Subscribe to our newsletter and join our 1 subscribers
-            </p>
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Your email address">
-            </div>
-            <div class="">
-              <button type="button" class="btn btn-danger btn-hover-dark">Subscribe</button>
-            </div>
-          </div>
-        </aside> -->
+            <section class="section">
+              <header class="section-header section-header-action">
+                <h2 class="section-title">Videos</h2>
+                <div>
+                  <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
+                    <li>
+                      <a [ngClass]="{'active-tab' : selectedCatTab == 'all'}" (click)="showCat($event, 'all')">All</a>
+                    </li>
+                    <li *ngFor="let cat of videoCategoryList">
+                      <a (click)="showCat($event, cat.id)" [ngClass]="{'active-tab' : selectedCatTab == cat.id}">{{cat.name}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </header>
+              <div class="section-body">
+                <ng-container *ngIf="LatestVideos && LatestVideos.length > 0">
+                  <div class="row cat-wrapper">
+                    <article *ngFor="let LT_Vid of LatestVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
+                      <div class="imgs-single">
+                        <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
+                          <i class="fas fa-play play-btn"></i>
+                        </div>
+                        <div class="imgs-captions">
+                          <div class="imgs-title">
+                            <a (click)="playVideo($event, LT_Vid.id)" class="post-link">{{LT_Vid.title}}</a>
+                          </div>
+                          <div class="imgs-meta-data">
+                            <ul>
+                              <li>
+                                <i class="fas fa-eye" aria-hidden="true"></i> {{LT_Vid.viewsCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{LT_Vid.likesCount}}</li>
+                              <li>
+                                <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{LT_Vid.dislikesCount}}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                  </div>
+                </ng-container>
+              </div>
+            </section>
+          </section>
+
+          <!-- sidebar -->
+          <section class="col-md-4">
+            <!-- <aside class="sidebar-item">
+                  <div class="sidebar-header">
+                    <h6 class="sidebar-title">Newsletter</h6>
+                  </div>
+                  <div class="sidebar-body">
+                    <p>
+                      Subscribe to our newsletter and join our 1 subscribers
+                    </p>
+                    <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Your email address">
+                    </div>
+                    <div class="">
+                      <button type="button" class="btn btn-danger btn-hover-dark">Subscribe</button>
+                    </div>
+                  </div>
+                </aside> -->
+
+            <aside class="ads">
+              <img src="assets/images/banner/Ad/ad2.jpg" alt="">
+            </aside>
+            <aside class="ads">
+              <img src="assets/images/banner/Ad/ad4.png" alt="">
+            </aside>
+          </section>
+          <!-- sidebar -->
+        </div>
 
         <aside class="ads">
-          <img src="assets/images/banner/Ad/ad2.jpg" alt="">
+          <img src="assets/images/banner/Ad/ad_h1.jpg" alt="">
         </aside>
-        <aside class="ads">
-          <img src="assets/images/banner/Ad/ad4.png" alt="">
-        </aside>
-      </section> <!-- sidebar -->
+      </div>
+
+      <aside class="col-md-1 ad-sidebar ad-sidebar-right">
+        <div class="ads">
+          <img src="assets/images/banner/Ad/ad_v2.jpg" alt="">
+        </div>
+      </aside>
     </div>
+
 
   </div>
 </main>
