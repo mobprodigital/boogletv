@@ -2,7 +2,9 @@
   <div class="container">
     <div class="single-video">
       <video 
-        (waiting)="onWaiting($event)"
+        
+        (waiting)="onWaiting()"
+        (playing)="onPlaying()"
         (progress)="onProgress()"
         (timeupdate)="onTimeUpdate()" 
         (contextmenu)="contextMenu($event)" 
@@ -20,8 +22,15 @@
       <div [hidden]="currentVideo.videoSource == 1" class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
         <span [hidden]="isAdvideoPlaying" class="video-btn-span">
-          <i (click)="videoPlayer.paused ? play() : pause()" [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
+          <i  
+            [hidden]="isWaiting"
+            (click)="videoPlayer.paused ? play() : pause()" 
+            [ngClass]="videoPlayer.paused ? 'video-play' : 'video-pause'"
             class="video-player-btn"></i>
+
+          <i 
+            [hidden]="!isWaiting" 
+            class="fas fa-spinner fa-pulse video-waiting"></i>
         </span>
 
         <ul class="video-controls">

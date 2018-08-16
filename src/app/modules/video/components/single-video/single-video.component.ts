@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
 import { Router, ActivatedRoute, Route } from '@angular/router';
 import { VideoService } from '../../services/video.service';
@@ -12,7 +12,7 @@ import { VideoSource } from '../../../../enums/videosource.enum';
   styleUrls: ['./single-video.component.css'],
   providers: [VideoService]
 })
-export class SingleVideoComponent implements OnInit {
+export class SingleVideoComponent implements OnInit, AfterViewInit {
 
   @ViewChild('videoPlayer', { read: ElementRef }) videoPlayerControlRef: ElementRef;
   videoPlayer: HTMLMediaElement;
@@ -23,7 +23,7 @@ export class SingleVideoComponent implements OnInit {
   videoTotalTime: string | number = '00:00:00';
   videoBuffered: number;
   seekBarPercent: number = 0;
-
+  isWaiting: boolean = false;
   currentVideo: VideoModel = new VideoModel();
 
   isAdPlayed: boolean = false;
@@ -60,8 +60,7 @@ export class SingleVideoComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
+  ngAfterViewInit() {
     this.seekBar = <HTMLDivElement>this.seekBarControlRef.nativeElement;
     this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
 
@@ -82,6 +81,10 @@ export class SingleVideoComponent implements OnInit {
       });
     })
   }
+  ngOnInit() {
+
+
+  }
 
   public videoEnded() {
     if (!this.isAdPlayed) {
@@ -89,7 +92,7 @@ export class SingleVideoComponent implements OnInit {
       this.isAdPlayed = true;
       this.videoPlayer.src = this.currentVideo.src;
       this.videoPlayer.load();
-      this.videoPlayer.play();
+      this.play()
     }
     else {
 
@@ -104,11 +107,7 @@ export class SingleVideoComponent implements OnInit {
   }
 
 
-  public onTimeUpdate() {
-    this.seekBarPercent = (this.videoPlayer.currentTime / this.videoPlayer.duration) * 100;
-    this.videoCurrentTime = this.secToTime(this.videoPlayer.currentTime);
-    this.videoTotalTime = this.secToTime(this.videoPlayer.duration);
-  }
+
 
   private async setVideoData() {
     if (this.currentVideo.videoSource == VideoSource.File) {
@@ -116,6 +115,7 @@ export class SingleVideoComponent implements OnInit {
       if (!this.isAdPlayed) {
         this.isAdvideoPlaying = true;
       }
+      this.videoPlayer.load();
       await this.play();
       this.videoTotalTime = this.currentVideo.duration;
 
@@ -166,16 +166,19 @@ export class SingleVideoComponent implements OnInit {
   }
 
   public play() {
+    // this.videoPlayer.load();
     return this.videoPlayer.play();
   }
+
 
   public pause() {
     this.videoPlayer.pause();
   }
 
   public onProgress() {
-    var duration = this.videoPlayer.duration;
+
     if (duration > 0) {
+      var duration = this.videoPlayer.duration;
       for (var i = 0; i < this.videoPlayer.buffered.length; i++) {
         if (this.videoPlayer.buffered.start(this.videoPlayer.buffered.length - 1 - i) < this.videoPlayer.currentTime) {
           this.videoBuffered = (this.videoPlayer.buffered.end(this.videoPlayer.buffered.length - 1 - i) / duration) * 100;
@@ -184,9 +187,18 @@ export class SingleVideoComponent implements OnInit {
       }
     }
   }
-
-  public onWaiting(ev) {
-    console.log('waiting : ', ev);
+  public onTimeUpdate() {
+    this.seekBarPercent = (this.videoPlayer.currentTime / this.videoPlayer.duration) * 100;
+    this.videoCurrentTime = this.secToTime(this.videoPlayer.currentTime);
+    this.videoTotalTime = this.secToTime(this.videoPlayer.duration);
+  }
+  public onWaiting() {
+    this.isWaiting = true;
+    
+  }
+  public onPlaying() {
+    this.play();
+    this.isWaiting = false;
   }
 
 }
