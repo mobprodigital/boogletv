@@ -87,18 +87,23 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
   }
 
   public videoEnded() {
-    if (!this.isAdPlayed) {
+    if (this.isAdPlayed) {
+      
+      this.videoPlayer.muted = false;
       this.isAdvideoPlaying = false;
       this.isAdPlayed = true;
-      this.videoPlayer.src = this.currentVideo.src;
       this.videoPlayer.load();
-      this.play()
+
     }
     else {
 
       this.isAdvideoPlaying = false;
       this.isAdPlayed = true;
+      this.videoPlayer.muted = true;
+      this.videoPlayer.src = this.currentVideo.src;
       this.videoPlayer.load();
+      this.play();
+
     }
   }
 
@@ -114,6 +119,10 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
       this.videoPlayer.src = this.isAdPlayed ? this.currentVideo.src : this.adVideos[(Math.floor(Math.random() * 3) + 0)];
       if (!this.isAdPlayed) {
         this.isAdvideoPlaying = true;
+        // this.videoPlayer.muted = true;
+      }
+      else {
+        // this.videoPlayer.muted = false;
       }
       this.videoPlayer.load();
       await this.play();
@@ -194,7 +203,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
   }
   public onWaiting() {
     this.isWaiting = true;
-    
+
   }
   public onPlaying() {
     this.play();

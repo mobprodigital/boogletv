@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewMenu = window.outerWidth > 992;
+    this.viewMenu = window.outerWidth < 992;
+    
   }
 
   public getVideoData() {

@@ -57,10 +57,10 @@
         <span></span>
       </button>
       <div class="text-center">
-        <img class="mob-logo" src="assets/images/logo/logo-default-mob.png" alt="">
+        <img class="mob-logo" src="assets/images/logo/logo_mobile.png" alt="">
       </div>
     </div>
-    <div [ngClass]="!viewMenu ? 'mob-menu-hidden ' : ''" class="main-nav-wrapper container">
+    <div [ngClass]="viewMenu ? '' : 'mob-menu-hidden'" class="main-nav-wrapper container">
       <div class="text-center menu-close-btn-wrap">
         <button (click)="viewMenu = false" class="menu-close-btn">
           <i class="fas fa-times-circle"></i>
