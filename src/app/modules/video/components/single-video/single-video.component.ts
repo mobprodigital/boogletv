@@ -99,7 +99,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
       this.isAdvideoPlaying = false;
       this.isAdPlayed = true;
-      this.videoPlayer.muted = true;
+      this.videoPlayer.muted = false;
       this.videoPlayer.src = this.currentVideo.src;
       this.videoPlayer.load();
       this.play();
@@ -119,10 +119,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
       this.videoPlayer.src = this.isAdPlayed ? this.currentVideo.src : this.adVideos[(Math.floor(Math.random() * 3) + 0)];
       if (!this.isAdPlayed) {
         this.isAdvideoPlaying = true;
-        // this.videoPlayer.muted = true;
-      }
-      else {
-        // this.videoPlayer.muted = false;
+        this.videoPlayer.muted = true;
       }
       this.videoPlayer.load();
       await this.play();
@@ -186,11 +183,14 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
   public onProgress() {
 
+    var duration = this.videoPlayer.duration;
     if (duration > 0) {
-      var duration = this.videoPlayer.duration;
-      for (var i = 0; i < this.videoPlayer.buffered.length; i++) {
-        if (this.videoPlayer.buffered.start(this.videoPlayer.buffered.length - 1 - i) < this.videoPlayer.currentTime) {
-          this.videoBuffered = (this.videoPlayer.buffered.end(this.videoPlayer.buffered.length - 1 - i) / duration) * 100;
+      let videoBufferedLngth = this.videoPlayer.buffered.length;
+      console.log('videoBufferedLngth', videoBufferedLngth);
+      
+      for (var i = 0; i < videoBufferedLngth; i++) {
+        if (this.videoPlayer.buffered.start(videoBufferedLngth - 1 - i) < this.videoPlayer.currentTime) {
+          this.videoBuffered = (this.videoPlayer.buffered.end(videoBufferedLngth - 1 - i) / duration) * 100;
           break;
         }
       }
