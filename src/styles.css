@@ -265,6 +265,10 @@ span.imgs-control-right {
   right: -10px;
 }
 
+.form-label {
+  font-size: 14px;
+}
+
 span.imgs-control-left>i,
 span.imgs-control-right>i {
   width: 40px;

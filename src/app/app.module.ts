@@ -10,6 +10,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { AjaxService } from './services/ajax/ajax.service';
 import { HttpModule } from '@angular/http';
 import { AboutComponent } from './components/about/about.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 
 
 // custom modules
@@ -21,6 +22,7 @@ import { AboutComponent } from './components/about/about.component';
     FooterComponent,
     HomeComponent,
     AboutComponent,
+    ContactUsComponent,
     
   ],
   imports: [
