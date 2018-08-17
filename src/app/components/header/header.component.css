@@ -66,7 +66,9 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
-  ul.main-menu li a:not(.post-link):hover {
+  ul.main-menu li a:not(.post-link):hover,
+  ul.main-menu li a.active-link:not(.post-link)
+   {
     background-color: #9c0101;
   }
   ul.main-menu>li:hover>ul {

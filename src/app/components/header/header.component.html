@@ -70,15 +70,15 @@
         <nav class="col-lg-auto">
           <ul class="main-menu">
             <li>
-              <a [routerLink]="['']">Home</a>
+              <a [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['active-link']" [routerLink]="['/']">Home</a>
             </li>
             <li>
-              <a [routerLink]="['video']">Video
+              <a [routerLinkActive]="['active-link']" [routerLink]="['video']">Video
                 <i class="fas fa-angle-down"></i>
               </a>
               <ul *ngIf="videoListByCategory.length > 0" class="mega-menu mob-menu-hidden">
                 <li *ngFor="let vdoCat of videoListByCategory">
-                  <a [routerLink]="['video/category', vdoCat.id]">{{vdoCat.name}}</a>
+                  <a [routerLinkActive]="['active-link']" [routerLink]="['video/category', vdoCat.id]">{{vdoCat.name}}</a>
                   <ul>
                     <li *ngFor="let mmgVideo of vdoCat.videos">
                       <article class="imgs-single">
@@ -87,7 +87,7 @@
                         </div>
                         <div class="imgs-captions">
                           <div class="imgs-title">
-                            <a [routerLink]="['video/play', mmgVideo.id]" class="post-link">{{mmgVideo.title}}</a>
+                            <a [routerLinkActive]="['active-link']" [routerLink]="['video/play', mmgVideo.id]" class="post-link">{{mmgVideo.title}}</a>
                           </div>
                         </div>
                       </article>
@@ -118,10 +118,10 @@
             </li>
             
             <li>
-              <a [routerLink]="['about-us']">About Us</a>
+              <a [routerLinkActive]="['active-link']" [routerLink]="['about-us']">About Us</a>
             </li>
             <li>
-              <a [routerLink]="['contact-us']">Contact Us</a>
+              <a [routerLinkActive]="['active-link']" [routerLink]="['contact-us']">Contact Us</a>
             </li>
           </ul>
         </nav>
