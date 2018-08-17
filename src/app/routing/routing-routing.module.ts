@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
 import { NotFoundComponent } from '../modules/shared/components/not-found/not-found.component';
+import { AboutComponent } from '../components/about/about.component';
 
 const routes: Routes = [
 
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'image',
     loadChildren: '../modules/image/image.module#ImageModule'
+  },
+  {
+    path: 'about-us',
+    component: AboutComponent,
   },
   {
     path: '',

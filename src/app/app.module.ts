@@ -9,6 +9,7 @@ import { RoutingRoutingModule } from "./routing/routing-routing.module";
 import { SharedModule } from './modules/shared/shared.module';
 import { AjaxService } from './services/ajax/ajax.service';
 import { HttpModule } from '@angular/http';
+import { AboutComponent } from './components/about/about.component';
 
 
 // custom modules
@@ -19,6 +20,7 @@ import { HttpModule } from '@angular/http';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    AboutComponent,
     
   ],
   imports: [
