@@ -5,6 +5,7 @@ import { NotFoundComponent } from '../modules/shared/components/not-found/not-fo
 import { AboutComponent } from '../components/about/about.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from '../components/terms-conditions/terms-conditions.component';
 
 const routes: Routes = [
 
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsConditionsComponent,
   },
   {
     path: '',

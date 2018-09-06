@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 
 
 // custom modules
@@ -25,6 +26,7 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
     AboutComponent,
     ContactUsComponent,
     PrivacyPolicyComponent,
+    TermsConditionsComponent,
     
   ],
   imports: [
