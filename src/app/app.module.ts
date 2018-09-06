@@ -11,6 +11,7 @@ import { AjaxService } from './services/ajax/ajax.service';
 import { HttpModule } from '@angular/http';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 
 // custom modules
@@ -23,6 +24,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     HomeComponent,
     AboutComponent,
     ContactUsComponent,
+    PrivacyPolicyComponent,
     
   ],
   imports: [

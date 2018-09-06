@@ -4,6 +4,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { NotFoundComponent } from '../modules/shared/components/not-found/not-found.component';
 import { AboutComponent } from '../components/about/about.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
+import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
   },
   {
     path: '',
