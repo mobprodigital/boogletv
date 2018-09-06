@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 .font-poppins {
   font-family: 'Poppins', sans-serif;
 }
@@ -54,7 +53,6 @@ header.page-header {
 }
 
 /* section */
-
 .section {
   margin-bottom: 40px;
 }
@@ -91,7 +89,6 @@ h1.page-title {
 }
 
 /* sidebar */
-
 .sidebar-item {
   border: solid 2px lightgray;
   padding: 20px;
@@ -132,7 +129,6 @@ h1.page-title {
 }
 
 /* slider */
-
 .imgs-wrap {
   display: flex;
   flex-wrap: nowrap;
@@ -327,10 +323,12 @@ span.imgs-control-right>i {
     transform: scale(1);
     background-color: rgb(204, 0, 0, 1);
   }
+
   50% {
     transform: scale(1.25);
     background-color: rgb(204, 0, 0, 0.5);
   }
+
   100% {
     transform: scale(1);
     background-color: rgb(204, 0, 0, 1);
@@ -338,9 +336,7 @@ span.imgs-control-right>i {
 }
 
 /* slider ends */
-
 /* single post author and date CSS */
-
 .video-description {
   height: 70px;
   overflow: hidden;
@@ -377,9 +373,7 @@ span.imgs-control-right>i {
 }
 
 /* single post author and date End */
-
 /* badge categories style */
-
 .badge {
   font-size: 11px;
   font-weight: normal;
@@ -397,9 +391,7 @@ span.imgs-control-right>i {
 }
 
 /* badge categories style */
-
 /* Single Video Player */
-
 .app-video-single {
   background-color: black;
   margin-top: 0px;
@@ -503,6 +495,25 @@ span.imgs-control-right>i {
   position: relative;
 }
 
+aside.quick-links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+aside.quick-links ul>li>a {
+  padding: 14px 16px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+  padding-left: 0;
+}
+
+aside.quick-links ul>li>a:hover {
+  text-decoration: underline !important;
+}
+
 .progress.video-seekbar>div {
   position: absolute;
   top: 0;
@@ -529,9 +540,7 @@ span.imgs-control-right>i {
 }
 
 /* Single Video Player Class End */
-
 /* Single Player Control-Icon Start*/
-
 .btn-group.video-player-button>button {
   font-weight: 600;
 }
@@ -556,15 +565,14 @@ span.imgs-control-right>i {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
 
 /* Single Player Control-Icon End*/
-
 /* main section start */
-
 .main {
   background-color: #fff;
   font-family: "Poppins", sans-serif;
@@ -604,11 +612,8 @@ article>h1 {
 }
 
 /* main section end */
-
 /* responsive css */
-
 /* large device */
-
 @media screen and (max-width: 1200px) {
   .imgs-wrap .imgs-single {
     flex-basis: 33.333%;
@@ -616,7 +621,6 @@ article>h1 {
 }
 
 /* medium device */
-
 @media screen and (max-width: 992px) {
   .imgs-wrap .imgs-single {
     flex-basis: 50%;
@@ -624,21 +628,21 @@ article>h1 {
 }
 
 /* medium device */
-
 @media screen and (max-width: 768px) {
   span.imgs-control-right {
     right: 0;
   }
+
   span.imgs-control-left {
     left: 0;
   }
+
   .ad-sidebar {
     display: none;
   }
 }
 
 /* small device */
-
 @media screen and (max-width: 576px) {
   .imgs-wrap .imgs-single {
     flex-basis: 100%;
