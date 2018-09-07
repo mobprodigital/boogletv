@@ -54,7 +54,7 @@ export class AllVideoComponent implements OnInit {
   private filterVideos(catId) {
     if (this.videoCategrioes && this.videoCategrioes.length > 0 && this._allVideo && this._allVideo.length) {
       let catFound = this.videoCategrioes.find(vcat => vcat.id == catId);
-      this.pageTitle = catFound ? catFound.id : 'Videos';
+      this.pageTitle = catFound ? catFound.name : 'Videos';
       this.allVideos = this._allVideo.filter(vdo => vdo.categories.find(cat => cat.id == catId));
     }
   }
