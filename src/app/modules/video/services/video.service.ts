@@ -75,7 +75,7 @@ export class VideoService {
     _vdo2.duration = '00:01:27';
     _vdo2.viewsCount = 488;
     _vdo2.videoSource = VideoSource.File;
-    _vdo2.src = 'assets/videodata/bollywood_gossip/Karan Johar Warns Don’t Go Anywhere In Bandra If You Want To Keep Your Love Life Private!.mp4';
+    _vdo2.src = 'assets/videodata/bollywood_gossip/Karan Johar Warns Dont Go Anywhere In Bandra If You Want To Keep Your Love Life Private!.mp4';
     _vdo2.categories = [
       new VideoCategoryModel('Bollywood gossip', 'vc1')
     ];
@@ -114,7 +114,7 @@ export class VideoService {
     _vdo5.duration = '00:01:26';
     _vdo5.viewsCount = 13245;
     _vdo5.videoSource = VideoSource.File;
-    _vdo5.src = `assets/videodata/bollywood_gossip/Super 30 Posters Released On Teacher's Day Hrithik Roshan Sends Out A Strong Message.mp4`;
+    _vdo5.src = `assets/videodata/bollywood_gossip/Super 30 Posters Released On Teachers Day Hrithik Roshan Sends Out A Strong Message.mp4`;
     _vdo5.categories = [
       new VideoCategoryModel('Bollywood gossip', 'vc1')
     ];
