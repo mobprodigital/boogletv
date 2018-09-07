@@ -79,7 +79,7 @@ export class VideoService {
     _vdo2.categories = [
       new VideoCategoryModel('Bollywood gossip', 'vc1')
     ];
-    
+
     let _vdo3 = new VideoModel();
     _vdo3.id = 'vid_bg_3';
     _vdo3.title = 'Sonali Bendre Opts For A Wig';
@@ -92,7 +92,7 @@ export class VideoService {
     _vdo3.categories = [
       new VideoCategoryModel('Bollywood gossip', 'vc1')
     ];
-    
+
     let _vdo4 = new VideoModel();
     _vdo4.id = 'vid_bg_4';
     _vdo4.title = 'SPOTBOYE SPOT SHOTS';
@@ -244,7 +244,105 @@ export class VideoService {
     ];
     //#endregion
 
-    this.videoList = [_vdo1, _vdo2, _vdo3, _vdo4, _vdo5, _vdo6, _vdo7, _vdo8, _vdo9, _vdo10, _vdo11, _vdo12, _vdo13, _vdo14];
+    //#region kids
+
+    let _kvdo1 = new VideoModel();
+    _kvdo1.id = 'vid_kd_1';
+    _kvdo1.title = 'Baisakhi';
+    _kvdo1.likesCount = 365;
+    _kvdo1.dislikesCount = 22;
+    _kvdo1.duration = `00:01:17`;
+    _kvdo1.viewsCount = 3351;
+    _kvdo1.videoSource = VideoSource.File;
+    _kvdo1.src = `assets/videodata/kids/Baisakhi.mp4`;
+    _kvdo1.categories = [
+      new VideoCategoryModel('Kids', 'vc4')
+    ];
+
+    let _kvdo2 = new VideoModel();
+    _kvdo2.id = 'vid_kd_2';
+    _kvdo2.title = 'Basant Panchami';
+    _kvdo2.likesCount = 225;
+    _kvdo2.dislikesCount = 15;
+    _kvdo2.duration = `00:02:12`;
+    _kvdo2.viewsCount = 1351;
+    _kvdo2.videoSource = VideoSource.File;
+    _kvdo2.src = `assets/videodata/kids/Basant_Panchami.mp4`;
+    _kvdo2.categories = [
+      new VideoCategoryModel('Kids', 'vc4')
+    ];
+
+    let _kvdo3 = new VideoModel();
+    _kvdo3.id = 'vid_kd_3';
+    _kvdo3.title = 'Buddha Purnima';
+    _kvdo3.likesCount = 436;
+    _kvdo3.dislikesCount = 96;
+    _kvdo3.duration = `00:00:57`;
+    _kvdo3.viewsCount = 5351;
+    _kvdo3.videoSource = VideoSource.File;
+    _kvdo3.src = `assets/videodata/kids/Buddha_Purnima.mp4`;
+    _kvdo3.categories = [
+      new VideoCategoryModel('Kids', 'vc4')
+    ];
+
+    let _kvdo4 = new VideoModel();
+    _kvdo4.id = 'vid_kd_4';
+    _kvdo4.title = 'Good Manners';
+    _kvdo4.likesCount = 336;
+    _kvdo4.dislikesCount = 56;
+    _kvdo4.duration = `00:22:35`;
+    _kvdo4.viewsCount = 3351;
+    _kvdo4.videoSource = VideoSource.File;
+    _kvdo4.src = `assets/videodata/kids/Good_Manners.mp4`;
+    _kvdo4.categories = [
+      new VideoCategoryModel('Kids', 'vc4')
+    ];
+
+    let _kvdo5 = new VideoModel();
+    _kvdo5.id = 'vid_kd_5';
+    _kvdo5.title = 'Invention And Discovery';
+    _kvdo5.likesCount = 736;
+    _kvdo5.dislikesCount = 196;
+    _kvdo5.duration = `00:33:41`;
+    _kvdo5.viewsCount = 3351;
+    _kvdo5.videoSource = VideoSource.File;
+    _kvdo5.src = `assets/videodata/kids/Invention_And_Discovery_Vol_2.mp4`;
+    _kvdo5.categories = [
+      new VideoCategoryModel('Kids', 'vc4')
+    ];
+    //#endregion
+
+    //#region travel
+
+    let _tvdo1 = new VideoModel();
+    _tvdo1.id = 'vid_tvl_1';
+    _tvdo1.title = 'Ban Chiang Thailand';
+    _tvdo1.likesCount = 236;
+    _tvdo1.dislikesCount = 16;
+    _tvdo1.duration = `00:13:06`;
+    _tvdo1.viewsCount = 2351;
+    _tvdo1.videoSource = VideoSource.File;
+    _tvdo1.src = `assets/videodata/travel/Ban Chiang - Thailand.mp4`;
+    _tvdo1.categories = [
+      new VideoCategoryModel('Travel', 'vc5')
+    ];
+
+    let _tvdo2 = new VideoModel();
+    _tvdo2.id = 'vid_tvl_2';
+    _tvdo2.title = 'Biblical Tels Megiddo, Hazor, Beer Sheba - Israel';
+    _tvdo2.likesCount = 936;
+    _tvdo2.dislikesCount = 246;
+    _tvdo2.duration = `00:13:02`;
+    _tvdo2.viewsCount = 9351;
+    _tvdo2.videoSource = VideoSource.File;
+    _tvdo2.src = `assets/videodata/travel/Biblical Tels - Megiddo, Hazor, Beer Sheba - Israel.mp4`;
+    _tvdo2.categories = [
+      new VideoCategoryModel('Travel', 'vc5')
+    ];
+    //#endregion
+
+    this.videoList = [_vdo1, _vdo2, _vdo3, _vdo4, _vdo5, _vdo6, _vdo7, _vdo8, _vdo9, _vdo10, _vdo11, _vdo12, _vdo13, _vdo14,  _kvdo1, _kvdo2, _kvdo3, _kvdo4, _kvdo5,
+      _tvdo1, _tvdo2,];
   }
 
 
