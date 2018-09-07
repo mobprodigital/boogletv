@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
-import { Router, ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../services/video.service';
 import * as screenfull from 'screenfull'
 import { VideoModel } from '../../../../models/video.model';
