@@ -119,6 +119,7 @@
     display: block;
     overflow: hidden;
     font-size: 12px;
+    max-width: 150px;
   }
   ul.main-menu>li>ul.mega-menu a.post-link:hover {
     color: #9c0101;
