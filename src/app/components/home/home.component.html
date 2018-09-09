@@ -72,7 +72,7 @@
             <div class="imgs-container">
               <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
                 <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
-                  <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.medium + ')'}">
+                  <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.small + ')'}">
                     <i class="fas fa-play play-btn"></i>
                   </div>
                   <div class="imgs-captions">
@@ -126,7 +126,7 @@
                   <div class="row cat-wrapper">
                     <article *ngFor="let LT_Vid of LatestVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                       <div class="imgs-single">
-                        <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
+                        <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.small + ')'}">
                           <i class="fas fa-play play-btn"></i>
                         </div>
                         <div class="imgs-captions">

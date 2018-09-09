@@ -45,7 +45,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
       this.relatedVideoSliderImages.ImageSlideList = allVideos.map(singleVideo => {
         let singleImage: ImageSliderImage = {
           href: 'video/play/' + singleVideo.id,
-          imagePath: singleVideo.thumbnails.medium,
+          imagePath: singleVideo.thumbnails.small,
           metaData: [
             { faClassName: 'fa-eye', text: singleVideo.viewsCount.toString() },
             { faClassName: 'fa-thumbs-up', text: singleVideo.likesCount.toString() },
