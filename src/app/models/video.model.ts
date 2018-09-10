@@ -22,5 +22,4 @@ export class VideoModel {
         small: '',
     };
     public src: string = '';
-   
 }

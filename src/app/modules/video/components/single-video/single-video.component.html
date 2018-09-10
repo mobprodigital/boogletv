@@ -1,8 +1,9 @@
 <div class="app-video-single">
   <div class="container">
     <div class="single-video">
-      <video (waiting)="onWaiting()" (playing)="onPlaying()" (progress)="onProgress()" (timeupdate)="onTimeUpdate()" (contextmenu)="contextMenu($event)"
-        (ended)="videoEnded()" [hidden]="currentVideo.videoSource == 1 " class="single-post-video-palyer" #videoPlayer>
+      <video (waiting)="onWaiting()" (playing)="onPlaying()" (progress)="onProgress()" (timeupdate)="onTimeUpdate()"
+        (contextmenu)="contextMenu($event)" (ended)="videoEnded()" [hidden]="currentVideo.videoSource == 1 " class="single-post-video-palyer"
+        #videoPlayer>
       </video>
 
       <ng-container *ngIf="currentVideo.videoSource == 1">
@@ -30,15 +31,16 @@
           </li>
           <li>
             <span>
-              <i (click)="videoPlayer.muted = !videoPlayer.muted" [ngClass]="videoPlayer.muted ? 'fa-volume-off' : 'fa-volume-up'" class="fas"></i>
+              <i (click)="videoPlayer.muted = !videoPlayer.muted" [ngClass]="videoPlayer.muted ? 'fa-volume-off' : 'fa-volume-up'"
+                class="fas"></i>
             </span>
           </li>
         </ul>
         <div (click)="seekVideo($event)" #seekBar class="progress video-seekbar">
-          <div [ngStyle]="{width : seekBarPercent + '%'}" [ngClass]="isAdvideoPlaying ? 'bg-warning': 'bg-danger'" class="progress-bar current-progress"
-            role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-          <div [ngStyle]="{width : videoBuffered + '%'}" class="progress-bar bg-secondary buffer-progress" role="progressbar" aria-valuemin="0"
-            aria-valuemax="100"></div>
+          <div [ngStyle]="{width : seekBarPercent + '%'}" [ngClass]="isAdvideoPlaying ? 'bg-warning': 'bg-danger'"
+            class="progress-bar current-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+          <div [ngStyle]="{width : videoBuffered + '%'}" class="progress-bar bg-secondary buffer-progress" role="progressbar"
+            aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
     </div>
@@ -115,29 +117,49 @@
 
           <section class="section">
             <header class="section-header">
-              <h6 class="section-title">Related videos</h6>
+              <h6 class="section-title">Most Liked videos</h6>
             </header>
             <div class="section-body">
-              <div [appImageSlider]="relatedVideoSliderImages"></div>
+
+              <div class="imgs-container">
+                  <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
+                    <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
+                      <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.small + ')'}">
+                        <i class="fas fa-play play-btn"></i>
+                      </div>
+                      <div class="imgs-captions">
+                        <div class="imgs-title">
+                          <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
+                        </div>
+                        <div class="imgs-meta-data">
+                          <ul>
+                            <li>
+                              <i class="fas fa-eye" aria-hidden="true"></i> {{ML_Vid.viewsCount}}</li>
+                            <li>
+                              <i class="fas fa-thumbs-up" aria-hidden="true"></i> {{ML_Vid.likesCount}}</li>
+                            <li>
+                              <i class="fas fa-thumbs-down" aria-hidden="true"></i> {{ML_Vid.dislikesCount}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                  <span class="imgs-control-left">
+                    <i (click)="imgSlide('right')" class="fas fa-arrow-left" aria-hidden="true"></i>
+                  </span>
+                  <span class="imgs-control-right">
+                    <i (click)="imgSlide('left')" class="fas fa-arrow-right" aria-hidden="true"></i>
+                  </span>
+                </div>
             </div>
           </section>
 
+         
           <aside class="ads">
-            <img src="assets/images/banner/Ad/ad_h1.jpg" alt="">
+            <img src="assets/images/banner/Ad/ad_h2.jpg" alt="">
           </aside>
-          <section class="section">
-              <header class="section-header">
-                <h6 class="section-title">Related videos</h6>
-              </header>
-              <div class="section-body">
-                <div [appImageSlider]="relatedVideoSliderImages"></div>
-              </div>
-            </section>
-            <aside class="ads">
-                <img src="assets/images/banner/Ad/ad_h2.jpg" alt="">
-              </aside>
         </div>
-        
+
       </main>
       <aside class="col-md-1 ad-sidebar ad-sidebar-right">
         <div class="ads">

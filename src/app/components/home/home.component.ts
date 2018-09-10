@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectedSlide: string = '';
 
   LatestVideos: VideoModel[] = [];
-
+  mostLikedVideos: VideoModel[] = [];
+  allVideos: VideoModel[] = [];
   videoCategoryList: VideoCategoryModel[];
   selectedCatTab: string = 'all';
   constructor(private _videoService: VideoService, private _router: Router, ) {
@@ -92,14 +93,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   private feedVideos() {
 
-    this._videoService.getAllVideos().then(vidList => {
+    this._videoService.getLatestVideos(5).then(vidList => {
       this.LatestVideos = vidList;
       this.selectedSlide = vidList[0].id;
     });
 
-    this._videoService.getAllCategories().then(catList => {
-      this.videoCategoryList = catList;
-    });
+    this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
+
+    this._videoService.getAllVideos().then(vidList => this.allVideos = vidList);
+
+    this._videoService.getAllCategories().then(catList => this.videoCategoryList = catList);
   }
 
   public imgSlide(slideTo: string) {
@@ -124,11 +127,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ev.preventDefault();
     ev.stopPropagation();
     this.selectedCatTab = catId;
+    console.log(catId);
     if (catId == 'all') {
-      this.LatestVideos.forEach(lv => lv.hidden = false);
+      this.allVideos.forEach(async (lv) => { lv.hidden = false });
     }
     else {
-      this.LatestVideos.forEach(lv => lv.hidden = lv.categories.find(lvc => lvc.id == catId) ? false : true);
+      this.allVideos.forEach(async (lv) => lv.hidden = lv.categories.find(lvc => lvc.id == catId) ? false : true);
     }
   }
 

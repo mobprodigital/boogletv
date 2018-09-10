@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../services/video.service';
 import * as screenfull from 'screenfull'
 import { VideoModel } from '../../../../models/video.model';
@@ -15,6 +15,7 @@ import { VideoSource } from '../../../../enums/videosource.enum';
 export class SingleVideoComponent implements OnInit, AfterViewInit {
 
   @ViewChild('videoPlayer', { read: ElementRef }) videoPlayerControlRef: ElementRef;
+  @ViewChild('imgSlider', { read: ElementRef }) imgSlider: ElementRef;
   videoPlayer: HTMLMediaElement;
   videoTimer: any;
   @ViewChild('seekBar', { read: ElementRef }) seekBarControlRef: ElementRef;
@@ -35,29 +36,15 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
   ]
 
 
-  relatedVideoSliderImages: ImageSlider = {
-    ImageSlideList: []
-  };
-
-  constructor(private _videoService: VideoService, private _activatedRoute: ActivatedRoute) {
-    this._videoService.getAllVideos().then(allVideos => {
-
-      this.relatedVideoSliderImages.ImageSlideList = allVideos.map(singleVideo => {
-        let singleImage: ImageSliderImage = {
-          href: 'video/play/' + singleVideo.id,
-          imagePath: singleVideo.thumbnails.small,
-          metaData: [
-            { faClassName: 'fa-eye', text: singleVideo.viewsCount.toString() },
-            { faClassName: 'fa-thumbs-up', text: singleVideo.likesCount.toString() },
-            { faClassName: 'fa-thumbs-down', text: singleVideo.dislikesCount.toString() },
-          ],
-          title: singleVideo.title
-        };
-        return singleImage;
-      });
+  mostLikedVideos: VideoModel[] = [];
 
 
-    });
+
+  constructor(private _videoService: VideoService, private _activatedRoute: ActivatedRoute, private _router: Router) {
+
+
+    this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
+
   }
 
   ngAfterViewInit() {
@@ -65,7 +52,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
     this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
 
 
-    window.scroll({ top: 180, behavior: 'smooth' });
+    window.scroll({ top: 0, behavior: 'smooth' });
 
     this._activatedRoute.params.subscribe((params) => {
       let videoId = params['id'];
@@ -88,7 +75,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
   public videoEnded() {
     if (this.isAdPlayed) {
-      
+
       this.videoPlayer.muted = false;
       this.isAdvideoPlaying = false;
       this.isAdPlayed = true;
@@ -187,7 +174,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
     if (duration > 0) {
       let videoBufferedLngth = this.videoPlayer.buffered.length;
       console.log('videoBufferedLngth', videoBufferedLngth);
-      
+
       for (var i = 0; i < videoBufferedLngth; i++) {
         if (this.videoPlayer.buffered.start(videoBufferedLngth - 1 - i) < this.videoPlayer.currentTime) {
           this.videoBuffered = (this.videoPlayer.buffered.end(videoBufferedLngth - 1 - i) / duration) * 100;
@@ -208,6 +195,32 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
   public onPlaying() {
     this.play();
     this.isWaiting = false;
+  }
+
+
+  public imgSlide(slideTo: string) {
+    let slider: HTMLDivElement = this.imgSlider.nativeElement;
+    let scrollLength: number = 0;
+    if (slideTo == 'left') {
+      scrollLength = slider.scrollLeft + slider.clientWidth;
+      if (scrollLength >= slider.scrollWidth) {
+        scrollLength = 0;
+      }
+    }
+    else {
+      scrollLength = slider.scrollLeft - slider.clientWidth;
+      if (slider.scrollLeft <= 0) {
+        scrollLength = slider.scrollWidth;
+      }
+    }
+    slider.scroll({ left: scrollLength, behavior: 'smooth' });
+  }
+
+
+  public playVideo(ev: MouseEvent, videoId: string) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this._router.navigate(['video/play', videoId]);
   }
 
 }

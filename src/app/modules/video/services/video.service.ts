@@ -35,7 +35,19 @@ export class VideoService {
   }
 
   public getAllVideos(): Promise<VideoModel[]> {
-    return Promise.resolve(this.videoList);
+    return Promise.resolve(this.videoList.slice());
+  }
+
+  public getLatestVideos(count: number): Promise<VideoModel[]> {
+    return Promise.resolve(this.videoList.slice(0, count));
+  }
+
+  public getMostLikedVideos(): Promise<VideoModel[]> {
+    return Promise.resolve(this.videoList.slice().sort((vid1, vid2) => vid2.likesCount - vid1.likesCount));
+  }
+
+  public getMostPlayedVideos(): Promise<VideoModel[]> {
+    return Promise.resolve(this.videoList.slice().sort((vid1, vid2) => vid2.viewsCount - vid1.viewsCount));
   }
 
   public getVideoById(videoId: string): Promise<VideoModel> {
@@ -88,8 +100,8 @@ export class VideoService {
     _vdo3.id = 'vid_bg_3';
     _vdo3.title = 'Sonali Bendre Opts For A Wig';
     _vdo3.likesCount = 1255;
-    _vdo3.thumbnails.large = 'assets/videodata/bollywood_gossip/images/1280x600/Sonali-Bendre-Opts-For-A-Wig;.jpg';
-    _vdo3.thumbnails.small = 'assets/videodata/bollywood_gossip/images/300x150/Sonali-Bendre-Opts-For-A-Wig;.jpg';
+    _vdo3.thumbnails.large = 'assets/videodata/bollywood_gossip/images/1280x600/sonali.jpg';
+    _vdo3.thumbnails.small = 'assets/videodata/bollywood_gossip/images/300x150/sonali.jpg';
     _vdo3.dislikesCount = 164;
     _vdo3.duration = '00:02:37';
     _vdo3.viewsCount = 14455;
@@ -383,7 +395,7 @@ export class VideoService {
     ];
     //#endregion
 
-    this.videoList = [_vdo1, _vdo2, _vdo3, _vdo4, _vdo5, _vdo6, _vdo7, _vdo8, _vdo9, _vdo10, _vdo11, _vdo12, _vdo13, _vdo14,  _kvdo1, _kvdo2, _kvdo3, _kvdo4, _kvdo5,
+    this.videoList = [_vdo1, _vdo2, _vdo3, _vdo4, _vdo5, _vdo6, _vdo7, _vdo8, _vdo9, _vdo10, _vdo11, _vdo12, _vdo13, _vdo14, _kvdo1, _kvdo2, _kvdo3, _kvdo4, _kvdo5,
       _tvdo1, _tvdo2,];
   }
 

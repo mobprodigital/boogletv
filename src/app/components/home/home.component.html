@@ -63,6 +63,7 @@
         </div>
       </aside>
       <div class="col-md-10">
+        <!-- most liked videos -->
         <section class="section">
           <header class="section-header">
             <h2 class="section-title section-title-center">Most liked videos</h2>
@@ -71,7 +72,7 @@
             <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
             <div class="imgs-container">
               <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
-                <article *ngFor="let ML_Vid of LatestVideos" class="imgs-single">
+                <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
                   <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.small + ')'}">
                     <i class="fas fa-play play-btn"></i>
                   </div>
@@ -107,6 +108,7 @@
         <div class="row">
           <section class="col-md-9">
 
+            <!-- all videos -->
             <section class="section">
               <header class="section-header section-header-action">
                 <h2 class="section-title">Videos</h2>
@@ -122,9 +124,9 @@
                 </div>
               </header>
               <div class="section-body">
-                <ng-container *ngIf="LatestVideos && LatestVideos.length > 0">
+                <ng-container *ngIf="allVideos && allVideos.length > 0">
                   <div class="row cat-wrapper">
-                    <article *ngFor="let LT_Vid of LatestVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
+                    <article *ngFor="let LT_Vid of allVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                       <div class="imgs-single">
                         <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.small + ')'}">
                           <i class="fas fa-play play-btn"></i>
