@@ -41,22 +41,17 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
 
   constructor(private _videoService: VideoService, private _activatedRoute: ActivatedRoute, private _router: Router) {
-
-
     this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
-
   }
 
   ngAfterViewInit() {
     this.seekBar = <HTMLDivElement>this.seekBarControlRef.nativeElement;
     this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
 
-
-    window.scroll({ top: 0, behavior: 'smooth' });
+    
 
     this._activatedRoute.params.subscribe((params) => {
       let videoId = params['id'];
-
       this._videoService.getVideoById(videoId).then(vid => {
 
         this.currentVideo = vid;
@@ -65,6 +60,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
         this.isAdPlayed = false;
 
         this.setVideoData();
+        window.scroll({ top: 180, behavior: 'smooth' });
       });
     })
   }
