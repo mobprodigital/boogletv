@@ -9,6 +9,13 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\serve"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }

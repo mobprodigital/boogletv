@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VideoService } from '../../services/video.service';
+import { VideoService } from '../../../../services/video/video.service';
 import * as screenfull from 'screenfull'
 import { VideoModel } from '../../../../models/video.model';
 import { VideoSource } from '../../../../enums/videosource.enum';
@@ -113,6 +113,7 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
   public seekVideo(ev: MouseEvent) {
     ev.preventDefault();
+    ev.stopPropagation();
     if (!this.isAdvideoPlaying) {
       this.seekBarPercent = (ev.offsetX / this.seekBar.offsetWidth) * 100;
       this.videoPlayer.currentTime = (this.videoPlayer.duration / 100) * this.seekBarPercent;
@@ -186,11 +187,11 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
   }
   public onWaiting() {
     this.isWaiting = true;
-
   }
   public onPlaying() {
     this.play();
     this.isWaiting = false;
+    console.log('now playing');
   }
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoModel } from '../../../../models/video.model';
-import { VideoCategoryModel } from '../../../../models/video-category.model';
-import { VideoService } from '../../services/video.service';
+import { CategoryModel } from '../../../../models/category.model';
+import { VideoService } from '../../../../services/video/video.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
@@ -16,7 +16,7 @@ export class AllVideoComponent implements OnInit {
   allVideos: VideoModel[] = [];
   _allVideo: VideoModel[] = [];
   pageTitle: string = 'Videos';
-  videoCategrioes: VideoCategoryModel[];
+  videoCategrioes: CategoryModel[];
 
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageService } from '../../services/image.service';
+import { ImageService } from '../../../../services/image/image.service';
 import { ImageModel } from '../../../../models/image.model';
 import { Router } from '@angular/router';
 

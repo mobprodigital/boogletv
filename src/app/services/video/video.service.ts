@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AjaxService } from '../../../services/ajax/ajax.service';
-import { VideoCategoryModel } from '../../../models/video-category.model';
-import { VideoModel } from '../../../models/video.model';
-import { VideoSource } from '../../../enums/videosource.enum';
+import { AjaxService } from '../ajax/ajax.service';
+import { CategoryModel } from '../../models/category.model';
+import { VideoModel } from '../../models/video.model';
+import { VideoSource } from '../../enums/videosource.enum';
 
 
 @Injectable()
@@ -13,18 +13,104 @@ export class VideoService {
   }
 
 
+  /**
+   * Get single video by its id
+   * @param videoId Video Id
+   */q
+  public getVideoById(videoId: number): Promise<VideoModel> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'getVideoById.php',
+        dataToSend: {
+          id: videoId
+        }
+      }).then(data => {
+        if (data.status) {
+          this.parseVideoModel([data.data]).then(vid => {
+            resolve(vid[0]);
+          }).catch(err => {
+            reject(err);
+          });
+        }
+      })
+    });
+  }
+
+  /**
+   * Get all videos of specified category ids
+   * @param catIdArray array of category ids
+   * @param fromIndex (Optional) (Default = 0) Zero based index number from witch video start 
+   * @param count (Optional) (Default = 10) number of videos wants to get 
+   */
+  public getVideoByCategoryId(catIdArray: number[], fromIndex: number = 0, count: number = 10): Promise<VideoModel[]> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'getVideoByCategory.php',
+        dataToSend: {
+          id: catIdArray,
+          start: fromIndex,
+          count: count
+        }
+      }).then(ajaxResponse => {
+        if (ajaxResponse.status) {
+          this.parseVideoModel(ajaxResponse.data).then(vid => {
+            resolve(vid);
+          }).catch(err => {
+            reject(err);
+          });
+        }
+      })
+    });
+  }
+
+  /**
+   * Parse video data array into VideoModel class array
+   * @param videoDataArr Raw array of video data from web service
+   */
+  private parseVideoModel(videoDataArr: any[]): Promise<VideoModel[]> {
+    let videoArr: VideoModel[] = [];
+    if (videoDataArr && videoDataArr.length > 0) {
+      return Promise.all(videoDataArr.map(async (vid) => {
+        let _vid = new VideoModel();
+        _vid.id = vid.id;
+        _vid.title = vid.title;
+        _vid.description = vid.description;
+        _vid.tags = vid.tags;
+        _vid.src = 'http://192.168.0.7/boogletv/' + vid.videoUrl;
+        _vid.minAgeReq = parseInt(vid.minAgeReq, 10);
+        _vid.viewsCount = parseInt(vid.viewsCount, 10);
+        _vid.likesCount = parseInt(vid.likesCount, 10);
+        _vid.dislikesCount = parseInt(vid.dislikesCount, 10);
+
+        let _dateArr = vid.createDate.split('/');
+        _vid.createDate = new Date(parseInt(_dateArr[2]), parseInt(_dateArr[1], parseInt(_dateArr[0])));
+
+        _vid.thumbnails.large = 'http://192.168.0.7/boogletv/' + vid.thumbnails.large;
+        _vid.thumbnails.medium = 'http://192.168.0.7/boogletv/' + vid.thumbnails.medium;
+        _vid.thumbnails.small = 'http://192.168.0.7/boogletv/' + vid.thumbnails.small;
+
+        return _vid;
+      }))
+    }
+    else {
+      return Promise.reject('No videos found');
+    }
+  }
+
+  //#region old unsed methods
+
   private videoList: VideoModel[] = [];
 
   /**
    * Get all video categories
    */
-  public getAllCategories(): Promise<VideoCategoryModel[]> {
-    let videoCategoryList: VideoCategoryModel[] = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1'),
-      new VideoCategoryModel('Comedy', 'vc2'),
-      new VideoCategoryModel('Food', 'vc3'),
-      new VideoCategoryModel('Kids', 'vc4'),
-      new VideoCategoryModel('Travel', 'vc5'),
+  public getAllCategories(): Promise<CategoryModel[]> {
+    let videoCategoryList: CategoryModel[] = [
+      new CategoryModel('Bollywood gossip', 'vc1'),
+      new CategoryModel('Comedy', 'vc2'),
+      new CategoryModel('Food', 'vc3'),
+      new CategoryModel('Kids', 'vc4'),
+      new CategoryModel('Travel', 'vc5'),
     ];
 
 
@@ -50,7 +136,7 @@ export class VideoService {
     return Promise.resolve(this.videoList.slice().sort((vid1, vid2) => vid2.viewsCount - vid1.viewsCount));
   }
 
-  public getVideoById(videoId: string): Promise<VideoModel> {
+  /* public getVideoById(videoId: string): Promise<VideoModel> {
     return new Promise((resolve, reject) => {
       let videoFound = this.videoList.find(vid => vid.id == videoId);
       if (videoFound) {
@@ -61,7 +147,7 @@ export class VideoService {
       }
 
     })
-  }
+  } */
 
   private feedTempVideo() {
     //#region bollywood gossip
@@ -78,7 +164,7 @@ export class VideoService {
     _vdo1.videoSource = VideoSource.File;
     _vdo1.src = 'assets/videodata/bollywood_gossip/Dilip Kumar Admitted To Lilavati Hospital, Suffering From Aspiration Pneumonia &Age-Related Problems.mp4';
     _vdo1.categories = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1')
+      new CategoryModel('Bollywood gossip', 'vc1')
     ];
 
     let _vdo2 = new VideoModel();
@@ -93,7 +179,7 @@ export class VideoService {
     _vdo2.videoSource = VideoSource.File;
     _vdo2.src = 'assets/videodata/bollywood_gossip/Karan Johar Warns Dont Go Anywhere In Bandra If You Want To Keep Your Love Life Private!.mp4';
     _vdo2.categories = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1')
+      new CategoryModel('Bollywood gossip', 'vc1')
     ];
 
     let _vdo3 = new VideoModel();
@@ -108,7 +194,7 @@ export class VideoService {
     _vdo3.videoSource = VideoSource.File;
     _vdo3.src = 'assets/videodata/bollywood_gossip/Sonali Bendre Opts For A Wig; Thanks Priyanka Chopra For It.mp4';
     _vdo3.categories = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1')
+      new CategoryModel('Bollywood gossip', 'vc1')
     ];
 
     let _vdo4 = new VideoModel();
@@ -123,7 +209,7 @@ export class VideoService {
     _vdo4.videoSource = VideoSource.File;
     _vdo4.src = 'assets/videodata/bollywood_gossip/SPOTBOYE SPOT SHOTS.mp4';
     _vdo4.categories = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1')
+      new CategoryModel('Bollywood gossip', 'vc1')
     ];
 
     let _vdo5 = new VideoModel();
@@ -138,7 +224,7 @@ export class VideoService {
     _vdo5.videoSource = VideoSource.File;
     _vdo5.src = `assets/videodata/bollywood_gossip/Super 30 Posters Released On Teachers Day Hrithik Roshan Sends Out A Strong Message.mp4`;
     _vdo5.categories = [
-      new VideoCategoryModel('Bollywood gossip', 'vc1')
+      new CategoryModel('Bollywood gossip', 'vc1')
     ];
 
     //#endregion 
@@ -156,7 +242,7 @@ export class VideoService {
     _vdo6.videoSource = VideoSource.File;
     _vdo6.src = `assets/videodata/comedy/Brother Sister blueberry fight.mp4`;
     _vdo6.categories = [
-      new VideoCategoryModel('Comedy', 'vc2')
+      new CategoryModel('Comedy', 'vc2')
     ];
 
     let _vdo7 = new VideoModel();
@@ -171,7 +257,7 @@ export class VideoService {
     _vdo7.videoSource = VideoSource.File;
     _vdo7.src = `assets/videodata/comedy/Cat Funny Viral Videos.mp4`;
     _vdo7.categories = [
-      new VideoCategoryModel('Comedy', 'vc2')
+      new CategoryModel('Comedy', 'vc2')
     ];
 
     let _vdo8 = new VideoModel();
@@ -186,7 +272,7 @@ export class VideoService {
     _vdo8.videoSource = VideoSource.File;
     _vdo8.src = `assets/videodata/comedy/DAD TRY TO MAKE SON SAY DAD.mp4`;
     _vdo8.categories = [
-      new VideoCategoryModel('Comedy', 'vc2')
+      new CategoryModel('Comedy', 'vc2')
     ];
 
     let _vdo9 = new VideoModel();
@@ -201,7 +287,7 @@ export class VideoService {
     _vdo9.videoSource = VideoSource.File;
     _vdo9.src = `assets/videodata/comedy/SCARRY PUMPKIN.mp4`;
     _vdo9.categories = [
-      new VideoCategoryModel('Comedy', 'vc2')
+      new CategoryModel('Comedy', 'vc2')
     ];
 
 
@@ -220,7 +306,7 @@ export class VideoService {
     _vdo10.videoSource = VideoSource.File;
     _vdo10.src = `assets/videodata/food/Almond Pudding.mp4`;
     _vdo10.categories = [
-      new VideoCategoryModel('Food', 'vc3'),
+      new CategoryModel('Food', 'vc3'),
     ];
 
     let _vdo11 = new VideoModel();
@@ -235,7 +321,7 @@ export class VideoService {
     _vdo11.videoSource = VideoSource.File;
     _vdo11.src = `assets/videodata/food/Apple cider caramel popcorn.mp4`;
     _vdo11.categories = [
-      new VideoCategoryModel('Food', 'vc3'),
+      new CategoryModel('Food', 'vc3'),
     ];
 
     let _vdo12 = new VideoModel();
@@ -250,7 +336,7 @@ export class VideoService {
     _vdo12.videoSource = VideoSource.File;
     _vdo12.src = `assets/videodata/food/Apple Pie Bites.mp4`;
     _vdo12.categories = [
-      new VideoCategoryModel('Food', 'vc3'),
+      new CategoryModel('Food', 'vc3'),
     ];
 
     let _vdo13 = new VideoModel();
@@ -265,7 +351,7 @@ export class VideoService {
     _vdo13.videoSource = VideoSource.File;
     _vdo13.src = `assets/videodata/food/Asian baked chicken wings.mp4`;
     _vdo13.categories = [
-      new VideoCategoryModel('Food', 'vc3'),
+      new CategoryModel('Food', 'vc3'),
     ];
 
     let _vdo14 = new VideoModel();
@@ -280,7 +366,7 @@ export class VideoService {
     _vdo14.videoSource = VideoSource.File;
     _vdo14.src = `assets/videodata/food/Bacon jalapeño grilled cheese.mp4`;
     _vdo14.categories = [
-      new VideoCategoryModel('Food', 'vc3'),
+      new CategoryModel('Food', 'vc3'),
     ];
     //#endregion
 
@@ -298,7 +384,7 @@ export class VideoService {
     _kvdo1.videoSource = VideoSource.File;
     _kvdo1.src = `assets/videodata/kids/Baisakhi.mp4`;
     _kvdo1.categories = [
-      new VideoCategoryModel('Kids', 'vc4')
+      new CategoryModel('Kids', 'vc4')
     ];
 
     let _kvdo2 = new VideoModel();
@@ -313,7 +399,7 @@ export class VideoService {
     _kvdo2.videoSource = VideoSource.File;
     _kvdo2.src = `assets/videodata/kids/Basant_Panchami.mp4`;
     _kvdo2.categories = [
-      new VideoCategoryModel('Kids', 'vc4')
+      new CategoryModel('Kids', 'vc4')
     ];
 
     let _kvdo3 = new VideoModel();
@@ -328,7 +414,7 @@ export class VideoService {
     _kvdo3.videoSource = VideoSource.File;
     _kvdo3.src = `assets/videodata/kids/Buddha_Purnima.mp4`;
     _kvdo3.categories = [
-      new VideoCategoryModel('Kids', 'vc4')
+      new CategoryModel('Kids', 'vc4')
     ];
 
     let _kvdo4 = new VideoModel();
@@ -343,7 +429,7 @@ export class VideoService {
     _kvdo4.videoSource = VideoSource.File;
     _kvdo4.src = `assets/videodata/kids/Good_Manners.mp4`;
     _kvdo4.categories = [
-      new VideoCategoryModel('Kids', 'vc4')
+      new CategoryModel('Kids', 'vc4')
     ];
 
     let _kvdo5 = new VideoModel();
@@ -358,7 +444,7 @@ export class VideoService {
     _kvdo5.videoSource = VideoSource.File;
     _kvdo5.src = `assets/videodata/kids/Invention_And_Discovery_Vol_2.mp4`;
     _kvdo5.categories = [
-      new VideoCategoryModel('Kids', 'vc4')
+      new CategoryModel('Kids', 'vc4')
     ];
     //#endregion
 
@@ -376,7 +462,7 @@ export class VideoService {
     _tvdo1.videoSource = VideoSource.File;
     _tvdo1.src = `assets/videodata/travel/Ban Chiang - Thailand.mp4`;
     _tvdo1.categories = [
-      new VideoCategoryModel('Travel', 'vc5')
+      new CategoryModel('Travel', 'vc5')
     ];
 
     let _tvdo2 = new VideoModel();
@@ -391,7 +477,7 @@ export class VideoService {
     _tvdo2.videoSource = VideoSource.File;
     _tvdo2.src = `assets/videodata/travel/Biblical Tels - Megiddo, Hazor, Beer Sheba - Israel.mp4`;
     _tvdo2.categories = [
-      new VideoCategoryModel('Travel', 'vc5')
+      new CategoryModel('Travel', 'vc5')
     ];
     //#endregion
 
@@ -403,5 +489,7 @@ export class VideoService {
   public getAdVideos() {
 
   }
+
+  //#endregion
 
 }

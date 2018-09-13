@@ -9,7 +9,7 @@ import { AjaxRequestOptions } from './interface/ajax-request-options.interface';
 })
 export class AjaxService {
 
-  private _baseUrl: string = 'http://192.168.0.7:8096/MediaService.svc/';
+  private _baseUrl: string = 'http://192.168.0.7/boogletv/api/';
 
   constructor(private _http: Http) { }
 
@@ -22,6 +22,7 @@ export class AjaxService {
 
       let _t_baseurl = baseUrl ? baseUrl + apiName : this._baseUrl + apiName;
       let _dataToSend: any = data;
+
       if (_dataToSend != null && _dataToSend != undefined) {
         if (dataType == DataType.RowData) {
           _dataToSend = JSON.stringify(data);
@@ -30,10 +31,12 @@ export class AjaxService {
       }
 
       _requestOptions.method = requestMethod;
+
+
       let _ajaxResponse: AjaxResponse = {
         data: null,
         msg: '',
-        responseCode: 1,
+        status: false,
         httpInfo: {
           ok: true,
           status: 200,
@@ -46,23 +49,35 @@ export class AjaxService {
 
         let statusCode: number = response.status;
         console.log('Status code : ', statusCode);
-        let responseData: any = response.json();
 
-        // feed api data
-        _ajaxResponse.data = responseData.Data;
-        _ajaxResponse.msg = responseData.Msg;
-        _ajaxResponse.responseCode = parseInt(responseData.ResponseCode);
+        switch (statusCode) {
+          case 200:
+            let responseData: any = response.json();
+
+            // feed api data
+            _ajaxResponse.data = responseData.data;
+            _ajaxResponse.msg = responseData.message;
+            _ajaxResponse.status = responseData.status;
 
 
-        //feed http request data
-        _ajaxResponse.httpInfo.ok = response.ok;
-        _ajaxResponse.httpInfo.status = response.status;
-        _ajaxResponse.httpInfo.statusText = response.statusText;
-        _ajaxResponse.httpInfo.url = response.url;
+            //feed http response data
+            _ajaxResponse.httpInfo.ok = response.ok;
+            _ajaxResponse.httpInfo.status = response.status;
+            _ajaxResponse.httpInfo.statusText = response.statusText;
+            _ajaxResponse.httpInfo.url = response.url;
+            resolve(_ajaxResponse);
 
-        resolve(_ajaxResponse);
+            break;
+          case 500:
+            reject('500 internal server error');
+            break;
+          default:
+            break;
+        }
+
+
       }, (err: Response) => {
-        _ajaxResponse.responseCode = 0;
+        _ajaxResponse.status = false;
         _ajaxResponse.httpInfo.ok = err.ok;
         _ajaxResponse.httpInfo.status = err.status;
         _ajaxResponse.httpInfo.statusText = err.statusText;
@@ -130,6 +145,11 @@ export class AjaxService {
       ajaxRequestOptions.dataType,
       ajaxRequestOptions.baseUrl
     );
+  }
+
+
+  private GenerateAjaxData() {
+
   }
 
 }

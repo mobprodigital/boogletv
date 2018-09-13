@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AjaxService } from '../../../services/ajax/ajax.service';
-import { ImageModel } from '../../../models/image.model';
-import { ImageCategoryModel } from '../../../models/image-category.model';
+import { AjaxService } from '../ajax/ajax.service';
+import { ImageModel } from '../../models/image.model';
+import { ImageCategoryModel } from '../../models/image-category.model';
 
 @Injectable()
 export class ImageService {

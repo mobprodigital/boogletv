@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { VideoModel } from "../../models/video.model";
-import { VideoCategoryModel } from '../../models/video-category.model';
-import { VideoService } from "../../modules/video/services/video.service";
+import { CategoryModel } from '../../models/category.model';
+import { VideoService } from "../../services/video/video.service";
 import { Router } from '@angular/router';
+import { NavItemModel } from '../../models/nav-item.model';
 
 
 @Component({
@@ -18,15 +19,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
   selectedSlide: string = '';
-
   LatestVideos: VideoModel[] = [];
   mostLikedVideos: VideoModel[] = [];
   allVideos: VideoModel[] = [];
-  videoCategoryList: VideoCategoryModel[];
+  videoCategoryList: CategoryModel[];
   selectedCatTab: string = 'all';
   constructor(private _videoService: VideoService, private _router: Router, ) {
     this.feedVideos();
-
   }
 
   ngOnInit() {
