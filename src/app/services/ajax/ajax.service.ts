@@ -1,5 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
-import { Http, RequestOptions, Headers, RequestMethod } from '@angular/http';
+import { Http, RequestOptions, RequestMethod } from '@angular/http';
 import { DataType } from './enum/data-type.enum';
 import { AjaxResponse } from './interface/ajax-response.interface';
 import { AjaxRequestOptions } from './interface/ajax-request-options.interface';
@@ -48,7 +48,6 @@ export class AjaxService {
       this._http.request(_t_baseurl, _requestOptions).subscribe(response => {
 
         let statusCode: number = response.status;
-        console.log('Status code : ', statusCode);
 
         switch (statusCode) {
           case 200:

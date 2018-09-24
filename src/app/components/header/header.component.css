@@ -107,6 +107,7 @@
   }
   ul.main-menu>li>ul.mega-menu>li>ul>li {
     flex-basis: 25%;
+    overflow: hidden;
   }
   ul.mega-menu .imgs-image {
     height: 125px;
@@ -119,7 +120,7 @@
     display: block;
     overflow: hidden;
     font-size: 12px;
-    max-width: 150px;
+    /* max-width: 150px; */
   }
   ul.main-menu>li>ul.mega-menu a.post-link:hover {
     color: #9c0101;
@@ -180,6 +181,23 @@
 
 /* nav menu end */
 
+/* page loader start */
+.nav-loader {
+  width: 100%;
+  display: block;
+  background-color: #111111;
+}
+
+.nav-progress-bar {
+  width: 0%;
+  height: 2px;
+  background: #f32222;
+  transition: width 0.25s ease;
+}
+
+
+/* page loader end */
+
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #fff;
@@ -201,7 +219,27 @@
 
 @media screen and (max-width: 991px) {
 
-  .mob-menu-hidden, .search-div{
+  
+  .mob-menu-anim-slide-up {
+    animation-name: mm-slide-up;
+    animation-duration: 0.25s;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  @keyframes mm-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  .mob-menu-hidden,
+  .search-div {
     display: none;
   }
 
@@ -257,6 +295,9 @@
     margin: 0;
     width: 100%;
   }
+  ul.main-menu > li {
+    overflow: hidden;
+  }
   ul.main-menu ul,
   ul.main-menu {
     list-style: none;
@@ -267,6 +308,9 @@
   }
   ul.main-menu .mega-menu>li>ul {
     display: none;
+  }
+  ul.main-menu ul.mega-menu.show-mega-menu {
+    display: block;
   }
   ul.main-menu a {
     color: #fff;

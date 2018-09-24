@@ -4,13 +4,14 @@ import { CategoryModel } from '../../models/category.model';
 import { VideoService } from "../../services/video/video.service";
 import { Router } from '@angular/router';
 import { NavItemModel } from '../../models/nav-item.model';
+import { CategoryService } from '../../services/categories/category.service';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [VideoService]
+  providers: [VideoService, CategoryService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   allVideos: VideoModel[] = [];
   videoCategoryList: CategoryModel[];
   selectedCatTab: string = 'all';
-  constructor(private _videoService: VideoService, private _router: Router, ) {
+  constructor(private _videoService: VideoService, private _categoryService: CategoryService, private _router: Router, ) {
     this.feedVideos();
   }
 
@@ -61,10 +62,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.showSlide(targetSlideIndex.toString());
   }
 
-  public bannerNextPrev(nextOrPrev: string) {
+  public bannerNextPrev(ev, nextOrPrev: string) {
     let vdoLength = this.LatestVideos.length
     for (let i = 0; i < vdoLength; i++) {
-      if (this.LatestVideos[i].id == this.selectedSlide) {
+      if (this.LatestVideos[i].id.toString() == this.selectedSlide) {
         if (nextOrPrev == 'next') {
           this.bannerSwipeLeft(i);
         }
@@ -92,16 +93,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   private feedVideos() {
 
-    this._videoService.getLatestVideos(5).then(vidList => {
-      this.LatestVideos = vidList;
-      this.selectedSlide = vidList[0].id;
+    this._videoService.getMostLikedVideosByCategoryId([], 0, 10).then(mlv => this.mostLikedVideos = mlv);
+
+    this._categoryService.getSubCategoriesById(2, 0, 5).then(catList => {
+      this.videoCategoryList = catList;
+      this._videoService.getVideoByCategoryId(Array.from(catList.slice(0, 5), cat => cat.id ), 0, 10).then(vidList => {
+        this.allVideos = vidList;
+        this.selectedSlide = vidList[0].id.toString();
+      });
     });
 
-    this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
 
-    this._videoService.getAllVideos().then(vidList => this.allVideos = vidList);
 
-    this._videoService.getAllCategories().then(catList => this.videoCategoryList = catList);
+    // this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
+
+    // this._videoService.getAllVideos().then(vidList => this.allVideos = vidList);
+
+    // this._videoService.getAllCategories().then(catList => this.videoCategoryList = catList);
   }
 
   public imgSlide(slideTo: string) {
@@ -131,7 +139,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.allVideos.forEach(async (lv) => { lv.hidden = false });
     }
     else {
-      this.allVideos.forEach(async (lv) => lv.hidden = lv.categories.find(lvc => lvc.id == catId) ? false : true);
+      this.allVideos.forEach(async (lv) => lv.hidden = lv.categories.find(lvc => lvc.id == parseInt(catId)) ? false : true);
     }
   }
 

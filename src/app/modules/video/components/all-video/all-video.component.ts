@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { VideoModel } from '../../../../models/video.model';
 import { CategoryModel } from '../../../../models/category.model';
 import { VideoService } from '../../../../services/video/video.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationStart, NavigationEnd } from '@angular/router';
+import { CategoryService } from '../../../../services/categories/category.service';
 
 
 @Component({
@@ -14,9 +15,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 export class AllVideoComponent implements OnInit {
   allVideos: VideoModel[] = [];
-  _allVideo: VideoModel[] = [];
+  selectedCatTab: string = 'all';
   pageTitle: string = 'Videos';
-  videoCategrioes: CategoryModel[];
+  initalVideoLoaded: boolean = false;
+  videoCategoryList: CategoryModel[];
+
+  canLazyLoad: boolean = true;
+
+  @ViewChild('videosContainerRef', { read: ElementRef }) videosContainerRef: ElementRef;
 
 
 
@@ -24,43 +30,48 @@ export class AllVideoComponent implements OnInit {
     private _videoService: VideoService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-
+    private _categoryService: CategoryService
   ) {
-    
-    this.getCategories();
-    this.getAllVideos();
 
-    this._router.events.subscribe(val => {
-      let catId: any = this._activatedRoute.snapshot.paramMap.get('id');
-      this.filterVideos(catId);
+    this._router.events.subscribe(async e => {
+      /* if (e instanceof NavigationStart) {
+
+      } */
+
+      if (e instanceof NavigationEnd) {
+        let catId: any = this._activatedRoute.snapshot.paramMap.get('id');
+        try {
+          this.selectedCatTab = catId ? atob(catId) : 'all';
+          this.showCat(this.selectedCatTab);
+        }
+        catch (err) {
+          this.showCat(this.selectedCatTab);
+        }
+      }
+
     });
+
+    this.getVideoAndCategories();
+
   }
+
+
+
   ngOnInit() {
   }
-  private getAllVideos() {
 
-    let catId: any = this._activatedRoute.snapshot.paramMap.get('id');
-    this._videoService.getAllVideos().then(vid => {
-      if (catId) {
-        this._allVideo = vid;
-        this.filterVideos(catId);
-      } else {
-        this.pageTitle = 'Videos';
-        this.allVideos = vid;
-      }
-    });
+
+  private getVideoAndCategories() {
+    Promise.all([this._categoryService.getSubCategoriesById(2), this.getVideosByCategory()]).then(data => {
+      this.allVideos = data[1];
+      this.videoCategoryList = data[0];
+      this.showCat(this.selectedCatTab);
+      this.initalVideoLoaded = true;
+    }).catch(err => alert(err));
   }
 
-  private filterVideos(catId) {
-    if (this.videoCategrioes && this.videoCategrioes.length > 0 && this._allVideo && this._allVideo.length) {
-      let catFound = this.videoCategrioes.find(vcat => vcat.id == catId);
-      this.pageTitle = catFound ? catFound.name : 'Videos';
-      this.allVideos = this._allVideo.filter(vdo => vdo.categories.find(cat => cat.id == catId));
-    }
-  }
-
-  private async getCategories() {
-    this.videoCategrioes = await this._videoService.getAllCategories();
+  private getVideosByCategory(categoryIdArr: number[] = [], fromIndex: number = 0, count: number = 10): Promise<VideoModel[]> {
+    return this._videoService.getVideoByCategoryId(categoryIdArr, fromIndex, count);
   }
 
   public showVideoByCategory(categoryId: string) {
@@ -76,5 +87,59 @@ export class AllVideoComponent implements OnInit {
     ev.stopPropagation();
     this._router.navigate(['video/play', videoId]);
   }
+
+  public showCat(catId: string) {
+    this.selectedCatTab = catId ? catId : 'all';
+    if (catId === 'all') {
+      this.allVideos.forEach(async (vid) => { vid.hidden = false });
+    }
+    else {
+      this.allVideos.forEach(async (vid) => vid.hidden = vid.categories.find(vidCat => vidCat.id == parseInt(catId)) ? false : true);
+    }
+  }
+
+  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+    try {
+      let videosContainer: HTMLDivElement = this.videosContainerRef.nativeElement;
+      let windowHeight: number = window.outerHeight;
+      let bottomOffset = videosContainer.getBoundingClientRect().bottom - windowHeight;
+      if (this.initalVideoLoaded) {
+        if (bottomOffset < 0 && this.canLazyLoad) {
+          this.canLazyLoad = false;
+          let catArr: number[] = [];
+          let fromIndexVideo: number = this.allVideos.length;
+          let videoCount: number = 10;
+
+          if (this.selectedCatTab !== 'all') {
+            catArr = [parseInt(this.selectedCatTab)];
+            fromIndexVideo = this.calculateCategoryVideoLength(parseInt(this.selectedCatTab));
+          }
+
+          this.getVideosByCategory(catArr, fromIndexVideo, videoCount).then(vidData => {
+            this.canLazyLoad = true;
+            this.allVideos.push(...vidData);
+            
+          }).catch(err => {
+            this.canLazyLoad = true;
+            
+          });
+
+        }
+      }
+
+    }
+    catch (err) {
+      alert(err);
+    }
+
+
+  }
+
+
+  private calculateCategoryVideoLength(catId: number): number {
+    let len = this.allVideos.filter(vid => vid.categories.some(cat => cat.id == catId)).length;
+    return len;
+  }
+
 
 }

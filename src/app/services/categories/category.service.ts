@@ -41,7 +41,7 @@ export class CategoryService {
             this._ajaxService.Post({
                 apiName: 'getsubCategories.php',
                 dataToSend: {
-                    catId: categoryId,
+                    id: categoryId,
                     start: fromIndex,
                     count: count
                 }
@@ -59,13 +59,44 @@ export class CategoryService {
         });
     }
 
+    public getAllCategories(): Promise<CategoryModel[]> {
+        return new Promise((resolve, reject) => {
+            let savedCategory = localStorage.getItem('jmm_allcategory');
+            try {
+                if (savedCategory) {
+                    let allCats: CategoryModel[] = JSON.parse(savedCategory);
+                    resolve(allCats);
+                }
+                else{
+                    throw 'no saved categories found in local storage';
+                }
+            }
+            catch {
+                this._ajaxService.Post({
+                    apiName: 'getAllCategories.php',
+                }).then(ajaxresponse => {
+                    if (ajaxresponse.status) {
+                        let allCategory: CategoryModel[] = this.parseCategories(ajaxresponse.data);
+                        localStorage.setItem('jmm_allcategory', JSON.stringify(allCategory));
+                        resolve(allCategory);
+                    }
+                    else {
+                        reject(ajaxresponse.msg);
+                    }
+                }).catch(err => {
+                    reject(err);
+                });
+            }
+
+        });
+    }
 
     private parseCategories(catArr: any[]): CategoryModel[] {
         let catModelArr: CategoryModel[] = [];
         if (catArr && catArr.length > 0) {
             catArr.forEach((cat) => {
                 // if (cat.status) {
-                    catModelArr.push(new CategoryModel(cat.name, cat.id));
+                catModelArr.push(new CategoryModel(cat.name, parseInt(cat.id)));
                 // }
             })
         }

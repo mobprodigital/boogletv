@@ -1,7 +1,9 @@
 <header class="page-header">
   <ng-container *ngIf="LatestVideos.length > 0">
-    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" [hidden]="!(lVdo.id == selectedSlide)"
-      [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}" (swipeleft)="bannerNextPrev('next')" (swiperight)="bannerNextPrev('prev')">
+      <div class="swipe-pan-css" (swipeleft)="bannerNextPrev($event, 'next')"  (swiperight)="bannerNextPrev($event, 'prev')">
+    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" 
+    [hidden]="!(lVdo.id == selectedSlide)" [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}"
+    >
 
       <div class="h-media-inner">
         <div class="h-play-btn">
@@ -29,13 +31,15 @@
       </div>
 
     </article>
+      </div>
   </ng-container>
 
   <ng-container *ngIf="LatestVideos.length > 0">
     <section class="container banner-btn-container">
-      <article (swipeleft)="bannerNextPrev('next')" (swiperight)="bannerNextPrev('prev')" class="banner-btn-wrap" #bannerBtnWrap>
-        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id"
-          (click)="showSlide(lVdoBtnIndex)">
+      <article (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')" class="banner-btn-wrap swipe-pan-css" 
+      #bannerBtnWrap>
+        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " 
+        class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id" (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.title}}
           </span>
@@ -45,10 +49,10 @@
   </ng-container>
 
   <ng-container *ngIf="LatestVideos.length > 0">
-    <span (click)="bannerNextPrev('prev')" class="banner-nav-btns banner-nav-btns-left">
+    <span (click)="bannerNextPrev($event, 'prev')" class="banner-nav-btns banner-nav-btns-left">
       <i class="fas fa-angle-left"></i>
     </span>
-    <span (click)="bannerNextPrev('next')" class="banner-nav-btns banner-nav-btns-right">
+    <span (click)="bannerNextPrev($event, 'next')" class="banner-nav-btns banner-nav-btns-right">
       <i class="fas fa-angle-right"></i>
     </span>
   </ng-container>
@@ -71,9 +75,9 @@
           <div class="section-body">
             <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
             <div class="imgs-container">
-              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
+              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap swipe-pan-css" #imgSlider>
                 <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
-                  <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.small + ')'}">
+                  <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
                     <i class="fas fa-play play-btn"></i>
                   </div>
                   <div class="imgs-captions">
@@ -121,6 +125,12 @@
                       <a (click)="showCat($event, cat.id)" [ngClass]="{'active-tab' : selectedCatTab == cat.id}">{{cat.name}}</a>
                     </li>
                   </ul>
+                  <select class="form-control category-list-select" (change)="showCat($event, $event.target.value)">
+                      <option value="all">All</option>
+                      <option value="{{cat.id}}" *ngFor="let cat of videoCategoryList">
+                        {{cat.name}}
+                      </option>
+                    </select>
                 </div>
               </header>
               <div class="section-body">
@@ -128,7 +138,7 @@
                   <div class="row cat-wrapper">
                     <article *ngFor="let LT_Vid of allVideos" class="col-md-6 animated zoomIn" [hidden]="LT_Vid.hidden">
                       <div class="imgs-single">
-                        <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.small + ')'}">
+                        <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
                           <i class="fas fa-play play-btn"></i>
                         </div>
                         <div class="imgs-captions">

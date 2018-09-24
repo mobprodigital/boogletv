@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AllVideoComponent } from '../components/all-video/all-video.component';
-import { SingleVideoComponent } from '../components/single-video/single-video.component';
 import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
+import { PlayVideoComponent } from '../components/play-video/play-video.component';
 
 let videoRoutes: Routes = [
   {
     path: "play/:id",
-    component: SingleVideoComponent
+    component: PlayVideoComponent
   },
   {
     path: "category/:id",

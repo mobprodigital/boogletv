@@ -13,6 +13,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
+import { CategoryService } from './services/categories/category.service';
 
 
 // custom modules
@@ -35,7 +36,7 @@ import { TermsConditionsComponent } from './components/terms-conditions/terms-co
     RoutingRoutingModule,
     SharedModule,
   ],
-  providers: [AjaxService],
+  providers: [AjaxService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

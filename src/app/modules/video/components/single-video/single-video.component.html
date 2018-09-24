@@ -6,11 +6,6 @@
         #videoPlayer>
       </video>
 
-      <ng-container *ngIf="currentVideo.videoSource == 1">
-        <div class="youtube-player-wrap">
-          <youtube-player [videoId]="currentVideo.src"></youtube-player>
-        </div>
-      </ng-container>
       <div [hidden]="currentVideo.videoSource == 1" class="video-player-frame" [ngClass]="videoPlayer.paused ? 'show-control' : 'hide-controls'">
 
         <span [hidden]="isAdvideoPlaying" class="video-btn-span">

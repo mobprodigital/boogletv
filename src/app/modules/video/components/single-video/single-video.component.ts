@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
+// import { ImageSlider, ImageSliderImage } from '../../../../directives/image-slider/interface/image-slider.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../../../services/video/video.service';
 import * as screenfull from 'screenfull'
 import { VideoModel } from '../../../../models/video.model';
-import { VideoSource } from '../../../../enums/videosource.enum';
+// import { VideoSource } from '../../../../enums/videosource.enum';
 
 @Component({
   selector: 'app-single-video',
@@ -41,14 +41,14 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
 
   constructor(private _videoService: VideoService, private _activatedRoute: ActivatedRoute, private _router: Router) {
-    this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
+    // this._videoService.getMostLikedVideos().then(vidList => this.mostLikedVideos = vidList);
   }
 
   ngAfterViewInit() {
     this.seekBar = <HTMLDivElement>this.seekBarControlRef.nativeElement;
     this.videoPlayer = <HTMLMediaElement>this.videoPlayerControlRef.nativeElement;
 
-    
+
 
     this._activatedRoute.params.subscribe((params) => {
       let videoId = params['id'];
@@ -98,17 +98,17 @@ export class SingleVideoComponent implements OnInit, AfterViewInit {
 
 
   private async setVideoData() {
-    if (this.currentVideo.videoSource == VideoSource.File) {
-      this.videoPlayer.src = this.isAdPlayed ? this.currentVideo.src : this.adVideos[(Math.floor(Math.random() * 3) + 0)];
-      if (!this.isAdPlayed) {
-        this.isAdvideoPlaying = true;
-        this.videoPlayer.muted = true;
-      }
-      this.videoPlayer.load();
-      await this.play();
-      this.videoTotalTime = this.currentVideo.duration;
 
+    this.videoPlayer.src = this.isAdPlayed ? this.currentVideo.src : this.adVideos[(Math.floor(Math.random() * 3) + 0)];
+    if (!this.isAdPlayed) {
+      this.isAdvideoPlaying = true;
+      this.videoPlayer.muted = true;
     }
+    this.videoPlayer.load();
+    await this.play();
+    this.videoTotalTime = this.currentVideo.duration;
+
+
   }
 
   public seekVideo(ev: MouseEvent) {

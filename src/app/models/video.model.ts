@@ -1,9 +1,8 @@
 import { CategoryModel } from "./category.model";
 import { IthumbnailSize } from "../interfaces/thumbnail.interface";
-import { VideoSource } from "../enums/videosource.enum";
 
 export class VideoModel {
-    public id: string = '';
+    public id: number = 0;
     public title: string = '';
     public description: string = '';
     public categories: CategoryModel[] = [];
@@ -14,7 +13,6 @@ export class VideoModel {
     public tags: string[] = [];
     public minAgeReq: number = 0;
     public createDate: Date;
-    public videoSource: VideoSource;
     public hidden: boolean = false;
     public thumbnails: IthumbnailSize = {
         orignal: '',

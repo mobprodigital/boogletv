@@ -336,9 +336,11 @@ span.imgs-control-right>i {
 }
 
 /* slider ends */
+
 /* single post author and date CSS */
+
 .video-description {
-  height: 70px;
+  max-height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: justify;
@@ -373,7 +375,9 @@ span.imgs-control-right>i {
 }
 
 /* single post author and date End */
+
 /* badge categories style */
+
 .badge {
   font-size: 11px;
   font-weight: normal;
@@ -391,7 +395,9 @@ span.imgs-control-right>i {
 }
 
 /* badge categories style */
+
 /* Single Video Player */
+
 .app-video-single {
   background-color: black;
   margin-top: 0px;
@@ -427,6 +433,8 @@ span.imgs-control-right>i {
   display: flex;
   justify-content: flex-end;
   padding-bottom: 5px;
+  align-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.06));
 }
 
 .single-video ul.video-controls>li:first-of-type {
@@ -495,7 +503,7 @@ span.imgs-control-right>i {
   position: relative;
 }
 
-aside.quick-links ul {
+/* aside.quick-links ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -512,7 +520,7 @@ aside.quick-links ul>li>a {
 
 aside.quick-links ul>li>a:hover {
   text-decoration: underline !important;
-}
+} */
 
 .progress.video-seekbar>div {
   position: absolute;
@@ -535,12 +543,14 @@ aside.quick-links ul>li>a:hover {
   transition: visibility 1s ease-in;
 }
 
-.single-video .video-player-frame.hide-controls:hover>* {
+/* .single-video .video-player-frame.hide-controls:hover>* {
   visibility: visible;
-}
+} */
 
 /* Single Video Player Class End */
+
 /* Single Player Control-Icon Start*/
+
 .btn-group.video-player-button>button {
   font-weight: 600;
 }
@@ -611,7 +621,62 @@ article>h1 {
   color: #999999;
 }
 
+.swipe-pan-css {
+  -webkit-touch-action: pan-y !important;
+  -moz-touch-action: pan-y !important;
+  -ms-touch-action: pan-y !important;
+  -o-touch-action: pan-y !important;
+  touch-action: pan-y !important;
+}
+
 /* main section end */
+.category-list-select {
+  display: none;
+  height: auto !important;
+}
+
+.fb-loader{
+  width: 100%;
+  text-align: center;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  width: 13px;
+  background: rgb(169, 169, 169);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 6px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 45px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 6px;
+    height: 51px;
+  }
+  50%, 100% {
+    top: 19px;
+    height: 26px;
+  }
+}
+
 /* responsive css */
 /* large device */
 @media screen and (max-width: 1200px) {
@@ -625,6 +690,20 @@ article>h1 {
   .imgs-wrap .imgs-single {
     flex-basis: 50%;
   }
+
+  .section-header-action,
+  .category-list-select {
+    display: block;
+  }
+
+  .category-list {
+    display: none;
+  }
+
+  .section-title {
+    margin-bottom: 10px;
+  }
+
 }
 
 /* medium device */

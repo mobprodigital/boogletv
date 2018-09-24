@@ -1,4 +1,7 @@
 <header class="app-header">
+  <aside class="nav-loader">
+  <div class="nav-progress-bar"></div>
+</aside>
   <section [hidden]="true" class="top-header-bar">
     <div class="container">
       <div class="row">
@@ -51,7 +54,7 @@
 
   <section class="main-nav theme-bg shadow-lg">
     <div class="mobile-menu-trigger">
-      <button (click)="viewMenu = true" class="h-menu-btn" type="button">
+        <button (click)="toggleViewMenu($event, true)" class="h-menu-btn" type="button">
         <span></span>
         <span></span>
         <span></span>
@@ -60,24 +63,24 @@
         <img class="mob-logo" src="assets/images/logo/logo_mobile.png" alt="">
       </div>
     </div>
-    <div [ngClass]="viewMenu ? '' : 'mob-menu-hidden'" class="main-nav-wrapper container">
+    <div [ngClass]="{'mob-menu-hidden ': !viewMenu, 'mob-menu-anim-slide-up' : viewMenu}" class="main-nav-wrapper container">
       <div class="text-center menu-close-btn-wrap">
-        <button (click)="viewMenu = false" class="menu-close-btn">
+          <button (click)="toggleViewMenu($event, false)" class="menu-close-btn">
           <i class="fas fa-times-circle"></i>
         </button>
       </div>
       <div class="row justify-content-between">
         <nav class="col-lg-auto">
-          <ul *ngIf="mainMenu.length > 0" class="main-menu">
+            <ul class="main-menu">
             <li>
               <a [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['active-link']" [routerLink]="['/']">Home</a>
             </li>
             <li *ngFor="let navMenu of mainMenu">
               <a [routerLinkActive]="['active-link']" [routerLink]="[navMenu.href]">{{navMenu.text}}
-                <i *ngIf="navMenu.navItems && navMenu.navItems.length > 0" class="fas fa-angle-down"></i>
+                <i (click)="toggleMobMenu($event)" *ngIf="navMenu.navItems && navMenu.navItems.length > 0" class="fas fa-angle-down"></i>
               </a>
               <ng-container *ngIf="navMenu.navItems && navMenu.navItems.length > 0">
-                <ul [ngClass]="{'mega-menu' : navMenu.megaMenu}" class="mob-menu-hidden">
+                <ul [ngClass]="{'show-mega-menu slideInDown' : viewVideoMenu}" class="animated mega-menu">
                   <!-- mega menu cats -->
                   <li *ngFor="let subMenuItems of navMenu.navItems">
                     <a [routerLinkActive]="['active-link']" [routerLink]="[subMenuItems.href]">{{subMenuItems.text}}</a>
