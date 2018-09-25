@@ -1,4 +1,4 @@
-<video class="video-js" id="video-player">
+<video (contextmenu)="OnContextmenu($event)" class="video-js" id="video-player">
   <source  src="{{videoModel.src}}" type="video/mp4">
 </video>
 
