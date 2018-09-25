@@ -96,13 +96,12 @@ export class HeaderComponent implements OnInit {
 
             }
             else {
-              alert('err');
+              alert('no sub cats found');
             }
 
             return _subNavMenu;
           }));
           this.mainMenu.push(...rootCatArr);
-          console.log('main menu', this.mainMenu);
         }
         catch (err) {
           alert('Err in code : ' + err);

@@ -224,25 +224,45 @@
     animation-name: mm-slide-up;
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform-origin: center;
   }
 
   @keyframes mm-slide-up {
     from {
       opacity: 0;
-      transform: translateY(40px);
+      transform: scale(1.2);
     }
 
     to {
       opacity: 1;
-      transform: translateY(0px);
+      transform: scale(1);
     }
   }
 
-  .mob-menu-hidden,
+  /* .mob-menu-hidden, */
   .search-div {
     display: none;
   }
 
+  .mob-menu-hidden{
+    animation-name: mm-fade-out;
+    animation-duration: 0.25s;
+    animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform-origin: center;
+    transform: translate(999999px);
+  }
+
+  @keyframes mm-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+  }
   .menu-close-btn-wrap,
   .mobile-menu-trigger {
     display: block;

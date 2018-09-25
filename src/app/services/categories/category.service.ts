@@ -24,9 +24,7 @@ export class CategoryService {
                 else {
                     reject(ajaxresponse.msg);
                 }
-            }).catch(err => {
-                reject(err);
-            });
+            }).catch(err => reject(err));
         });
     }
 
@@ -67,7 +65,7 @@ export class CategoryService {
                     let allCats: CategoryModel[] = JSON.parse(savedCategory);
                     resolve(allCats);
                 }
-                else{
+                else {
                     throw 'no saved categories found in local storage';
                 }
             }

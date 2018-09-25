@@ -24,11 +24,14 @@
               "src/web.config"
             ],
             "styles": [
+              "node_modules/video.js/dist/video-js.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/animate.css/animate.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/video.js/dist/video.min.js"
+            ]
           },
           "configurations": {
             "production": {
