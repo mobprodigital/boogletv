@@ -37,13 +37,14 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    console.log('ngAfterViewInit');
     this.videoPlayer = videojs(document.getElementById('video-player'),
       {
         height: 450,
         controls: true,
         autoplay: true,
         preload: 'auto'
-      });
+      })
   }
 
   public imgSlide(slideTo: string) {
