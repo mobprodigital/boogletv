@@ -64,4 +64,10 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
     slider.scroll({ left: scrollLength, behavior: 'smooth' });
   }
 
+  public OnContextmenu(ev: MouseEvent): boolean {
+    // ev.preventDefault();
+    // ev.stopPropagation();
+    return false;
+  }
+
 }
