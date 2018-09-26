@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('bannerBtnWrap', { read: ElementRef }) bannerBtnWrap: ElementRef;
 
 
-  selectedSlide: string = '';
-  LatestVideos: VideoModel[] = [];
+  selectedSlide: number = null;
+  bannerVideos: VideoModel[] = [];
   mostLikedVideos: VideoModel[] = [];
   allVideos: VideoModel[] = [];
   videoCategoryList: CategoryModel[];
@@ -36,13 +36,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private showSlide(targetSlideIndex: string) {
-    this.selectedSlide = this.LatestVideos[targetSlideIndex].id;
+    this.selectedSlide = this.bannerVideos[targetSlideIndex].id;
     this.scrollBannerBtnBar(parseInt(targetSlideIndex))
   }
 
   private bannerSwipeLeft(slideindex: number): void {
     let targetSlideIndex: number = 0;
-    if (slideindex >= (this.LatestVideos.length - 1)) {
+    if (slideindex >= (this.bannerVideos.length - 1)) {
       targetSlideIndex = 0;
     }
     else {
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private bannerSwipeRight(slideindex: number): void {
     let targetSlideIndex: number = 0;
     if (slideindex <= 0) {
-      targetSlideIndex = this.LatestVideos.length - 1;
+      targetSlideIndex = this.bannerVideos.length - 1;
     }
     else {
       targetSlideIndex = slideindex - 1;
@@ -63,9 +63,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   public bannerNextPrev(ev, nextOrPrev: string) {
-    let vdoLength = this.LatestVideos.length
+    let vdoLength = this.bannerVideos.length
     for (let i = 0; i < vdoLength; i++) {
-      if (this.LatestVideos[i].id.toString() == this.selectedSlide) {
+      if (this.bannerVideos[i].id == this.selectedSlide) {
         if (nextOrPrev == 'next') {
           this.bannerSwipeLeft(i);
         }
@@ -93,13 +93,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   private feedVideos() {
 
-    this._videoService.getMostLikedVideosByCategoryId([], 0, 10).then(mlv => this.mostLikedVideos = mlv);
+    this._videoService.getMostLikedVideosByCategoryId([], 0, 10).then(mlv => {
+      this.mostLikedVideos = mlv.map(item => Object.assign({}, item));
 
+      this.bannerVideos = mlv.map(item => Object.assign({}, item));
+      this.selectedSlide = this.bannerVideos[0].id;
+    });
+
+    
     this._categoryService.getSubCategoriesById(2, 0, 5).then(catList => {
       this.videoCategoryList = catList;
       this._videoService.getVideoByCategoryId(Array.from(catList.slice(0, 5), cat => cat.id ), 0, 10).then(vidList => {
         this.allVideos = vidList;
-        this.selectedSlide = vidList[0].id.toString();
       });
     });
 

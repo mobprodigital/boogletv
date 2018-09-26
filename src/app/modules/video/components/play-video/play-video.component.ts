@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoModel } from '../../../../models/video.model';
 import { VideoService } from '../../../../services/video/video.service';
 
@@ -10,16 +10,21 @@ declare var videojs: any;
   templateUrl: './play-video.component.html',
   styleUrls: ['./play-video.component.css']
 })
-export class PlayVideoComponent implements OnInit, AfterViewInit {
+export class PlayVideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private videoId: number;
   private videoPlayer: any;
   public videoModel: VideoModel;
-  public mostLikedVideos: VideoModel[] = [];
+  public relatedVideos: VideoModel[] = [];
   @ViewChild('imgSlider', { read: ElementRef }) imgSlider: ElementRef;
 
-  constructor(private _activatedRoute: ActivatedRoute, private _videoService: VideoService) {
-    this._videoService.getMostLikedVideosByCategoryId().then(vdo => this.mostLikedVideos = vdo).catch(err => alert(err));
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _videoService: VideoService,
+    private _router: Router) {
+
+
+
   }
 
   ngOnInit() {
@@ -29,6 +34,12 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
         this.videoId = parseInt(vid);
         this._videoService.getVideoById(this.videoId).then(vdo => {
           this.videoModel = vdo;
+          this.setVideoSrc(vdo.src);
+          let randonCatId = this.videoModel.categories[Math.floor(Math.random() * this.videoModel.categories.length)].id;
+
+          this._videoService.getRelatedVideos(this.videoModel.id, randonCatId).then(vdo => {
+            this.relatedVideos = vdo;
+          }).catch(err => alert(err));
         }).catch(err => {
           alert(err);
         });
@@ -37,7 +48,6 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
     this.videoPlayer = videojs(document.getElementById('video-player'),
       {
         height: 450,
@@ -45,6 +55,30 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
         autoplay: true,
         preload: 'auto'
       })
+  }
+
+  ngOnDestroy() {
+    this.saveVideoTime();
+  }
+
+  private setVideoSrc(src: string): Promise<string> {
+    if (src && this.videoPlayer) {
+      this.videoPlayer.src(src);
+      this.videoPlayer.load();
+      this.videoPlayer.play();
+      return Promise.resolve('Src set');
+
+    }
+    else {
+      return Promise.reject('src not set');
+    }
+  }
+
+  private saveVideoTime(): void {
+    let totalTime = this.videoPlayer.currentTime();
+    if (totalTime > 0) {
+      this._videoService.setVideoTimeByVideoId(this.videoModel.id, totalTime).then(msg => console.log(msg)).catch(err => alert(err));
+    }
   }
 
   public imgSlide(slideTo: string) {
@@ -70,5 +104,14 @@ export class PlayVideoComponent implements OnInit, AfterViewInit {
     // ev.stopPropagation();
     return false;
   }
+
+  public playVideo(ev: MouseEvent, videoId: string) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.saveVideoTime();
+    this._router.navigate(['video/play', videoId]);
+  }
+
+
 
 }

@@ -1,5 +1,4 @@
 <video (contextmenu)="OnContextmenu($event)" class="video-js" id="video-player">
-  <source  src="{{videoModel.src}}" type="video/mp4">
 </video>
 
 <div class="main">
@@ -58,8 +57,8 @@
 
               <div class="imgs-container">
                   <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap" #imgSlider>
-                    <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
-                      <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.small + ')'}">
+                    <article *ngFor="let ML_Vid of relatedVideos" class="imgs-single">
+                      <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
                         <i class="fas fa-play play-btn"></i>
                       </div>
                       <div class="imgs-captions">

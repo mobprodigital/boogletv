@@ -1,7 +1,7 @@
 <header class="page-header">
-  <ng-container *ngIf="LatestVideos.length > 0">
+  <ng-container *ngIf="bannerVideos.length > 0">
       <div class="swipe-pan-css" (swipeleft)="bannerNextPrev($event, 'next')"  (swiperight)="bannerNextPrev($event, 'prev')">
-    <article *ngFor="let lVdo of LatestVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" 
+    <article *ngFor="let lVdo of bannerVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" 
     [hidden]="!(lVdo.id == selectedSlide)" [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}"
     >
 
@@ -34,11 +34,11 @@
       </div>
   </ng-container>
 
-  <ng-container *ngIf="LatestVideos.length > 0">
+  <ng-container *ngIf="bannerVideos.length > 0">
     <section class="container banner-btn-container">
       <article (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')" class="banner-btn-wrap swipe-pan-css" 
       #bannerBtnWrap>
-        <div *ngFor="let lVdoBtn of LatestVideos;let lVdoBtnIndex = index " 
+        <div *ngFor="let lVdoBtn of bannerVideos;let lVdoBtnIndex = index " 
         class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id" (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.title}}
@@ -48,7 +48,7 @@
     </section>
   </ng-container>
 
-  <ng-container *ngIf="LatestVideos.length > 0">
+  <ng-container *ngIf="bannerVideos.length > 0">
     <span (click)="bannerNextPrev($event, 'prev')" class="banner-nav-btns banner-nav-btns-left">
       <i class="fas fa-angle-left"></i>
     </span>

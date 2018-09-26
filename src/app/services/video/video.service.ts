@@ -117,6 +117,31 @@ export class VideoService {
   }
 
   /**
+   * 
+   * @param videId Video Id
+   * @param time Time in seconds
+   */
+  public setVideoTimeByVideoId(videoId: number, time: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'setViewTimeByVideoId.php',
+        dataToSend: {
+          id: videoId,
+          time: time
+        }
+      }).then(res => {
+        if (res.status === true) {
+          resolve(res.msg);
+        }
+        else {
+          reject(res.msg);
+        }
+      }).catch(err => reject(err));
+    });
+
+  }
+
+  /**
    * Parse video data array into VideoModel class array
    * @param videoDataArr Raw array of video data from web service
    */
@@ -162,5 +187,30 @@ export class VideoService {
     }
   }
 
+  /**
+   * 
+   * @param videoId Video id
+   * @param catId Category id
+   */
+  public getRelatedVideos(videoId: number, catId: number): Promise<VideoModel[]> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'getRelatedVideosByVideoId.php',
+        dataToSend: {
+          vid: videoId,
+          cid: catId
+        }
+      }).then(data => {
+        if (data.status === true) {
+          this.parseVideoModel(data.data).then(vdos => {
+            resolve(vdos);
+          }).catch(err => reject(err));
+        }
+        else {
+          reject(data.msg);
+        }
+      }).catch(err => reject(err));
+    });
+  }
 
 }
