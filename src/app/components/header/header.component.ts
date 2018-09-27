@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   mainMenu: NavItemModel[] = [];
   viewMenu: boolean = false;
   viewVideoMenu: boolean = false;
+  searchTerm: string = '';
 
   constructor(private router: Router, private _videoService: VideoService, private _categoryService: CategoryService) {
     router.events.subscribe(async e => {
@@ -137,6 +138,11 @@ export class HeaderComponent implements OnInit {
     this.viewMenu = menuVisibility;
     if (!this.viewMenu) {
       this.viewVideoMenu = false;
+    }
+  }
+  public searchSubmit() {
+    if (this.searchTerm && this.searchTerm.trim().length > 0) {
+      this.router.navigate(['video/search', this.searchTerm]);
     }
   }
 }

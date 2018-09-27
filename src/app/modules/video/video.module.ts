@@ -12,6 +12,7 @@ import { ImageSliderDirective } from '../../directives/image-slider/image-slider
 import { VideoByCategoryComponent } from './components/video-by-category/video-by-category.component';
 import { PlayVideoComponent } from './components/play-video/play-video.component';
 import { VideoService } from '../../services/video/video.service';
+import { SearchResultComponent } from './components/search-result/search-result.component';
 
 @NgModule({
   imports: [
@@ -21,8 +22,8 @@ import { VideoService } from '../../services/video/video.service';
     HttpModule,
     FormsModule
   ],
-  declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent, ImageSliderDirective, VideoByCategoryComponent, PlayVideoComponent],
-  exports: [VideoRoutingModule, SharedModule, HttpModule, ImageSliderDirective],
+  declarations: [SingleVideoComponent, AllVideoComponent, VideoSidebarComponent, ImageSliderDirective, VideoByCategoryComponent, PlayVideoComponent, SearchResultComponent],
+  exports: [VideoRoutingModule,FormsModule, SharedModule, HttpModule, ImageSliderDirective],
   providers: [AjaxService, VideoService]
 })
 export class VideoModule { }

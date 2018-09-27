@@ -1,45 +1,44 @@
 <header class="page-header">
   <ng-container *ngIf="bannerVideos.length > 0">
-      <div class="swipe-pan-css" (swipeleft)="bannerNextPrev($event, 'next')"  (swiperight)="bannerNextPrev($event, 'prev')">
-    <article *ngFor="let lVdo of bannerVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn" 
-    [hidden]="!(lVdo.id == selectedSlide)" [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}"
-    >
+    <div class="swipe-pan-css" (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')">
+      <article *ngFor="let lVdo of bannerVideos;let _index = index" class="h-media-wrapper h-media-img animated fadeIn"
+        [hidden]="!(lVdo.id == selectedSlide)" [ngStyle]="{'background-image' : 'url(' + lVdo.thumbnails.large + ')'}">
 
-      <div class="h-media-inner">
-        <div class="h-play-btn">
-          <i (click)="playVideo($event, lVdo.id)" class="fas fa-play"></i>
+        <div class="h-media-inner">
+          <div class="h-play-btn">
+            <i (click)="playVideo($event, lVdo.id)" class="fas fa-play"></i>
+          </div>
+          <div class="h-media-title">
+            {{lVdo.title}}
+          </div>
+          <div class="h-media-meta-data">
+            <ul>
+              <li>
+                <i class="fas fa-calendar"></i> oct 19, 2018
+              </li>
+              <li>
+                <i class="fas fa-eye"></i> {{lVdo.viewsCount}}
+              </li>
+              <li>
+                <i class="fas fa-thumbs-up"></i> {{lVdo.likesCount}}
+              </li>
+              <li>
+                <i class="fas fa-thumbs-down"></i> {{lVdo.dislikesCount}}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="h-media-title">
-          {{lVdo.title}}
-        </div>
-        <div class="h-media-meta-data">
-          <ul>
-            <li>
-              <i class="fas fa-calendar"></i> oct 19, 2018
-            </li>
-            <li>
-              <i class="fas fa-eye"></i> {{lVdo.viewsCount}}
-            </li>
-            <li>
-              <i class="fas fa-thumbs-up"></i> {{lVdo.likesCount}}
-            </li>
-            <li>
-              <i class="fas fa-thumbs-down"></i> {{lVdo.dislikesCount}}
-            </li>
-          </ul>
-        </div>
-      </div>
 
-    </article>
-      </div>
+      </article>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="bannerVideos.length > 0">
     <section class="container banner-btn-container">
-      <article (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')" class="banner-btn-wrap swipe-pan-css" 
-      #bannerBtnWrap>
-        <div *ngFor="let lVdoBtn of bannerVideos;let lVdoBtnIndex = index " 
-        class="banner-btn" [class.banner-btn-active]="selectedSlide == lVdoBtn.id" (click)="showSlide(lVdoBtnIndex)">
+      <article (swipeleft)="bannerNextPrev($event, 'next')" (swiperight)="bannerNextPrev($event, 'prev')" class="banner-btn-wrap swipe-pan-css"
+        #bannerBtnWrap>
+        <div *ngFor="let lVdoBtn of bannerVideos;let lVdoBtnIndex = index " class="banner-btn"
+          [class.banner-btn-active]="selectedSlide == lVdoBtn.id" (click)="showSlide(lVdoBtnIndex)">
           <span>
             {{lVdoBtn.title}}
           </span>
@@ -75,7 +74,8 @@
           <div class="section-body">
             <!-- <div [appImageSlider]="relatedVideoSliderImages"></div> -->
             <div class="imgs-container">
-              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap swipe-pan-css" #imgSlider>
+              <div (swipeleft)="imgSlide('left')" (swiperight)="imgSlide('right')" class="imgs-wrap swipe-pan-css"
+                #imgSlider>
                 <article *ngFor="let ML_Vid of mostLikedVideos" class="imgs-single">
                   <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
                     <i class="fas fa-play play-btn"></i>
@@ -115,7 +115,7 @@
             <!-- all videos -->
             <section class="section">
               <header class="section-header section-header-action">
-                <h2 class="section-title">Videos</h2>
+                <h2 class="section-title">All Videos</h2>
                 <div>
                   <ul class="category-list" *ngIf="videoCategoryList && videoCategoryList.length > 0">
                     <li>
@@ -126,11 +126,11 @@
                     </li>
                   </ul>
                   <select class="form-control category-list-select" (change)="showCat($event, $event.target.value)">
-                      <option value="all">All</option>
-                      <option value="{{cat.id}}" *ngFor="let cat of videoCategoryList">
-                        {{cat.name}}
-                      </option>
-                    </select>
+                    <option value="all">All</option>
+                    <option value="{{cat.id}}" *ngFor="let cat of videoCategoryList">
+                      {{cat.name}}
+                    </option>
+                  </select>
                 </div>
               </header>
               <div class="section-body">
@@ -141,7 +141,11 @@
                         <div (click)="playVideo($event, LT_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + LT_Vid.thumbnails.large + ')'}">
                           <i class="fas fa-play play-btn"></i>
                         </div>
+
                         <div class="imgs-captions">
+                          <div *ngIf="LT_Vid.categories.length > 0" class="post-categories-label">
+                            <span *ngFor="let cat of LT_Vid.categories" class="badge badge-warning badge-categories">{{cat.name}}</span>
+                          </div>
                           <div class="imgs-title">
                             <a (click)="playVideo($event, LT_Vid.id)" class="post-link">{{LT_Vid.title}}</a>
                           </div>

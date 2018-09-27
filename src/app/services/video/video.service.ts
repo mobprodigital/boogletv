@@ -213,4 +213,31 @@ export class VideoService {
     });
   }
 
+  /**
+   * 
+   * @param searchTerm search terms query
+   * @param fromIndex start index of array
+   * @param count number of search results 
+   */
+  public search(searchTerm: string, fromIndex: number = 0, count: number = 10): Promise<VideoModel[]> {
+    return new Promise((resolve, reject) => {
+      this._ajaxService.Post({
+        apiName: 'VideoBySearch.php',
+        dataToSend: {
+          searchTerm: searchTerm,
+          start: fromIndex,
+          count: count
+        }
+      }).then(data => {
+        if (data.status === true) {
+          this.parseVideoModel(data.data).then(vdos => {
+            resolve(vdos);
+          }).catch(err => reject(err));
+        }
+        else {
+          reject(data.msg);
+        }
+      }).catch(err => reject(err));
+    });
+  }
 }

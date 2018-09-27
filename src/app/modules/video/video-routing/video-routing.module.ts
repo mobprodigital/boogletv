@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AllVideoComponent } from '../components/all-video/all-video.component';
 import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 import { PlayVideoComponent } from '../components/play-video/play-video.component';
+import { SearchResultComponent } from '../components/search-result/search-result.component';
 
 let videoRoutes: Routes = [
   {
@@ -13,6 +14,10 @@ let videoRoutes: Routes = [
   {
     path: "category/:id",
     component: AllVideoComponent
+  },
+  {
+    path: "search/:searchTerm",
+    component: SearchResultComponent
   },
   {
     path: '',

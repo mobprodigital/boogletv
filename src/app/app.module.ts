@@ -14,6 +14,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './components/terms-conditions/terms-conditions.component';
 import { CategoryService } from './services/categories/category.service';
+import { FormsModule } from '@angular/forms';
 
 
 // custom modules
@@ -32,9 +33,11 @@ import { CategoryService } from './services/categories/category.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpModule,
     RoutingRoutingModule,
     SharedModule,
+
   ],
   providers: [AjaxService, CategoryService],
   bootstrap: [AppComponent]

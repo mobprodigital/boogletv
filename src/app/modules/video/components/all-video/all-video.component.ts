@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { VideoModel } from '../../../../models/video.model';
 import { CategoryModel } from '../../../../models/category.model';
 import { VideoService } from '../../../../services/video/video.service';
@@ -13,7 +13,7 @@ import { CategoryService } from '../../../../services/categories/category.servic
   providers: [VideoService]
 })
 
-export class AllVideoComponent implements OnInit {
+export class AllVideoComponent implements OnInit, OnDestroy {
   allVideos: VideoModel[] = [];
   selectedCatTab: string = 'all';
   pageTitle: string = 'Videos';
@@ -34,9 +34,9 @@ export class AllVideoComponent implements OnInit {
   ) {
 
     this._router.events.subscribe(async e => {
-      /* if (e instanceof NavigationStart) {
+      if (e instanceof NavigationStart) {
 
-      } */
+      }
 
       if (e instanceof NavigationEnd) {
         let catId: any = this._activatedRoute.snapshot.paramMap.get('id');
@@ -51,6 +51,14 @@ export class AllVideoComponent implements OnInit {
 
     });
 
+    /* let catId: any = this._activatedRoute.snapshot.params['id'];
+    try {
+      this.selectedCatTab = catId ? atob(catId) : 'all';
+      this.showCat(this.selectedCatTab);
+    }
+    catch (err) {
+      this.showCat(this.selectedCatTab);
+    } */
     this.getVideoAndCategories();
 
   }
@@ -60,6 +68,9 @@ export class AllVideoComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    
+  }
 
   private getVideoAndCategories() {
     Promise.all([this._categoryService.getSubCategoriesById(2), this.getVideosByCategory()]).then(data => {
@@ -118,10 +129,10 @@ export class AllVideoComponent implements OnInit {
           this.getVideosByCategory(catArr, fromIndexVideo, videoCount).then(vidData => {
             this.canLazyLoad = true;
             this.allVideos.push(...vidData);
-            
+
           }).catch(err => {
             this.canLazyLoad = true;
-            
+
           });
 
         }

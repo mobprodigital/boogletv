@@ -157,9 +157,9 @@
         </nav>
         <div class="col-lg-auto">
           <div class="search-div">
-            <form action="" method="post">
+            <form (ngSubmit)="searchSubmit()">
               <div class="search-wrap">
-                <input placeholder="Search..." type="search" class="nav-search-box">
+                <input name="search" [(ngModel)]="searchTerm" placeholder="Search..." type="search" class="nav-search-box">
                 <i class="fas fa-search"></i>
               </div>
             </form>
