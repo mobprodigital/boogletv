@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   viewMenu: boolean = false;
   viewVideoMenu: boolean = false;
   searchTerm: string = '';
-
+  mobSaerchVisible: boolean = false;
   constructor(private router: Router, private _videoService: VideoService, private _categoryService: CategoryService) {
     router.events.subscribe(async e => {
 
@@ -144,5 +144,8 @@ export class HeaderComponent implements OnInit {
     if (this.searchTerm && this.searchTerm.trim().length > 0) {
       this.router.navigate(['video/search', this.searchTerm]);
     }
+  }
+  public toggleMobileSearch(toShow : boolean){
+    this.mobSaerchVisible = toShow;
   }
 }

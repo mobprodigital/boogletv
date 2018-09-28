@@ -22,7 +22,7 @@
               <div class="section-body">
                 <ng-container *ngIf="allVideos && allVideos.length > 0; else noVideoFound">
                   <div class="row cat-wrapper">
-                    <article *ngFor="let ML_Vid of allVideos" class="col-6">
+                    <article *ngFor="let ML_Vid of allVideos" class="col-lg-4 col-md-6 col-sm-6 col-sm-12">
                       <div class="imgs-single">
                         <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
 

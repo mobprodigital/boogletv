@@ -147,7 +147,9 @@ export class VideoService {
    */
   private parseVideoModel(videoDataArr: any[]): Promise<VideoModel[]> {
 
-    let fileBaseUrl: string = 'http://192.168.0.7/boogletv/';
+    // let fileBaseUrl: string = 'http://192.168.0.7/boogletv/';
+    let fileBaseUrl: string = '';
+    let imageBaseUrl: string = 'http://192.168.0.7/boogletv/';
 
     let videoArr: VideoModel[] = [];
     if (videoDataArr && videoDataArr.length > 0) {
@@ -175,9 +177,9 @@ export class VideoService {
         let _dateArr = vid.createDate.split('/');
         _vid.createDate = new Date(parseInt(_dateArr[2]), parseInt(_dateArr[1], parseInt(_dateArr[0])));
 
-        _vid.thumbnails.large = fileBaseUrl + vid.thumbnails.large;
-        _vid.thumbnails.medium = fileBaseUrl + vid.thumbnails.medium;
-        _vid.thumbnails.small = fileBaseUrl + vid.thumbnails.small;
+        _vid.thumbnails.large = imageBaseUrl + vid.thumbnails.large;
+        _vid.thumbnails.medium = imageBaseUrl + vid.thumbnails.medium;
+        _vid.thumbnails.small = imageBaseUrl + vid.thumbnails.small;
 
         return _vid;
       }))

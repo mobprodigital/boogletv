@@ -1,7 +1,7 @@
 <header class="app-header">
   <aside class="nav-loader">
-  <div class="nav-progress-bar"></div>
-</aside>
+    <div class="nav-progress-bar"></div>
+  </aside>
   <section [hidden]="true" class="top-header-bar">
     <div class="container">
       <div class="row">
@@ -54,7 +54,7 @@
 
   <section class="main-nav theme-bg shadow-lg">
     <div class="mobile-menu-trigger">
-        <button (click)="toggleViewMenu($event, true)" class="h-menu-btn" type="button">
+      <button (click)="toggleViewMenu($event, true)" class="h-menu-btn" type="button">
         <span></span>
         <span></span>
         <span></span>
@@ -62,16 +62,29 @@
       <div class="text-center">
         <img class="mob-logo" src="assets/images/logo/logo_mobile.png" alt="">
       </div>
+      <button type="button" class="search-btn" (click)="toggleMobileSearch(true)">
+        <i class="fas fa-search"></i>
+      </button>
+      <div class="mob-serach-box" [hidden]="!mobSaerchVisible">
+        <form (ngSubmit)="searchSubmit()">
+          <input  name="search" [(ngModel)]="searchTerm" placeholder="search" type="search" >
+        </form>
+        <span>
+          <button type="button" (click)="toggleMobileSearch(false)">
+            <i class="fas fa-times"></i>
+          </button>
+        </span>
+      </div>
     </div>
     <div [ngClass]="{'mob-menu-hidden ': !viewMenu, 'mob-menu-anim-slide-up' : viewMenu}" class="main-nav-wrapper container">
       <div class="text-center menu-close-btn-wrap">
-          <button (click)="toggleViewMenu($event, false)" class="menu-close-btn">
+        <button (click)="toggleViewMenu($event, false)" class="menu-close-btn">
           <i class="fas fa-times-circle"></i>
         </button>
       </div>
       <div class="row justify-content-between">
         <nav class="col-lg-auto">
-            <ul class="main-menu">
+          <ul class="main-menu">
             <li>
               <a [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['active-link']" [routerLink]="['/']">Home</a>
             </li>

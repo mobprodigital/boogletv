@@ -34,7 +34,7 @@ export class PlayVideoComponent implements OnInit, AfterViewInit, OnDestroy {
         this.videoId = parseInt(vid);
         this._videoService.getVideoById(this.videoId).then(vdo => {
           this.videoModel = vdo;
-          this.setVideoSrc(vdo.src);
+          this.setVideoData(vdo.src, vdo.thumbnails.large);
           let randonCatId = this.videoModel.categories[Math.floor(Math.random() * this.videoModel.categories.length)].id;
 
           this._videoService.getRelatedVideos(this.videoModel.id, randonCatId).then(vdo => {
@@ -61,12 +61,25 @@ export class PlayVideoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.saveVideoTime();
   }
 
-  private setVideoSrc(src: string): Promise<string> {
+  private setVideoData(src: string, poster?: string): Promise<string> {
     if (src && this.videoPlayer) {
       this.videoPlayer.src(src);
       this.videoPlayer.load();
-      this.videoPlayer.play();
-      return Promise.resolve('Src set');
+      try {
+        this.videoPlayer.play();
+      }
+      catch(err){
+        console.log(err);
+      }
+      finally {
+        if (poster) {
+          this.videoPlayer.poster = poster;
+        }
+
+        return Promise.resolve('Src set');
+      }
+
+
 
     }
     else {
