@@ -24,7 +24,7 @@
                   <div class="row cat-wrapper">
                     <article *ngFor="let ML_Vid of allVideos" class="col-6">
                       <div class="imgs-single">
-                        <div (click)="viewVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
+                        <div (click)="playVideo($event, ML_Vid.id)" class="imgs-image" [ngStyle]="{'background-image' : 'url(' + ML_Vid.thumbnails.large + ')'}">
 
                           <i class="fas fa-play play-btn"></i>
                           <span class="badge badge-dark duration-text">{{ML_Vid.duration}}</span>
@@ -35,7 +35,7 @@
                           </div>
                           <div class="imgs-captions">
                             <div class="imgs-title">
-                              <a (click)="viewVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
+                              <a (click)="playVideo($event, ML_Vid.id)" class="post-link">{{ML_Vid.title}}</a>
                             </div>
 
                             <p class="video-description">{{ML_Vid.description}}</p>

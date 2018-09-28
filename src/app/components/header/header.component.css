@@ -84,6 +84,7 @@
   }
   ul.main-menu>li:hover>ul.mega-menu {
     display: flex;
+    z-index: 3;
   }
   ul.main-menu>li>ul.mega-menu>li>a {
     line-height: 2;

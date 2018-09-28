@@ -38,6 +38,10 @@ export class SearchResultComponent implements OnInit {
 
   }
 
-
+  public playVideo(ev: MouseEvent, videoId: number) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this._router.navigate(['video/play', videoId]);
+  }
 
 }
